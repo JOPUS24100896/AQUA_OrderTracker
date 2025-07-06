@@ -22,7 +22,7 @@ if($prep->execute()){
     $raw = $take->get_result();
     if($user = $raw->fetch_assoc()){
         $_SESSION["user_id"] = $user["CustomerID"];
-        echo "Successful Sign Up" . $_SESSION["user_id"];
+        echo "Successful Sign Up: " . $_SESSION["user_id"];
     }else {
         echo "Unable to retrieve user";
     }

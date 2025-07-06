@@ -1,18 +1,19 @@
 var p1 = document.getElementById("p1");
-var p1add = document.getElementById("p1+");
-var p1min = document.getElementById("p1-");
+var p1add = document.getElementById("p1add");
+var p1min = document.getElementById("p1min");
 var p1val = document.getElementById("p1val");
 var p2 = document.getElementById("p2");
-var p2add = document.getElementById("p2+");
-var p2min = document.getElementById("p2-");
+var p2add = document.getElementById("p2add");
+var p2min = document.getElementById("p2min");
 var p2val = document.getElementById("p2val");
+var submit = document.getElementById("orderForm");
 p1add.disabled=true;
 p1min.disabled=true;
 p1val.disabled=true;
 p2add.disabled=true;
 p2min.disabled=true;
 p2val.disabled=true;
-
+alert("check1");
 
 p1.addEventListener("change", function(){
     if(p1.checked){
@@ -77,6 +78,18 @@ p2add.addEventListener("click", function(){
     p2val.value = parseInt(p2val.value) + 1;
 })
 
-
+submit.addEventListener("submit", function(event){
+    event.preventDefault();
+    var orderData = new FormData(this);
+    alert("check");
+    fetch("../php/create_order.php", {
+        method: 'POST',
+        body: orderData
+    }).
+    then(response=>response.text()).
+    then(data => {
+        alert(data);
+    })
+})
 
 
