@@ -3,13 +3,11 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 07, 2025 at 04:13 PM
+-- Generation Time: Jul 07, 2025 at 05:47 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
-
 CREATE DATABASE IF NOT EXISTS aquadelsol_ordertracker;
 USE aquadelsol_ordertracker;
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -69,6 +67,13 @@ CREATE DEFINER=`root`@`localhost` FUNCTION `return_total_items` () RETURNS INT(1
     return Total_items;
 END$$
 
+CREATE DEFINER=`root`@`localhost` FUNCTION `verify_login` (`login_key` VARCHAR(50), `pass_key` VARCHAR(50)) RETURNS INT(11)  begin
+	declare user_id int;
+    declare user_name varchar(50);
+    select CustomerID into user_id from customers where (Username = login_key or Email = login_key) and Password = pass_key;
+    return user_id;
+end$$
+
 DELIMITER ;
 
 -- --------------------------------------------------------
@@ -86,6 +91,13 @@ CREATE TABLE `customers` (
   `Email` varchar(50) NOT NULL DEFAULT 'Unset',
   `Password` varchar(50) NOT NULL DEFAULT 'Unset'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `customers`
+--
+
+INSERT INTO `customers` (`CustomerID`, `CustomerName`, `Address`, `Contact`, `Username`, `Email`, `Password`) VALUES
+(1, 'testName', 'testAddress', '12345', 'test4', 'tes3@example.com', 'test');
 
 -- --------------------------------------------------------
 
@@ -198,7 +210,7 @@ ALTER TABLE `return_deadlines`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `CustomerID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `CustomerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `items`
