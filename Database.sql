@@ -3,10 +3,11 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 06, 2025 at 05:25 PM
+-- Generation Time: Jul 07, 2025 at 11:18 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
-
+CREATE DATABASE aquadelsol_ordertracker;
+USE aquadelsol_ordertracker;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -32,6 +33,10 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `clear_not_item` ()   BEGIN
     TRUNCATE order_details;
     TRUNCATE return_deadlines;
     SET FOREIGN_KEY_CHECKS = 1;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `return_all_items` ()   BEGIN
+	SELECT ItemName, ItemID FROM items;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `return_total_price` (IN `itemIdList` VARCHAR(255), IN `itemValList` VARCHAR(255), OUT `total_Price` DECIMAL(10,2))   BEGIN
@@ -62,12 +67,6 @@ CREATE DEFINER=`root`@`localhost` FUNCTION `return_total_items` () RETURNS INT(1
     return Total_items;
 END$$
 
-CREATE DEFINER=`root`@`localhost` FUNCTION `total_Price` (`itemIdList` VARCHAR(255)) RETURNS DECIMAL(10,2) DETERMINISTIC BEGIN
-	declare total_Price decimal(10,2);
-	select sum(Price) into total_Price from items where FIND_IN_SET(ItemID, itemIdList);
-    return total_Price;
-END$$
-
 DELIMITER ;
 
 -- --------------------------------------------------------
@@ -95,16 +94,17 @@ CREATE TABLE `items` (
   `ItemID` int(11) NOT NULL,
   `StockQuantity` int(11) DEFAULT NULL,
   `Price` decimal(10,2) DEFAULT NULL,
-  `Description` varchar(50) DEFAULT 'Description not set'
+  `Description` varchar(50) DEFAULT 'Description not set',
+  `ItemName` varchar(50) DEFAULT 'Unnamed'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `items`
 --
 
-INSERT INTO `items` (`ItemID`, `StockQuantity`, `Price`, `Description`) VALUES
-(1, 50, 25.00, 'Description not set'),
-(2, 50, 50.00, 'Description not set');
+INSERT INTO `items` (`ItemID`, `StockQuantity`, `Price`, `Description`, `ItemName`) VALUES
+(1, 50, 25.00, 'Description not set', 'Product 1'),
+(2, 50, 50.00, 'Description not set', 'Product 2');
 
 -- --------------------------------------------------------
 
@@ -117,7 +117,8 @@ CREATE TABLE `orders` (
   `CustomerID` int(11) NOT NULL,
   `ReturnDeadlineID` int(11) NOT NULL,
   `Delivery` tinyint(1) DEFAULT 0,
-  `TotalPrice` decimal(10,2) DEFAULT NULL
+  `TotalPrice` decimal(10,2) DEFAULT NULL,
+  `OrderDate` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -198,7 +199,7 @@ ALTER TABLE `customers`
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `ItemID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ItemID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `orders`
