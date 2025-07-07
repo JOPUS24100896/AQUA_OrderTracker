@@ -6,10 +6,10 @@ formBody.addEventListener("submit", function(event){
         method: 'POST',
         body: data
     }).
-    then(response=>response.text()).
+    then(response=>response.json()).
     then(data => {
-        if(data.includes("Duplicate entry")){//Not-Unique username
-            alert("Not unique username");
+        if(data.Error){//Not-Unique username
+            console.log(data);
         }
         else {
             alert(data);
