@@ -13,7 +13,7 @@ text-decoration: none;
 
 body{
     /* background-image: url(https://i.pinimg.com/736x/db/6f/1d/db6f1dbe760629457f0d79df67003aeb.jpg); */
-    background-image: url(/background.jpg);
+    background-image: url(/css/background.jpg);
     background-size: 100%;
     background-repeat: no-repeat;
     background-position: absolute;
