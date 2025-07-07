@@ -3,11 +3,13 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 07, 2025 at 11:18 AM
+-- Generation Time: Jul 07, 2025 at 04:13 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
+
 CREATE DATABASE IF NOT EXISTS aquadelsol_ordertracker;
 USE aquadelsol_ordertracker;
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -80,8 +82,9 @@ CREATE TABLE `customers` (
   `CustomerName` varchar(50) DEFAULT NULL,
   `Address` varchar(50) DEFAULT NULL,
   `Contact` varchar(50) DEFAULT NULL,
-  `Username` varchar(50) DEFAULT NULL,
-  `Password` varchar(50) DEFAULT NULL
+  `Username` varchar(50) NOT NULL DEFAULT 'Unset',
+  `Email` varchar(50) NOT NULL DEFAULT 'Unset',
+  `Password` varchar(50) NOT NULL DEFAULT 'Unset'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -155,7 +158,9 @@ CREATE TABLE `return_deadlines` (
 --
 ALTER TABLE `customers`
   ADD PRIMARY KEY (`CustomerID`),
-  ADD UNIQUE KEY `Username` (`Username`);
+  ADD UNIQUE KEY `Username` (`Username`),
+  ADD UNIQUE KEY `Username_2` (`Username`),
+  ADD UNIQUE KEY `Email` (`Email`);
 
 --
 -- Indexes for table `items`

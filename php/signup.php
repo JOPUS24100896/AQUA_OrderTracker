@@ -3,15 +3,16 @@ session_start();
 $conn = new mysqli("localhost", "root", "", "aquadelsol_ordertracker");//IMPORTANT, ESTABLISH CONNECTION
 
 $username = $_POST['username'];
+$email = $_POST["email"];
 $password = $_POST['password'];
 $fullname = $_POST['fullname'];
 $address = $_POST['address'];
 $contact = $_POST['contact'];
 
 //APPARENTTLY NEEDED FOR SECURITY
-$insquery = "INSERT INTO customers (CustomerName, `Address`, Contact, Username, `Password`) VALUES (?, ?, ?, ?, ?)";
+$insquery = "INSERT INTO customers (CustomerName, `Address`, Contact, Username, `Password`, Email) VALUES (?, ?, ?, ?, ?, ?)";
 $prep = $conn->prepare($insquery);
-$prep->bind_param("sssss", $fullname, $address, $contact, $username, $password);
+$prep->bind_param("ssssss", $fullname, $address, $contact, $username, $email, $password);
 
 if($prep->execute()){
     $user = [];
@@ -22,11 +23,25 @@ if($prep->execute()){
     $raw = $take->get_result();
     if($user = $raw->fetch_assoc()){
         $_SESSION["user_id"] = $user["CustomerID"];
-        echo "Successful Sign Up: " . $_SESSION["user_id"];
+        $return = json_encode([
+            "Error" => true,
+            "Error_Number" => $take->errno,
+            "Error_Location" => "Selecting CustomerID"
+        ]);
     }else {
-        echo "Unable to retrieve user";
+        $return = json_encode([
+            "Error" => false;
+        ])
     }
+    echo $return;
     
 } 
-else echo "There was a problem with signing up, " . $prep->error;
+else {
+        $return = json_encode([
+            "Error" => true,
+            "Error_Number" =>  $prep->errno,
+            "Error_Location" => "Prepare Insert"
+        ]);
+        echo $return;
+    }
 ?>
