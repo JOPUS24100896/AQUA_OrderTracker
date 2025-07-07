@@ -14,36 +14,42 @@
         </div>
     </div>
 
-    <div id="content" class="center">
+    <form id="content" class="center">
         <div id="log_in">
             <div id="account">
-                <h3>Email or phone number:</h3>
-                <input id="email_or_phone" name="email_or_phone" required>
+                <h3>Email or Username:</h3>
+                <input id="email_or_phone" name="login_key" type="text" required>
             </div>
             <div id="password">
                 <h3>Password:</h3>
-                <input id="password" name="password" required>
+                <input id="password_input" name="password" type="password" required>
             </div>
             <div id="log_in_button">
-                <button type="submit">Log In</button>
+                <input type="submit" value="Log In">
             </div>
             <h4>Forgot Password?</h4>
-            <div id="sign_up">
-                <h4>SIGN UP</h4>
-
-            </div>
+            <a href="SignUp.html">
+                <a href="SignUp.html">
+                    <div id="sign_up">
+                        <h4>SIGN UP</h4>
+                    </div>
+                </a>
+               
+            </a>
+            
         </div>
         <div id="about_us">
             <h2>ABOUT US</h2>
             <h3>Aqua del Sol is a water refilling station that is currently based in Yati, Liloan. As the name suggests, they deal with the filtration and distribution of clean drinkable water to their customers.</h3>
         </div>
-    </div>    
+    </form>    
 
     <div id="footer">
         <div class="center">
             <h4>Where to find us</h4>
             <h4>Privacy Policy</h4>
         </div>     
-    </div>   
+    </div>
+    <script src="js/login.js"></script>   
 </body>
 </html>
