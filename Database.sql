@@ -6,7 +6,7 @@
 -- Generation Time: Jul 07, 2025 at 11:18 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
-CREATE DATABASE aquadelsol_ordertracker;
+CREATE DATABASE IF NOT EXISTS aquadelsol_ordertracker;
 USE aquadelsol_ordertracker;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
