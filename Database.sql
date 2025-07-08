@@ -3,10 +3,11 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 08, 2025 at 09:22 AM
+-- Generation Time: Jul 08, 2025 at 10:16 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
-
+CREATE DATABASE IF NOT EXISTS aquadelsol_ordertracker;
+USE aquadelsol_ordertracker;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -57,6 +58,10 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `return_total_price` (IN `itemIdList
 	END while;
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `verify_login` (IN `login_key` VARCHAR(50), IN `pass_key` VARCHAR(50))   BEGIN
+    select UserID, Type from users where (Username = login_key or Email = login_key) and Password = pass_key;
+END$$
+
 --
 -- Functions
 --
@@ -65,13 +70,6 @@ CREATE DEFINER=`root`@`localhost` FUNCTION `return_total_items` () RETURNS INT(1
 	select count(distinct ItemID) into Total_items from items;
     return Total_items;
 END$$
-
-CREATE DEFINER=`root`@`localhost` FUNCTION `verify_login` (`login_key` VARCHAR(50), `pass_key` VARCHAR(50)) RETURNS INT(11)  begin
-	declare user_id int;
-    declare user_name varchar(50);
-    select CustomerID into user_id from customers where (Username = login_key or Email = login_key) and Password = pass_key;
-    return user_id;
-end$$
 
 DELIMITER ;
 
@@ -105,7 +103,7 @@ INSERT INTO `items` (`ItemID`, `StockQuantity`, `Price`, `Description`, `ItemNam
 
 CREATE TABLE `orders` (
   `OrderID` int(11) NOT NULL,
-  `CustomerID` int(11) NOT NULL,
+  `UserID` int(11) NOT NULL,
   `ReturnDeadlineID` int(11) NOT NULL,
   `Delivery` tinyint(1) DEFAULT 0,
   `TotalPrice` decimal(10,2) DEFAULT NULL,
@@ -144,22 +142,23 @@ CREATE TABLE `return_deadlines` (
 --
 
 CREATE TABLE `users` (
-  `CustomerID` int(11) NOT NULL,
-  `CustomerName` varchar(50) DEFAULT NULL,
+  `UserID` int(11) NOT NULL,
+  `FullName` varchar(50) DEFAULT NULL,
   `Address` varchar(50) DEFAULT NULL,
   `Contact` varchar(50) DEFAULT NULL,
   `Username` varchar(50) NOT NULL DEFAULT 'Unset',
   `Email` varchar(50) NOT NULL DEFAULT 'Unset',
   `Password` varchar(50) NOT NULL DEFAULT 'Unset',
-  `type` varchar(5) NOT NULL DEFAULT 'CUST'
+  `Type` varchar(5) NOT NULL DEFAULT 'CUST'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`CustomerID`, `CustomerName`, `Address`, `Contact`, `Username`, `Email`, `Password`, `type`) VALUES
-(1, 'gaygay', 'gay street', '10', 'notgay', 'gay@example.com', 'gaygaygay', 'CUST');
+INSERT INTO `users` (`UserID`, `FullName`, `Address`, `Contact`, `Username`, `Email`, `Password`, `Type`) VALUES
+(1, 'Aeron Cute', 'Cebu', 'test', 'namename', 'namename@gmail.com', 'test', 'CUST'),
+(2, 'Aeron Cute', 'Cebu', 'test', 'namename1', 'namename1@gmail.com', 'test', 'CUST');
 
 --
 -- Indexes for dumped tables
@@ -176,7 +175,7 @@ ALTER TABLE `items`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`OrderID`),
-  ADD KEY `orders_fkCust` (`CustomerID`),
+  ADD KEY `orders_fkCust` (`UserID`),
   ADD KEY `orders_fkRet` (`ReturnDeadlineID`);
 
 --
@@ -197,7 +196,7 @@ ALTER TABLE `return_deadlines`
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`CustomerID`),
+  ADD PRIMARY KEY (`UserID`),
   ADD UNIQUE KEY `Username` (`Username`),
   ADD UNIQUE KEY `Username_2` (`Username`),
   ADD UNIQUE KEY `Email` (`Email`);
@@ -234,7 +233,7 @@ ALTER TABLE `return_deadlines`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `CustomerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
@@ -244,7 +243,7 @@ ALTER TABLE `users`
 -- Constraints for table `orders`
 --
 ALTER TABLE `orders`
-  ADD CONSTRAINT `orders_fkCust` FOREIGN KEY (`CustomerID`) REFERENCES `users` (`CustomerID`),
+  ADD CONSTRAINT `orders_fkCust` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`),
   ADD CONSTRAINT `orders_fkRet` FOREIGN KEY (`ReturnDeadlineID`) REFERENCES `return_deadlines` (`ReturnDeadlineID`);
 
 --
