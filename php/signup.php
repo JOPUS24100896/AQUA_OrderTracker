@@ -11,13 +11,13 @@ $address = $_POST['address'];
 $contact = $_POST['contact'];
 
 //APPARENTTLY NEEDED FOR SECURITY
-$insquery = "INSERT INTO customers VALUES (DEFAULT, ?, ?, ?, ?, ?, ?)";
+$insquery = "INSERT INTO users VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, DEFAULT)";
 $prep = $conn->prepare($insquery);
 $prep->bind_param("ssssss", $fullname, $address, $contact, $username, $email, $password);
 
 if($prep->execute()){
     $user = [];
-    $getId = "SELECT CustomerID FROM customers WHERE Username = ?";
+    $getId = "SELECT CustomerID FROM users WHERE Username = ?";
     $take = $conn->prepare($getId);
     $take->bind_param("s", $username);
     $take->execute();

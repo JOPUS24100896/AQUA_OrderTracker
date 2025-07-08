@@ -3,11 +3,10 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 07, 2025 at 05:47 PM
+-- Generation Time: Jul 08, 2025 at 09:22 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
-CREATE DATABASE IF NOT EXISTS aquadelsol_ordertracker;
-USE aquadelsol_ordertracker;
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -28,7 +27,7 @@ DELIMITER $$
 --
 CREATE DEFINER=`root`@`localhost` PROCEDURE `clear_not_item` ()   BEGIN
 	SET FOREIGN_KEY_CHECKS = 0;
-    TRUNCATE customers;
+    TRUNCATE users;
     TRUNCATE orders;
     TRUNCATE order_details;
     TRUNCATE return_deadlines;
@@ -75,29 +74,6 @@ CREATE DEFINER=`root`@`localhost` FUNCTION `verify_login` (`login_key` VARCHAR(5
 end$$
 
 DELIMITER ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `customers`
---
-
-CREATE TABLE `customers` (
-  `CustomerID` int(11) NOT NULL,
-  `CustomerName` varchar(50) DEFAULT NULL,
-  `Address` varchar(50) DEFAULT NULL,
-  `Contact` varchar(50) DEFAULT NULL,
-  `Username` varchar(50) NOT NULL DEFAULT 'Unset',
-  `Email` varchar(50) NOT NULL DEFAULT 'Unset',
-  `Password` varchar(50) NOT NULL DEFAULT 'Unset'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `customers`
---
-
-INSERT INTO `customers` (`CustomerID`, `CustomerName`, `Address`, `Contact`, `Username`, `Email`, `Password`) VALUES
-(1, 'testName', 'testAddress', '12345', 'test4', 'tes3@example.com', 'test');
 
 -- --------------------------------------------------------
 
@@ -161,18 +137,33 @@ CREATE TABLE `return_deadlines` (
   `ReturnStatus` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `CustomerID` int(11) NOT NULL,
+  `CustomerName` varchar(50) DEFAULT NULL,
+  `Address` varchar(50) DEFAULT NULL,
+  `Contact` varchar(50) DEFAULT NULL,
+  `Username` varchar(50) NOT NULL DEFAULT 'Unset',
+  `Email` varchar(50) NOT NULL DEFAULT 'Unset',
+  `Password` varchar(50) NOT NULL DEFAULT 'Unset',
+  `type` varchar(5) NOT NULL DEFAULT 'CUST'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`CustomerID`, `CustomerName`, `Address`, `Contact`, `Username`, `Email`, `Password`, `type`) VALUES
+(1, 'gaygay', 'gay street', '10', 'notgay', 'gay@example.com', 'gaygaygay', 'CUST');
+
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `customers`
---
-ALTER TABLE `customers`
-  ADD PRIMARY KEY (`CustomerID`),
-  ADD UNIQUE KEY `Username` (`Username`),
-  ADD UNIQUE KEY `Username_2` (`Username`),
-  ADD UNIQUE KEY `Email` (`Email`);
 
 --
 -- Indexes for table `items`
@@ -203,14 +194,17 @@ ALTER TABLE `return_deadlines`
   ADD PRIMARY KEY (`ReturnDeadlineID`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- Indexes for table `users`
 --
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`CustomerID`),
+  ADD UNIQUE KEY `Username` (`Username`),
+  ADD UNIQUE KEY `Username_2` (`Username`),
+  ADD UNIQUE KEY `Email` (`Email`);
 
 --
--- AUTO_INCREMENT for table `customers`
+-- AUTO_INCREMENT for dumped tables
 --
-ALTER TABLE `customers`
-  MODIFY `CustomerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `items`
@@ -237,6 +231,12 @@ ALTER TABLE `return_deadlines`
   MODIFY `ReturnDeadlineID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `CustomerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- Constraints for dumped tables
 --
 
@@ -244,7 +244,7 @@ ALTER TABLE `return_deadlines`
 -- Constraints for table `orders`
 --
 ALTER TABLE `orders`
-  ADD CONSTRAINT `orders_fkCust` FOREIGN KEY (`CustomerID`) REFERENCES `customers` (`CustomerID`),
+  ADD CONSTRAINT `orders_fkCust` FOREIGN KEY (`CustomerID`) REFERENCES `users` (`CustomerID`),
   ADD CONSTRAINT `orders_fkRet` FOREIGN KEY (`ReturnDeadlineID`) REFERENCES `return_deadlines` (`ReturnDeadlineID`);
 
 --
