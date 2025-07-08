@@ -12,8 +12,8 @@ formBody.addEventListener("submit", function(event){
             console.log(data);
         }
         else {
-            alert(data);
-            window.location.assign("index.html");
+            console.log(data);
+            //window.location.assign("index.html"); //Uncomment if no longer debugging
         }
     })
 })

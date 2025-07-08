@@ -17,13 +17,13 @@ $prep->bind_param("ssssss", $fullname, $address, $contact, $username, $email, $p
 
 if($prep->execute()){
     $user = [];
-    $getId = "SELECT CustomerID FROM users WHERE Username = ?";
+    $getId = "SELECT UserID FROM users WHERE Username = ?";
     $take = $conn->prepare($getId);
     $take->bind_param("s", $username);
     $take->execute();
     $raw = $take->get_result();
     if($user = $raw->fetch_assoc()){
-        $_SESSION["user_id"] = $user["CustomerID"];
+        $_SESSION["user_id"] = $user["UserID"];
         $return = json_encode([
             "Error" => false
         ]);

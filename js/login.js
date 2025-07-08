@@ -10,15 +10,17 @@ forms.addEventListener("submit", function(event){
         method: 'POST',
         body: formsData
     }).
-    then(response=>response.json()).
+    then(response=>response.text()).
     then(data => {
         console.log(data);
         if(!data.Error){
-            window.location.assign("../CreateOrder.html");
+            //window.location.assign("../CreateOrder.html");
         }else{
             errorVerification();    
         }
-    })
+    })//.catch(data => {
+        //console.log(JSON.stringify(data))
+    //})
 })
 
 function errorVerification(){
