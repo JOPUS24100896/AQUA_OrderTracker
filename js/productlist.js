@@ -4,9 +4,10 @@ var idArr = [];
 fetch("../php/create_prod_list.php").
 then(response=>response.json()).
 then(data=>{
-    console.log(data);
+    //console.log(data);
     data.forEach(createProductList);
-    submit.innerHTML += `<input type="checkbox"name="delivery"><label for="delivery">Delivery</label><br>
+    submit.innerHTML += `<input type="radio" name="delivery" value="1"><label for="delivery">Delivery</label><br>
+                        <input type="radio" name="delivery" value="0"><label for="delivery">On-Site</label><br>
                         <input type="submit" value="Submit Order"></input>`;
 
     localStorage.setItem("ListedIDs", JSON.stringify(idArr));
