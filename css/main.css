@@ -10,7 +10,6 @@ text-decoration: none;
     display: flex;
     justify-content: center;
 }
-
 body{
     /* background-image: url(https://i.pinimg.com/736x/db/6f/1d/db6f1dbe760629457f0d79df67003aeb.jpg); */
     background-image: url(../images/background.jpg);
@@ -21,23 +20,42 @@ body{
     background-position-y: -23vh;
     background-image: fade-in;
 }
+
+
+/* main header */
 #header{
     background-color: rgb(6, 17, 83);
     color: white;
     padding: 1vh 0;
 }
-
 #brand{
     text-align: center;
     padding: 20px;
     font-size: xx-large;
     font-weight: normal;
 }
-
 /* main content */
 #content{
     margin-top: 5vh;
 }
+/* main footer */
+#footer{
+    position: absolute;
+    bottom: 0;
+    background-color: rgb(6, 17, 83);
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+}
+.center h4{
+    padding: 1%;
+    color: white;
+    text-decoration: underline;
+    text-decoration-thickness: 1.5px;
+}
+
+
+/* Log in UI */
 #log_in{
     background-color: rgb(255, 255, 255);
     height: max-content;
@@ -51,7 +69,6 @@ body{
     font-weight: lighter;
     padding: 2%;
 }
-
 #log_in input{
     width: 100%;
     background-color: #8383836b;
@@ -71,11 +88,9 @@ body{
     padding: 10px 40px 10px 40px;
     margin: 0 0 0 0;
 }
-
 #log_in h4{
     margin-left: 32%;
 }
-
 #sign_up{
     background-color: rgb(7, 19, 71);
     width: 13vw;
@@ -83,13 +98,11 @@ body{
     padding: 1rem;
     border-radius: 20px;
 }
-
 #sign_up h4{
     color: white;
     font-weight: lighter;
     text-decoration: none;
 }
-
 #about_us{
     background-color: rgba(82, 82, 82, 0.712);
     height: 40vh;
@@ -117,20 +130,38 @@ body{
     color: white;
 }
 
-
-
-#footer{
-    position: absolute;
-    bottom: 0;
-    background-color: rgb(6, 17, 83);
-    width: 100%;
-    text-align: center;
-    padding: 10px 0;
-}
-
-.center h4{
+/* Sign_up UI */
+#signupForm{
+    background-color: rgb(255, 255, 255);
+    margin: 5vh 30vw 0 30vw; 
     padding: 1%;
-    color: white;
-    text-decoration: underline;
-    text-decoration-thickness: 1.5px;
+}
+#signupFormContainer{
+    display: flex;
+}
+#signupForm label,input{
+    color: black;
+    font-weight: lighter;
+}
+#signupFormContainer input{
+    width: 140%;
+    background-color: #8383836b;
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid #838383;
+}
+.addmargin{
+    margin-left: 5%;
+}
+.addmargin2{
+    margin-left: 15%;
+}
+#submitForm{
+    background-color: rgb(50, 74, 212);
+    font-size: large;
+    cursor: pointer;   
+    padding: 2%;
+    border-radius: 10px; 
+    width: 90%;
+    margin: 0 0 0 5%;
 }
