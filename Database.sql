@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 08, 2025 at 10:16 AM
+-- Generation Time: Jul 08, 2025 at 06:06 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 CREATE DATABASE IF NOT EXISTS aquadelsol_ordertracker;
@@ -65,6 +65,26 @@ END$$
 --
 -- Functions
 --
+CREATE DEFINER=`root`@`localhost` FUNCTION `return_deadline_needed` (`item_list` VARCHAR(255)) RETURNS INT(11)  BEGIN
+	declare item_id int;
+    declare item_returnable int;
+	declare digit_count int;
+    declare loop_index int;
+    set digit_count = 1 + LENGTH(item_list) - LENGTH(REPLACE(item_list, ",", ""));
+    set loop_index = 1;
+    main_loop: 
+    	while loop_index <= digit_count do 
+    	set item_id = SUBSTRING_INDEX(SUBSTRING_INDEX(item_list, ",", loop_index), ",", -1);
+        set item_id = CAST(item_id as unsigned);
+    	select Returnable into item_returnable from items where ItemID = item_id;
+        if item_returnable = 1 then
+        	return 1;
+        end if;
+        set loop_index = loop_index + 1;
+     end while main_loop;
+   	 return 0;
+END$$
+
 CREATE DEFINER=`root`@`localhost` FUNCTION `return_total_items` () RETURNS INT(11) DETERMINISTIC BEGIN
 	declare Total_items int;
 	select count(distinct ItemID) into Total_items from items;
@@ -84,16 +104,18 @@ CREATE TABLE `items` (
   `StockQuantity` int(11) DEFAULT NULL,
   `Price` decimal(10,2) DEFAULT NULL,
   `Description` varchar(50) DEFAULT 'Description not set',
-  `ItemName` varchar(50) DEFAULT 'Unnamed'
+  `ItemName` varchar(50) DEFAULT 'Unnamed',
+  `Returnable` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `items`
 --
 
-INSERT INTO `items` (`ItemID`, `StockQuantity`, `Price`, `Description`, `ItemName`) VALUES
-(1, 50, 25.00, 'Description not set', 'Product 1'),
-(2, 50, 50.00, 'Description not set', 'Product 2');
+INSERT INTO `items` (`ItemID`, `StockQuantity`, `Price`, `Description`, `ItemName`, `Returnable`) VALUES
+(1, 50, 25.00, 'Description not set', 'Product 1', 1),
+(2, 50, 50.00, 'Description not set', 'Product 2', 0),
+(3, 50, 20.00, 'Description not set', 'Product 3', 0);
 
 -- --------------------------------------------------------
 
@@ -104,11 +126,21 @@ INSERT INTO `items` (`ItemID`, `StockQuantity`, `Price`, `Description`, `ItemNam
 CREATE TABLE `orders` (
   `OrderID` int(11) NOT NULL,
   `UserID` int(11) NOT NULL,
-  `ReturnDeadlineID` int(11) NOT NULL,
+  `ReturnDeadlineID` int(11) DEFAULT NULL,
   `Delivery` tinyint(1) DEFAULT 0,
   `TotalPrice` decimal(10,2) DEFAULT NULL,
   `OrderDate` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`OrderID`, `UserID`, `ReturnDeadlineID`, `Delivery`, `TotalPrice`, `OrderDate`) VALUES
+(1, 1, 1, 1, 25.00, '2025-07-09 00:01:36'),
+(2, 1, 2, 0, 175.00, '2025-07-09 00:02:04'),
+(3, 1, NULL, 1, 100.00, '2025-07-09 00:04:22'),
+(4, 1, NULL, 0, 280.00, '2025-07-09 00:05:10');
 
 -- --------------------------------------------------------
 
@@ -123,6 +155,18 @@ CREATE TABLE `order_details` (
   `ItemQuantity` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `order_details`
+--
+
+INSERT INTO `order_details` (`OrderDetailID`, `ItemID`, `OrderID`, `ItemQuantity`) VALUES
+(1, 1, 1, 1),
+(2, 1, 2, 5),
+(3, 2, 2, 1),
+(4, 2, 3, 2),
+(5, 2, 4, 4),
+(6, 3, 4, 4);
+
 -- --------------------------------------------------------
 
 --
@@ -134,6 +178,14 @@ CREATE TABLE `return_deadlines` (
   `ReturnDateTime` datetime DEFAULT NULL,
   `ReturnStatus` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `return_deadlines`
+--
+
+INSERT INTO `return_deadlines` (`ReturnDeadlineID`, `ReturnDateTime`, `ReturnStatus`) VALUES
+(1, '2025-07-26 18:01:36', 0),
+(2, '2025-07-26 18:02:04', 0);
 
 -- --------------------------------------------------------
 
@@ -157,8 +209,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`UserID`, `FullName`, `Address`, `Contact`, `Username`, `Email`, `Password`, `Type`) VALUES
-(1, 'Aeron Cute', 'Cebu', 'test', 'namename', 'namename@gmail.com', 'test', 'CUST'),
-(2, 'Aeron Cute', 'Cebu', 'test', 'namename1', 'namename1@gmail.com', 'test', 'CUST');
+(1, 'Aeron', 'Cebu', 'test', 'namename1', 'namename1@gmail.com', 'test', 'CUST');
 
 --
 -- Indexes for dumped tables
@@ -215,25 +266,25 @@ ALTER TABLE `items`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `OrderID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `OrderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `OrderDetailID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `OrderDetailID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `return_deadlines`
 --
 ALTER TABLE `return_deadlines`
-  MODIFY `ReturnDeadlineID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ReturnDeadlineID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
