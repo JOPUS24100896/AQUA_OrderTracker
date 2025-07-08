@@ -21,7 +21,7 @@ if($max_items_raw){
 
 $prod_selected = [];
 $prod_values = [];
-$delivery = isset($_POST["delivery"]) ? 1:0;
+$delivery = $_POST["delivery"];
 $curr_date = new DateTime();
 $retrieve_date = $curr_date->modify("+18 days");
 $retrieve_dateFormatted = $retrieve_date->format("Y-m-d H:i:s");
@@ -60,19 +60,52 @@ function insertReturnDeadline($conn, $retrieve_dateFormatted){
     else return $conn->insert_id;
 }
 
+//function do if returnDeadline is true
+function determineReturnNeed($conn, $item_list){
+    $retval = 0;
+    $query = "SELECT return_deadline_needed(?) AS Returnable";
+    if(!($query_prepare = $conn->prepare($query))) {
+        echo json_encode([
+            "Error" => true,
+            "Error_Number" => $conn->errno,
+            "Error Location" => "Unable to determine return need"
+        ]);
+        exit;
+    }
+    $query_prepare->bind_param("s", $item_list);
+    if($query_prepare->execute()){
+        $query_raw = $query_prepare->get_result();
+        $query_assoc = $query_raw->fetch_assoc();
+        $retval = $query_assoc["Returnable"];
+    }else{
+        echo json_encode([
+            "Error" => true,
+            "Error_Number" => $conn->errno,
+            "Error_Location" => "Bad query for return need"
+        ]);
+        exit;
+    }
+    return $retval;
+}
+
 function insertOrders($conn, $delivery, $prod_selected, $item_ids, $item_values){
     //global $delivery;
     //global $conn;
+    $returnDate_Id = 0;
     $curr_date = new DateTime();
     $curr_date_formatted = $curr_date->format("Y-m-s H:i:s");
     $retrieve_date = $curr_date->modify("+18 days");
     $retrieve_dateFormatted = $retrieve_date->format("Y-m-d H:i:s");
-    $returnDate_Id = insertReturnDeadline($conn, $retrieve_dateFormatted);
+    if(determineReturnNeed($conn, $item_ids)){
+        $returnDate_Id = insertReturnDeadline($conn, $retrieve_dateFormatted);
+    }
+    $returnDate_Id = $returnDate_Id == 0 ? null:$returnDate_Id;
     $totalPrice_result = returnTotalPrice($conn, $item_ids, $item_values);
-    if($returnDate_Id != null && $totalPrice_result != null) {
-        $order_query = "INSERT INTO orders VALUES (DEFAULT, ". $_SESSION['user_id'] . ", $returnDate_Id, $delivery, $totalPrice_result, DEFAULT)";
-        $order_check = $conn->query($order_query);
-        if(!$order_check) 
+    if($totalPrice_result != null) {
+        $data =[$_SESSION['user_id'], $returnDate_Id, $delivery, $totalPrice_result];
+        $order_query = "INSERT INTO orders VALUES (DEFAULT, ? , ?, ?, ?, DEFAULT)";
+        
+        if(!$conn->prepare($order_query)->execute($data)) 
             array_push($error_stack, "There was a problem receiving order Error " . $conn->errno);
         else 
             return $conn->insert_id;
