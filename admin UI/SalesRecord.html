@@ -4,8 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sales Record</title>
-        <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css">
+    <link rel="stylesheet" href="/css/main.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+
+
 </head>
 <body>
     <div id="header" class="flex_center">
@@ -14,7 +18,7 @@
         </div>
         <ul id="navbar">
             <li><a href="/admin UI/SalesRecord.html" id="current">Sales Record</a></li>
-            <li><a href="/admin UI/ManageProfile.html">Manage Profile</a></li>
+            <!-- <li><a href="/admin UI/ManageProfile.html">Manage Profile</a></li> -->
             <li><a href="/admin UI/OrderRecord.html">Order Record</a></li>
             <li><a href="/admin UI/InventoryUI.html">Inventory</a></li>
         </ul>
@@ -22,9 +26,78 @@
 
     <div id="content">
         <h1 id="page_title">SALES RECORD</h1>
+        <div class="flex_center">
+            <div id=""></div>
+            <div></div>
+        </div>
+
+        <div class="chart">
+            <canvas id="myChart"></canvas>
+          </div>
+
+
     </div>
     
-
+    <script>
+                  // LINE CHART
+      // Sample data with two datasets, each for a different Y-axis
+      const xdata = {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+        datasets: [
+          {
+            label: 'Sales',
+            data: [100, 200, 150, 300, 250],
+            borderColor: 'blue',
+            yAxisID: 'y'
+          },
+          {
+            label: 'Revenue',
+            data: [1000, 1500, 1200, 1800, 1600],
+            borderColor: 'green',
+            yAxisID: 'y1'
+          }
+        ]
+      };
+  
+      // Your provided config object
+      const config = {
+        type: 'line',
+        data: xdata,
+        options: {
+          responsive: true,
+          interaction: {
+            mode: 'index',
+            intersect: false,
+          },
+          stacked: false,
+          plugins: {
+            title: {
+              display: true,
+              text: 'Business Report'
+            }
+          },
+          scales: {
+            y: {
+              type: 'linear',
+              display: true,
+              position: 'left',
+            },
+            y1: {
+              type: 'linear',
+              display: true,
+              position: 'right',
+              grid: {
+                drawOnChartArea: false,
+              },
+            },
+          }
+        },
+      };
+  
+      // Render the chart
+      const ctx = document.getElementById('myChart').getContext('2d');
+      const myChart = new Chart(ctx, config);
+    </script>
 
     
     
@@ -35,6 +108,6 @@
         </div>     
     </div>
 
-  <script src="js/signup.js"></script>
+  <script src="/js/graphFunction.js"></script>
 </body>
 </html>
