@@ -14,13 +14,13 @@ forms.addEventListener("submit", function(event){
     then(data => {
         console.log(data);
         if(!data.Error){
-            //window.location.assign("../CreateOrder.html");
+            window.location.assign("../CreateOrder.html");
         }else{
             errorVerification();    
         }
-    })//.catch(data => {
-        //console.log(JSON.stringify(data))
-    //})
+    }).catch(data => {
+        console.log(JSON.stringify(data))
+    })
 })
 
 function errorVerification(){

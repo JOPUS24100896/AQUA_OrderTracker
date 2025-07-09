@@ -16,7 +16,9 @@ document.addEventListener("ProductListGenerated", function(){
             let OrderDone_event = new Event("OrderReceived");
             document.dispatchEvent(OrderDone_event);
             console.log(data);
-        })
+        })//.catch(data => {
+           // console.log(data);
+        //})
     })
 })
 
