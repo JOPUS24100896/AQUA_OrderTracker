@@ -5,21 +5,23 @@ box-sizing: border-box;
 font-family: 'Hubballi', sans-serif;
 text-decoration: none;
 }
-
-.center{
+.flex_center{
     display: flex;
     justify-content: center;
 }
 body{
-    /* background-image: url(https://i.pinimg.com/736x/db/6f/1d/db6f1dbe760629457f0d79df67003aeb.jpg); */
     background-image: url(../images/background.jpg);
     background-size: 100%;
     background-repeat: no-repeat;
     background-position: absolute;
-    /* background-position-x: center; */
     background-position-y: -23vh;
-    background-image: fade-in;
 }
+/* temporary */
+a{
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+}
+/* temp */
 
 
 /* main header */
@@ -27,17 +29,27 @@ body{
     background-color: rgb(6, 17, 83);
     color: white;
     padding: 1vh 0;
+    /* display: flex; */
+    text-align: center;
 }
 #brand{
     text-align: center;
     padding: 20px;
     font-size: xx-large;
     font-weight: normal;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 /* main content */
 #content{
     margin-top: 5vh;
 }
+#page_title{
+    font-size: 2.5rem;
+    font-weight: normal;
+    padding: 20px;
+    margin: 0 0 0 10%;
+    /* text-shadow: 4px 6px 7px #000000; */
+}   
 /* main footer */
 #footer{
     position: absolute;
@@ -47,7 +59,7 @@ body{
     text-align: center;
     padding: 10px 0;
 }
-.center h4{
+.flex_center h4{
     padding: 1%;
     color: white;
     text-decoration: underline;
@@ -179,4 +191,31 @@ body{
     margin: 0 0 0 27%;
 }
 
-/* ADMIN home */
+/* ADMIN Sales Record */
+#brand_Admin{
+    display: flex;
+}
+#brand_Admin h1{
+    font-size: 3rem;
+    padding: 20px;
+    font-weight: normal;
+    margin: 0 0 3%;
+    text-shadow: 4px 6px 7px #000000;
+}
+#navbar{
+    display: flex;
+    list-style: none;
+    margin: 0 0 0 30%;
+    gap: 2rem;
+    font-size: larger;
+    padding: 2.5%;
+}
+#navbar li a{
+    color: white;
+    font-weight: lighter;
+}
+#current{
+    text-decoration: underline;
+    text-decoration-style: solid;
+    text-decoration-color: white;
+}
