@@ -1,6 +1,5 @@
 <?php
 session_start();
-mysqli_report(MYSQLI_REPORT_OFF);
 $conn = new mysqli("localhost", "root", "", "aquadelsol_ordertracker");//IMPORTANT, ESTABLISH CONNECTION
 
 $username = $_POST['username'];
@@ -16,33 +15,17 @@ $prep = $conn->prepare($insquery);
 $prep->bind_param("ssssss", $fullname, $address, $contact, $username, $email, $password);
 
 if($prep->execute()){
-    $user = [];
-    $getId = "SELECT UserID FROM users WHERE Username = ?";
-    $take = $conn->prepare($getId);
-    $take->bind_param("s", $username);
-    $take->execute();
-    $raw = $take->get_result();
-    if($user = $raw->fetch_assoc()){
-        $_SESSION["user_id"] = $user["UserID"];
-        $return = json_encode([
-            "Error" => false
-        ]);
-    }else {
-        $return = json_encode([
-            "Error" => true,
-            "Error_Number" => $conn->errno,
-            "Error_Location" => "Selecting CustomerID"
-        ]);
-    }
-    echo $return;
+    $getId = $conn->insert_id;
+    $_SESSION["user_id"] = $getId;
+    echo json_encode([
+        "Error" => false
+    ]);
     
-} 
-else {
-        $return = json_encode([
-            "Error" => true,
-            "Error_Number" =>  $conn->errno,
-            "Error_Location" => "Prepare Insert"
-        ]);
-        echo $return;
-    }
+}else {
+    echo json_encode([
+        "Error" => true,
+        "Error_Number" =>  $conn->errno,
+        "Error_Location" => "Prepare Insert"
+    ]);
+}
 ?>
