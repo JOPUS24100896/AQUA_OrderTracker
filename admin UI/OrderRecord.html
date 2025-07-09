@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order Record</title>
-        <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css">
+    <link rel="stylesheet" href="/css/main.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div id="header" class="flex_center">
@@ -14,48 +14,58 @@
         </div>
         <ul id="navbar">
             <li><a href="/admin UI/SalesRecord.html">Sales Record</a></li>
-            <li><a href="/admin UI/ManageProfile.html">Manage Profile</a></li>
             <li><a href="/admin UI/OrderRecord.html" id="current">Order Record</a></li>
             <li><a href="/admin UI/InventoryUI.html">Inventory</a></li>
         </ul>
     </div>
 
-    <h1>Order Record</h1>
 
-    <div id="OrderRecordTable">
-        <table>
-        <thead>
-            <tr>
-                <th>Order ID</th>
-                <th>Customer Name</th>
-                <th>Order Date</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td>John Doe</td>
-                <td>2023-10-01</td>
-                <td>Completed</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Jane Smith</td>
-                <td>2023-10-02</td>
-                <td>Pending</td>
-            </tr>
-        </tbody>
-    </table>
+
+
+    <div id="content">
+        <h1 id="page_title">ORDER RECORD</h1>
+        <div id="salesChartContainer" class="flex_center">
+            <div id="OrderRecordTable">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Customer Name</th>
+                        <th>Order Date</th>
+                        <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>John Doe</td>
+                            <td>2023-10-01</td>
+                            <td>Completed</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Jane Smith</td>
+                            <td>2023-10-02</td>
+                            <td>Pending</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="chart">
+                <canvas id="myChart"></canvas>
+            </div>
+        </div>
     </div>
+
+    
 
     <div id="footer">
         <div class="flex_center">
-            <h4>Where to find us</h4>
-            <h4>Privacy Policy</h4>
+            <a href="/ContactInfo.html"><h4>Where to find us</h4></a>
+            <a href="/PrivacyPolicy.html"><h4>Privacy Policy</h4></a>
         </div>     
     </div>
 
-  <!-- <script src="js/signup.js"></script> -->
+  <script src="/js/graphFunction.js"></script>
 </body>
 </html>

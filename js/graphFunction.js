@@ -31,7 +31,7 @@ const config = {
         stacked: false,
         plugins: {
             title: {
-                display: true,
+                display: false,
                 text: 'Business Report'
             }
         },
