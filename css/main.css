@@ -197,7 +197,7 @@ a{
 }
 #brand_Admin h1{
     font-size: 3rem;
-    padding: 20px;
+    padding: 10px;
     font-weight: normal;
     margin: 0 0 3%;
     text-shadow: 4px 6px 7px #000000;
@@ -208,7 +208,7 @@ a{
     margin: 0 0 0 30%;
     gap: 2rem;
     font-size: larger;
-    padding: 2.5%;
+    padding: 2%;
 }
 #navbar li a{
     color: white;
