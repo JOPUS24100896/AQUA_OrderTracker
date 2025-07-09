@@ -266,10 +266,26 @@ a{
   padding: 1rem;
 }
 
-/* table style */
-.flex_center table{
-  width: 100%;
-  gap: 3rem;
+/* table style*/
+table{
+    width: 100%;
+}
+th{
+  background-color: rgb(45, 55, 108);
+  color: white;
+  padding: 8px;
+  margin: 1rem;
+  text-align: center;
+  font-size: larger;
+  border-radius: 15px;
+}
+td{
+  padding: 8px;
+  margin: 1rem;
+  text-align: center;
+  font-size: larger;
+  border: 2px solid rgba(7, 7, 7, 0.47);
+  border-radius: 10px;
 }
 
 /* Order record */
@@ -277,5 +293,26 @@ a{
   background-color: beige;
   border-radius: 20px;
   padding: 1rem;
+  margin: 0 15% 0 15%;
+  overflow-y: auto;
+  border: 2px solid rgb(7, 7, 7);
 }
-
+#search_container{
+    margin: 0 0 0 15%;
+    display: flex;
+    justify-items: left;
+}
+#search_container input{
+    width: 30vw;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 10px;
+    border: 1px solid #838383;
+}
+search{
+    padding: 10px;
+    margin: 5px;
+    height: fit-content;
+    border-radius: 10px;
+    background-color: rgb(120, 123, 139);
+}
