@@ -1,4 +1,5 @@
 <?php
+//SETUP----------------
 session_start();
 if(!isset($_SESSION["user_id"])) echo_error(true, "User not found", "No login credentials found");
 
@@ -16,7 +17,7 @@ $prod_selected = [];
 $prod_values = [];
 $delivery = (int) $_POST["delivery"];
 
-//INPUT CHECKS---------------
+//INPUT CHECKS-----------------
 if(!(is_array($user_chosen_products) && is_array($user_chosen_amount)))
     echo_error(true, "Invalid input", "Product keys or amount is not an array");
 
@@ -29,6 +30,8 @@ if(count($user_chosen_products) != count($user_chosen_amount))
 if($delivery != 1 && $delivery != 0)
     echo_error(true, "Invalid input", "Delivery name tampered");
 
+
+//MAIN QUERY-----------------
 $order_query = "CALL create_order(?, ?, ?, ?)";
 $order_prepare = $conn->prepare($order_query); 
 $order_prepare->bind_param("iiss", $user_id, $delivery, $item_ids, $item_values);
@@ -36,6 +39,8 @@ if($order_prepare->execute()){
     echo_error(false, "", "");
 }
 
+
+//ERROR FEEDBACK--------------
 function echo_error($bool, $errno, $errLoc){
     if(!$bool)
         echo json_encode([
