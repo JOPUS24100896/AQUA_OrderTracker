@@ -1,152 +1,53 @@
 <?php
 session_start();
-$error_stack = [];
+if(!isset($_SESSION["user_id"])) echo_error(true, "User not found", "No login credentials found");
+
 $conn = new mysqli("localhost", "root", "", "aquadelsol_ordertracker");
-if($conn->connect_errno){
-    array_push($error_stack, "There was a problem reaching the database. Error " . $conn->connect_errno);
-    exit();
-}
+if($conn->connect_errno)
+    echo_error(true, $conn->errno, "Bad connection to server");
+    
 
-$prod_maxNum = 0;
-
-$max_items_query = "SELECT return_total_items() AS Max_Items";
-$max_items_raw = $conn->query($max_items_query);
-if($max_items_raw){
-    $max_items_result = $max_items_raw->fetch_assoc();
-    $prod_maxNum = $max_items_result["Max_Items"];
-}else{
-    array_push($error_stack, "There was a problem retrieving from the database. Error"  . $conn->errno);
-}
-
-
+$user_chosen_products = isset($_POST["product"])?$_POST["product"]:null;
+$user_chosen_amount = isset($_POST["product_amount"])?$_POST["product_amount"]:null;
+$user_id = $_SESSION["user_id"];
+$item_ids = implode(',', $user_chosen_products);
+$item_values = implode(',', $user_chosen_amount);
 $prod_selected = [];
 $prod_values = [];
-$delivery = $_POST["delivery"];
-$curr_date = new DateTime();
-$retrieve_date = $curr_date->modify("+18 days");
-$retrieve_dateFormatted = $retrieve_date->format("Y-m-d H:i:s");
+$delivery = (int) $_POST["delivery"];
 
+//INPUT CHECKS---------------
+if(!(is_array($user_chosen_products) && is_array($user_chosen_amount)))
+    echo_error(true, "Invalid input", "Product keys or amount is not an array");
 
-for($prod_iterate = 1; $prod_iterate <= $prod_maxNum; $prod_iterate++){
-    $temp = (string)$prod_iterate;
-    if(isset($_POST[$temp])){
-        $prod_selected[] = $prod_iterate;
-        $prod_values[] = $_POST[$temp];
-    }
-}
-$item_ids = implode(',', $prod_selected);
-$item_values = implode(',', $prod_values);
+if($user_chosen_products == null || $user_chosen_amount == null)
+    echo_error(true, "Invalid input", "Missing product keys or amount");
 
-function returnTotalPrice($conn, $item_ids, $item_values){
-    //global $conn;
-    //global $item_ids;
-    $query = "CALL return_total_price('$item_ids', '$item_values', @total_Price); SELECT @total_Price AS total_Price;";
-    if($conn->multi_query($query)){
-        $conn->next_result();
-        $result = $conn->store_result();
-        $raw = $result->fetch_assoc();
-        $total_Price = $raw["total_Price"];
-        $result->free();
-        return $total_Price;
-    }else array_push($error_stack, "Failure to retrieve total price. Error " . $conn->errno);
+if(count($user_chosen_products) != count($user_chosen_amount))
+    echo_error(true, "Invalid input", "Product keys and amount mismatch");
+
+if($delivery != 1 && $delivery != 0)
+    echo_error(true, "Invalid input", "Delivery name tampered");
+
+$order_query = "CALL create_order(?, ?, ?, ?)";
+$order_prepare = $conn->prepare($order_query); 
+$order_prepare->bind_param("iiss", $user_id, $delivery, $item_ids, $item_values);
+if($order_prepare->execute()){
+    echo_error(false, "", "");
 }
 
-function insertReturnDeadline($conn, $retrieve_dateFormatted){
-    //global $conn;
-    //global $retrieve_dateFormatted;
-    $insertquery = "INSERT INTO return_deadlines VALUES (default, '$retrieve_dateFormatted', default)";
-    $check_insert = $conn->query($insertquery);
-    if(!$check_insert) array_push($error_stack, "Error inserting Return Deadlines. Error " . $conn->errno); 
-    else return $conn->insert_id;
-}
-
-//function do if returnDeadline is true
-function determineReturnNeed($conn, $item_list){
-    $retval = 0;
-    $query = "SELECT return_deadline_needed(?) AS Returnable";
-    if(!($query_prepare = $conn->prepare($query))) {
+function echo_error($bool, $errno, $errLoc){
+    if(!$bool)
         echo json_encode([
-            "Error" => true,
-            "Error_Number" => $conn->errno,
-            "Error Location" => "Unable to determine return need"
+            "Error" => $bool    
         ]);
-        exit;
-    }
-    $query_prepare->bind_param("s", $item_list);
-    if($query_prepare->execute()){
-        $query_raw = $query_prepare->get_result();
-        $query_assoc = $query_raw->fetch_assoc();
-        $retval = $query_assoc["Returnable"];
-    }else{
+    else
         echo json_encode([
-            "Error" => true,
-            "Error_Number" => $conn->errno,
-            "Error_Location" => "Bad query for return need"
+            "Error" => $bool,
+            "Error_Number" => $errno,
+            "Error_Location" => $errLoc
         ]);
-        exit;
-    }
-    return $retval;
+    exit(1);
 }
-
-function insertOrders($conn, $delivery, $prod_selected, $item_ids, $item_values){
-    //global $delivery;
-    //global $conn;
-    $returnDate_Id = 0;
-    $curr_date = new DateTime();
-    $curr_date_formatted = $curr_date->format("Y-m-s H:i:s");
-    $retrieve_date = $curr_date->modify("+18 days");
-    $retrieve_dateFormatted = $retrieve_date->format("Y-m-d H:i:s");
-    if(determineReturnNeed($conn, $item_ids)){
-        $returnDate_Id = insertReturnDeadline($conn, $retrieve_dateFormatted);
-    }
-    $returnDate_Id = $returnDate_Id == 0 ? null:$returnDate_Id;
-    $totalPrice_result = returnTotalPrice($conn, $item_ids, $item_values);
-    if($totalPrice_result != null) {
-        $data =[$_SESSION['user_id'], $returnDate_Id, $delivery, $totalPrice_result];
-        $order_query = "INSERT INTO orders VALUES (DEFAULT, ? , ?, ?, ?, DEFAULT)";
-        
-        if(!$conn->prepare($order_query)->execute($data)) 
-            array_push($error_stack, "There was a problem receiving order Error " . $conn->errno);
-        else 
-            return $conn->insert_id;
-    }
-    
-    
-}
-
-function insertOrderDetails($conn, $delivery, $prod_selected, $item_ids, $item_values){
-    //global $conn;
-    //global $prod_selected;
-    $order_id = insertOrders($conn, $delivery, $prod_selected, $item_ids, $item_values);
-    $index = 0;
-    $explode_item_values = explode(",", $item_values);
-    if($order_id != null){
-        foreach($prod_selected as $id){
-            $item_amount = $explode_item_values[$index];
-            $orderDetail_query = "INSERT INTO order_details VALUES (default, ?, ?, ?)";
-            $prepare_orderDetail = $conn->prepare($orderDetail_query);
-            $prepare_orderDetail->bind_param("iii", $id, $order_id, $item_amount);
-            if(!$prepare_orderDetail->execute()){
-                array_push($error_stack, "There was an error in receiving order details. Error " . $conn->errno);
-            }
-            $index++;
-        }
-        $prepare_orderDetail->close();
-    }
-}
-
-insertOrderDetails($conn, $delivery, $prod_selected, $item_ids, $item_values);
-
-header("Content-Type: application/json");
-if(count($error_stack) > 0){
-    echo json_encode([
-        "Error" => true,
-        "Error_Stack" => $error_stack
-    ]);
-}else{
-    echo json_encode(["Error" => false]);
-}
-
-
 $conn->close();
 ?>
