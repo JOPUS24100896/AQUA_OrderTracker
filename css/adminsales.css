@@ -1,0 +1,75 @@
+#brand_Admin{
+    display: flex;
+}
+#brand_Admin h1{
+    font-size: 3rem;
+    padding: 10px;
+    font-weight: normal;
+    margin: 0 0 3%;
+    text-shadow: 4px 6px 7px #000000;
+}
+#navbar{
+    display: flex;
+    list-style: none;
+    margin: 0 0 0 30%;
+    gap: 2rem;
+    font-size: larger;
+    padding: 2%;
+}
+#navbar li a{
+    color: white;
+    font-weight: lighter;
+}
+#current{
+    text-decoration: underline;
+    text-decoration-style: solid;
+    text-decoration-color: white;
+}
+
+/* graph style */
+#salesChartContainer{
+  gap: 2.5rem;
+}
+
+.chart{
+  position: relative;
+  background-color: #e0f2ff;
+  /* box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); */
+  z-index: 1;
+  width: 43rem;
+  height: 22.5rem;
+  border-radius: 20px;
+  padding: 1rem;
+  box-shadow: 1px 4px 8px black;
+}
+.shadow{
+  box-shadow: 1px 4px 8px black;
+}
+#salesLedgend{
+  background-color: #838383;
+  width: 20vw;
+  border-radius: 20px;
+  padding: 1rem;
+}
+
+/* table style*/
+table{
+    width: 100%;
+}
+th{
+  background-color: rgb(45, 55, 108);
+  color: white;
+  padding: 8px;
+  margin: 1rem;
+  text-align: center;
+  font-size: larger;
+  border-radius: 15px;
+}
+td{
+  padding: 8px;
+  margin: 1rem;
+  text-align: center;
+  font-size: larger;
+  border: 2px solid rgba(7, 7, 7, 0.47);
+  border-radius: 10px;
+}

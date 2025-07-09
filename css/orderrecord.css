@@ -1,0 +1,53 @@
+#orderChartContainer{
+  gap: 2.5rem;
+}
+#OrderRecordTable{
+  background-color: beige;
+  border-radius: 20px;
+  padding: 1rem;
+  margin: 0 15% 0 15%;
+  overflow-y: auto;
+  border: 2px solid rgb(7, 7, 7);
+}
+#search_container{
+    margin: 0 0 0 15%;
+    display: flex;
+    justify-items: left;
+}
+#search_container input{
+    width: 30vw;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 10px;
+    border: 1px solid #838383;
+}
+#search{
+    padding: 10px;
+    margin: 5px;
+    height: fit-content;
+    border-radius: 10px;
+    background-color: rgb(120, 123, 139);
+}
+
+#brand_Admin{
+    display: flex;
+}
+#brand_Admin h1{
+    font-size: 3rem;
+    padding: 10px;
+    font-weight: normal;
+    margin: 0 0 3%;
+    text-shadow: 4px 6px 7px #000000;
+}
+#navbar{
+    display: flex;
+    list-style: none;
+    margin: 0 0 0 30%;
+    gap: 2rem;
+    font-size: larger;
+    padding: 2%;
+}
+#navbar li a{
+    color: white;
+    font-weight: lighter;
+}

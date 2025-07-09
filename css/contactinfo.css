@@ -1,0 +1,15 @@
+#contacts{
+    background-color: rgba(127, 127, 127, 0.712);
+    height: 40vh;
+    width: 80vw;
+    margin: 0 0 0 10%; 
+    border-radius: 50px;
+    padding: 2%;
+    gap: 2rem;
+}
+.contactsBox{
+  /* background-color: #ffffff; */
+  width: 30vw;
+  text-align: center;
+  padding: 2%;
+}
