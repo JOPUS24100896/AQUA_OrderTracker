@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 08, 2025 at 06:06 PM
+-- Generation Time: Jul 10, 2025 at 04:50 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 CREATE DATABASE IF NOT EXISTS aquadelsol_ordertracker;
@@ -28,12 +28,50 @@ DELIMITER $$
 --
 CREATE DEFINER=`root`@`localhost` PROCEDURE `clear_not_item` ()   BEGIN
 	SET FOREIGN_KEY_CHECKS = 0;
-    TRUNCATE users;
     TRUNCATE orders;
     TRUNCATE order_details;
     TRUNCATE return_deadlines;
     SET FOREIGN_KEY_CHECKS = 1;
 END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `create_Order` (IN `user_id` INT, IN `delivery` BOOLEAN, IN `item_id_list` VARCHAR(255), IN `item_val_list` VARCHAR(255))   BEGIN
+    declare deadline_bool boolean;
+    declare delivery_status boolean;
+    declare return_deadline_id int;
+    declare total_price decimal(10,2);
+    declare order_id int;
+    set return_deadline_id = null;
+    SELECT return_deadline_needed(item_id_list) INTO deadline_bool;
+    IF deadline_bool = 1 then
+        INSERT INTO return_deadlines VALUES (default, DATE_ADD(NOW(), INTERVAL 5 DAY), default);
+        SELECT LAST_INSERT_ID() INTO return_deadline_id;
+    END IF;
+    IF delivery = 0 then
+        set delivery_status = null;
+    ELSE 
+        set delivery_status = delivery;
+    END IF;
+    CALL return_total_price(item_id_list, item_val_list, @totalprice);
+    SELECT @totalprice INTO total_Price;
+    INSERT INTO orders VALUES (DEFAULT, user_id , return_deadline_id, delivery, delivery_status, total_Price, DEFAULT);
+    SELECT LAST_INSERT_ID() INTO order_id;
+    CALL create_OrderDetail(item_id_list, order_id,item_val_list);
+    END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `create_OrderDetail` (IN `item_list` VARCHAR(255), IN `order_id` INT, IN `item_amount` VARCHAR(255))   BEGIN 
+        declare item_num int;
+        declare item_id int;
+        declare item_val int;
+        declare item_index int;
+        set item_num = 1 + LENGTH(item_list) - LENGTH(REPLACE(item_list, ",", ""));
+        set item_index = 1;
+        while item_index <= item_num DO
+            set item_id = CAST(SUBSTRING_INDEX(SUBSTRING_INDEX(item_list, ",", item_index), ",", -1) AS UNSIGNED);
+            set item_val = CAST(SUBSTRING_INDEX(SUBSTRING_INDEX(item_amount, ",", item_index), ",", -1) AS UNSIGNED);
+            INSERT INTO order_details VALUES (default, item_id, order_id, item_val); 
+            set item_index = item_index + 1;
+        end while;
+    END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `return_all_items` ()   BEGIN
 	SELECT ItemName, ItemID FROM items;
@@ -128,19 +166,10 @@ CREATE TABLE `orders` (
   `UserID` int(11) NOT NULL,
   `ReturnDeadlineID` int(11) DEFAULT NULL,
   `Delivery` tinyint(1) DEFAULT 0,
+  `DeliveryStatus` tinyint(1) DEFAULT NULL,
   `TotalPrice` decimal(10,2) DEFAULT NULL,
   `OrderDate` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `orders`
---
-
-INSERT INTO `orders` (`OrderID`, `UserID`, `ReturnDeadlineID`, `Delivery`, `TotalPrice`, `OrderDate`) VALUES
-(1, 1, 1, 1, 25.00, '2025-07-09 00:01:36'),
-(2, 1, 2, 0, 175.00, '2025-07-09 00:02:04'),
-(3, 1, NULL, 1, 100.00, '2025-07-09 00:04:22'),
-(4, 1, NULL, 0, 280.00, '2025-07-09 00:05:10');
 
 -- --------------------------------------------------------
 
@@ -155,18 +184,6 @@ CREATE TABLE `order_details` (
   `ItemQuantity` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `order_details`
---
-
-INSERT INTO `order_details` (`OrderDetailID`, `ItemID`, `OrderID`, `ItemQuantity`) VALUES
-(1, 1, 1, 1),
-(2, 1, 2, 5),
-(3, 2, 2, 1),
-(4, 2, 3, 2),
-(5, 2, 4, 4),
-(6, 3, 4, 4);
-
 -- --------------------------------------------------------
 
 --
@@ -178,14 +195,6 @@ CREATE TABLE `return_deadlines` (
   `ReturnDateTime` datetime DEFAULT NULL,
   `ReturnStatus` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `return_deadlines`
---
-
-INSERT INTO `return_deadlines` (`ReturnDeadlineID`, `ReturnDateTime`, `ReturnStatus`) VALUES
-(1, '2025-07-26 18:01:36', 0),
-(2, '2025-07-26 18:02:04', 0);
 
 -- --------------------------------------------------------
 
@@ -209,7 +218,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`UserID`, `FullName`, `Address`, `Contact`, `Username`, `Email`, `Password`, `Type`) VALUES
-(1, 'Aeron', 'Cebu', 'test', 'namename1', 'namename1@gmail.com', 'test', 'CUST');
+(1, 'test', 'test', 'test', 'test', 'test', 'test', 'CUST'),
+(2, 'test', 'test', 'test', 'test1', 'test1', 'test', 'CUST');
 
 --
 -- Indexes for dumped tables
@@ -266,25 +276,25 @@ ALTER TABLE `items`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `OrderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `OrderID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `OrderDetailID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `OrderDetailID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `return_deadlines`
 --
 ALTER TABLE `return_deadlines`
-  MODIFY `ReturnDeadlineID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ReturnDeadlineID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
