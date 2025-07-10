@@ -3,11 +3,12 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 10, 2025 at 04:50 AM
+-- Generation Time: Jul 10, 2025 at 06:45 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 CREATE DATABASE IF NOT EXISTS aquadelsol_ordertracker;
 USE aquadelsol_ordertracker;
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -34,26 +35,32 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `clear_not_item` ()   BEGIN
     SET FOREIGN_KEY_CHECKS = 1;
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `create_Delivery` (OUT `delivery_id` INT)   BEGIN
+        set delivery_id = null;
+        insert into deliveries values (DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+        select LAST_INSERT_ID() into delivery_id;
+    END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `create_Order` (IN `user_id` INT, IN `delivery` BOOLEAN, IN `item_id_list` VARCHAR(255), IN `item_val_list` VARCHAR(255))   BEGIN
     declare deadline_bool boolean;
-    declare delivery_status boolean;
     declare return_deadline_id int;
     declare total_price decimal(10,2);
     declare order_id int;
+    declare delivery_id int;
+    set delivery_id = null;
     set return_deadline_id = null;
     SELECT return_deadline_needed(item_id_list) INTO deadline_bool;
     IF deadline_bool = 1 then
         INSERT INTO return_deadlines VALUES (default, DATE_ADD(NOW(), INTERVAL 5 DAY), default);
         SELECT LAST_INSERT_ID() INTO return_deadline_id;
     END IF;
-    IF delivery = 0 then
-        set delivery_status = null;
-    ELSE 
-        set delivery_status = delivery;
+    If delivery = 1 then
+        call create_Delivery(@delivery_id);
+        select @delivery_id into delivery_id;
     END IF;
     CALL return_total_price(item_id_list, item_val_list, @totalprice);
     SELECT @totalprice INTO total_Price;
-    INSERT INTO orders VALUES (DEFAULT, user_id , return_deadline_id, delivery, delivery_status, total_Price, DEFAULT);
+    INSERT INTO orders VALUES (DEFAULT, user_id , return_deadline_id, delivery_id, total_Price, DEFAULT);
     SELECT LAST_INSERT_ID() INTO order_id;
     CALL create_OrderDetail(item_id_list, order_id,item_val_list);
     END$$
@@ -134,6 +141,48 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `deliveries`
+--
+
+CREATE TABLE `deliveries` (
+  `DeliveryID` int(11) NOT NULL,
+  `DeliveryDate` datetime DEFAULT current_timestamp(),
+  `DeliveryStatus` enum('Pending','Delivered','Cancelled','Failed') NOT NULL DEFAULT 'Pending',
+  `PortID` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `deliveries`
+--
+
+INSERT INTO `deliveries` (`DeliveryID`, `DeliveryDate`, `DeliveryStatus`, `PortID`) VALUES
+(1, '2025-07-11 00:20:52', 'Pending', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `delivery_port`
+--
+
+CREATE TABLE `delivery_port` (
+  `PortID` int(11) NOT NULL,
+  `PortNumber` varchar(5) DEFAULT NULL,
+  `PortStatus` enum('Ready','Transit','Maintenance','Closed') NOT NULL DEFAULT 'Maintenance'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `delivery_port`
+--
+
+INSERT INTO `delivery_port` (`PortID`, `PortNumber`, `PortStatus`) VALUES
+(1, 'DEL01', 'Ready'),
+(2, 'DEL02', 'Ready'),
+(3, 'DEL03', 'Ready'),
+(4, 'DEL04', 'Ready');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `items`
 --
 
@@ -165,11 +214,19 @@ CREATE TABLE `orders` (
   `OrderID` int(11) NOT NULL,
   `UserID` int(11) NOT NULL,
   `ReturnDeadlineID` int(11) DEFAULT NULL,
-  `Delivery` tinyint(1) DEFAULT 0,
-  `DeliveryStatus` tinyint(1) DEFAULT NULL,
+  `DeliveryID` int(11) DEFAULT NULL,
   `TotalPrice` decimal(10,2) DEFAULT NULL,
   `OrderDate` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`OrderID`, `UserID`, `ReturnDeadlineID`, `DeliveryID`, `TotalPrice`, `OrderDate`) VALUES
+(1, 1, 1, 1, 75.00, '2025-07-11 00:20:52'),
+(2, 1, 2, NULL, 95.00, '2025-07-11 00:33:27'),
+(3, 1, NULL, NULL, 70.00, '2025-07-11 00:33:55');
 
 -- --------------------------------------------------------
 
@@ -184,6 +241,19 @@ CREATE TABLE `order_details` (
   `ItemQuantity` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `order_details`
+--
+
+INSERT INTO `order_details` (`OrderDetailID`, `ItemID`, `OrderID`, `ItemQuantity`) VALUES
+(1, 1, 1, 1),
+(2, 2, 1, 1),
+(3, 1, 2, 1),
+(4, 2, 2, 1),
+(5, 3, 2, 1),
+(6, 2, 3, 1),
+(7, 3, 3, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -195,6 +265,14 @@ CREATE TABLE `return_deadlines` (
   `ReturnDateTime` datetime DEFAULT NULL,
   `ReturnStatus` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `return_deadlines`
+--
+
+INSERT INTO `return_deadlines` (`ReturnDeadlineID`, `ReturnDateTime`, `ReturnStatus`) VALUES
+(1, '2025-07-16 00:20:52', 0),
+(2, '2025-07-16 00:33:27', 0);
 
 -- --------------------------------------------------------
 
@@ -226,6 +304,20 @@ INSERT INTO `users` (`UserID`, `FullName`, `Address`, `Contact`, `Username`, `Em
 --
 
 --
+-- Indexes for table `deliveries`
+--
+ALTER TABLE `deliveries`
+  ADD PRIMARY KEY (`DeliveryID`),
+  ADD KEY `deliveries_FK` (`PortID`);
+
+--
+-- Indexes for table `delivery_port`
+--
+ALTER TABLE `delivery_port`
+  ADD PRIMARY KEY (`PortID`),
+  ADD UNIQUE KEY `PortNumber` (`PortNumber`);
+
+--
 -- Indexes for table `items`
 --
 ALTER TABLE `items`
@@ -237,7 +329,8 @@ ALTER TABLE `items`
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`OrderID`),
   ADD KEY `orders_fkCust` (`UserID`),
-  ADD KEY `orders_fkRet` (`ReturnDeadlineID`);
+  ADD KEY `orders_fkRet` (`ReturnDeadlineID`),
+  ADD KEY `orders_deliveryFK` (`DeliveryID`);
 
 --
 -- Indexes for table `order_details`
@@ -267,6 +360,18 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `deliveries`
+--
+ALTER TABLE `deliveries`
+  MODIFY `DeliveryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `delivery_port`
+--
+ALTER TABLE `delivery_port`
+  MODIFY `PortID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
@@ -276,19 +381,19 @@ ALTER TABLE `items`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `OrderID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `OrderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `OrderDetailID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `OrderDetailID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `return_deadlines`
 --
 ALTER TABLE `return_deadlines`
-  MODIFY `ReturnDeadlineID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ReturnDeadlineID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -301,9 +406,16 @@ ALTER TABLE `users`
 --
 
 --
+-- Constraints for table `deliveries`
+--
+ALTER TABLE `deliveries`
+  ADD CONSTRAINT `deliveries_FK` FOREIGN KEY (`PortID`) REFERENCES `delivery_port` (`PortID`);
+
+--
 -- Constraints for table `orders`
 --
 ALTER TABLE `orders`
+  ADD CONSTRAINT `orders_deliveryFK` FOREIGN KEY (`DeliveryID`) REFERENCES `deliveries` (`DeliveryID`),
   ADD CONSTRAINT `orders_fkCust` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`),
   ADD CONSTRAINT `orders_fkRet` FOREIGN KEY (`ReturnDeadlineID`) REFERENCES `return_deadlines` (`ReturnDeadlineID`);
 
