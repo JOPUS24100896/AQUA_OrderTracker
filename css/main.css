@@ -15,6 +15,7 @@ body{
     background-repeat: no-repeat;
     background-position: absolute;
     background-position-y: -23vh;
+    /* background-color: black; */
 }
 /* temporary */
 a{
@@ -29,8 +30,8 @@ a{
     background-color: rgb(6, 17, 83);
     color: white;
     padding: 1vh 0;
-    /* display: flex; */
     text-align: center;
+    /* height: min-content; */
 }
 #brand{
     text-align: center;
@@ -39,6 +40,110 @@ a{
     font-weight: normal;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
+#brand_Admin{
+    display: flex;
+}
+#brand_Admin h1{
+    font-size: 3rem;
+    padding: 10px;
+    font-weight: normal;
+    margin: 0 0 3%;
+    text-shadow: 4px 6px 7px #000000;
+}
+#navbar{
+    display: flex;
+    list-style: none;
+    margin: 0 0 0 10%;
+    gap: 2rem;
+    font-size: larger;
+    padding: 2%;
+}
+#navbar li a{
+    color: white;
+    font-weight: lighter;
+}
+#current{
+    text-decoration: underline;
+    text-decoration-style: solid;
+    text-decoration-color: white;
+}
+
+
+ /* Account dropdown menu */
+.account-container{
+    width: fit-content;
+    height: 2.5rem;
+    margin: 1.3rem;
+}
+.account-icon {
+    width: auto;
+    height: 100%;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-image: url(../images/dropdown_icon.png);
+    /* background-size: cover;
+    background-position: right; */
+}
+.account-popup {
+    display: none;
+    position: absolute;
+    background-color: rgb(31, 31, 31);
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 0.5rem;
+    width: 15%;
+    z-index: 10003;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    pointer-events: none;
+}
+
+/* Account dropdown menu list */
+.account-popup ul {
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+}
+.account-popup a{
+    gap: 0.5rem;
+    padding: 10px 20px;
+    color: white;
+    font-size: 1rem;
+    width: 100%
+} */
+
+/* Account dropdown menu styling */
+.popopt {
+    color: white;
+    text-align: center;
+    /* padding: 20px 22px; */
+    text-decoration: none;
+}
+
+.popopt:hover {
+    color: #ffbd59;
+    cursor: pointer;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.account-popup.show {
+    display: flex;
+    flex-direction: column;
+
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+ .account-icon:hover {
+    transform: scale(1.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+
+
 /* main content */
 #content{
     margin-top: 5vh;
@@ -48,7 +153,7 @@ a{
     font-weight: normal;
     padding: 20px;
     margin: 0 0 0 10%;
-    /* text-shadow: 4px 6px 7px #000000; */
+    text-shadow: 2px 3px 7px #ffffff;
 }   
 /* main footer */
 #footer{
@@ -68,19 +173,3 @@ a{
     margin: 0 1rem;
 }
 
-
-/* ContactInfo */
-/*contactinfo.css*/
-
-
-/* Log in UI */
-/**/
-
-/* Sign_up UI */
-/* signup.css
-
-/* ADMIN Sales Record */
-/*adminsales.css*/
-
-/* Order record */
-/*orderrecord.css*/

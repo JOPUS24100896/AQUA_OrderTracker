@@ -18,11 +18,19 @@
             <li><a href="/admin UI/OrderRecord.html" id="current">Order Record</a></li>
             <li><a href="/admin UI/InventoryUI.html">Inventory</a></li>
         </ul>
+        <div class="account-container">
+            <img alt="User Account" class="account-icon" id="accountBtn" src="/images/dropdown_icon.jpg"></img>
+            <div class="account-popup" id="accountPopup">
+                <ul>
+                    <a href="###" class="popopt">Manage Profile</a>
+                    <a href="###" onclick="localStorage.removeItem('currUser')" class="popopt">Logout</a>
+                </ul>
+            </div>
+        </div>
     </div>
 
 
-
-
+    <!-- content -->
     <div id="content">
         <h1 id="page_title">ORDER RECORD</h1>
         <div id="search_container">
@@ -36,8 +44,8 @@
                         <tr>    
                             <th>Order ID</th>
                             <th>Customer Name</th>
-                        <th>Order Date</th>
-                        <th>Status</th>
+                            <th>Order Date</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -112,6 +120,6 @@
         </div>     
     </div>
 
-  <script src="/js/graphFunction.js"></script>
+    <script src="/js/dropdown.js"></script>
 </body>
 </html>

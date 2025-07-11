@@ -1,7 +1,7 @@
         // LINE CHART
 // Sample data with two datasets, each for a different Y-axis
 const data = {
-labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+labels: ['1', '2', '3', '4', '5', '6', '7'],
 datasets: [
     {
     label: 'Sales',

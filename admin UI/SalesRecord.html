@@ -15,10 +15,18 @@
         </div>
         <ul id="navbar">
             <li><a href="/admin UI/SalesRecord.html" id="current">Sales Record</a></li>
-            <!-- <li><a href="/admin UI/ManageProfile.html">Manage Profile</a></li> -->
             <li><a href="/admin UI/OrderRecord.html">Order Record</a></li>
             <li><a href="/admin UI/InventoryUI.html">Inventory</a></li>
         </ul>
+        <div class="account-container">
+            <img alt="User Account" class="account-icon" id="accountBtn" src="/images/dropdown_icon.jpg"></img>
+            <div class="account-popup" id="accountPopup">
+                <ul>
+                    <a href="###" class="popopt">Manage Profile</a>
+                    <a href="###" onclick="localStorage.removeItem('currUser')" class="popopt">Logout</a>
+                </ul>
+            </div>
+        </div>
     </div>
 
     <div id="content">
@@ -43,5 +51,6 @@
     </div>
 
   <script src="/js/graphFunction.js"></script>
+  <script src="/js/dropdown.js"></script>
 </body>
 </html>
