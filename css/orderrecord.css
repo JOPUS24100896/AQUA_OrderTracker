@@ -1,13 +1,13 @@
-#orderChartContainer{
-  gap: 2.5rem;
-}
 #OrderRecordTable{
   background-color: beige;
   border-radius: 20px;
   padding: 1rem;
   margin: 0 15% 0 15%;
-  overflow-y: auto;
   border: 2px solid rgb(7, 7, 7);
+  position: fixed;
+  width: 70%;
+  height: 50%;
+  
 }
 #search_container{
     margin: 0 0 0 15%;
@@ -21,12 +21,84 @@
     border-radius: 10px;
     border: 1px solid #838383;
 }
-#search{
-    padding: 10px;
-    margin: 5px;
-    height: fit-content;
-    border-radius: 10px;
-    background-color: rgb(120, 123, 139);
+#search_container input{
+  padding: 10px;
+  margin: 5px;
+  height: fit-content;
+  border-radius: 10px;
+  color: black;
+  background-color: rgb(248, 249, 255);
+}
+#search_container button{
+  padding: 10px 20px;
+  margin: 5px;
+  border-radius: 10px;
+  background-color: rgb(18, 26, 36);
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+#search_container button:hover{
+  background-color: rgb(35, 78, 133);
 }
 
 
+/* table style*/
+table{
+  width: 100%;
+}
+#table_header{
+  background-color: rgb(45, 55, 108);
+  border: 2px solid rgb(7, 7, 7);
+  color: rgb(255, 255, 255);
+  text-align: center;
+  font-size: larger;
+  border-radius: 15px;
+  position: fixed;
+  width: 66%;
+  height: 6vh;
+  padding: 0.5%;
+}
+/* th{
+  border: 2px solid rgba(7, 7, 7, 0.47);
+  border-radius: 10px;
+} */
+#order_id{
+  width: 3%;
+}
+#customer_name{
+  width: 19%;
+}
+#order_date{
+  width: 11%;
+}
+#status{
+  width: 7%;
+}
+tbody{
+  display: block;
+  height: 40vh; 
+  overflow-y: auto;
+  margin-top: 5%;
+}
+td{
+  padding: 8px;
+  margin: 1rem;
+  text-align: center;
+  font-size: larger;
+  border: 2px solid rgba(7, 7, 7, 0.47);
+  border-radius: 10px;
+  width: 15%;
+}
+td:nth-child(1){
+  width: 5%;
+}
+td:nth-child(2){
+  width: 30%;
+}
+td:nth-child(3){
+  width: 18%;
+}
+td:nth-child(4){
+  width: 8%;
+}
