@@ -17,7 +17,15 @@
             <li><a href="/admin UI/OrderRecord.html">Order Record</a></li>
             <li><a href="/admin UI/InventoryUI.html" id="current">Inventory</a></li>
         </ul>
-        
+        <div class="account-container">
+            <img alt="User Account" class="account-icon" id="accountBtn" src="/images/dropdown_icon.jpg"></img>
+            <div class="account-popup" id="accountPopup">
+                <ul>
+                    <a href="###" class="popopt">Manage Profile</a>
+                    <a href="###" onclick="localStorage.removeItem('currUser')" class="popopt">Logout</a>
+                </ul>
+            </div>
+        </div>
     </div>
 
     <!-- Content -->
