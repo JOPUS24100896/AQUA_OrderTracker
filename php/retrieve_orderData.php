@@ -1,6 +1,7 @@
+
 <?php
+
     session_start();
-    
     // class Item {
     //     public $ItemID;
     //     public $ItemName;
@@ -91,6 +92,7 @@
     while($query_raw_row = $raw_Order_Data->fetch_assoc()){
         $json_placeholder[] = $query_raw_row;
     }
-    $json_echo = json_encode($json_placeholder);
-    echo $json_echo;
+    
+    echo json_encode($json_placeholder);
+    // file_put_contents('orderData.json', json_encode($json_placeholder, JSON_PRETTY_PRINT));
 ?>
