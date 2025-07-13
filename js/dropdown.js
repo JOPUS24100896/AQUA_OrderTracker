@@ -13,3 +13,11 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+
+function logOut(){
+    fetch("../php/EndSession.php").
+    then(response => response.text()).
+    then(data => {
+        console.log(data);
+    })  ;
+}

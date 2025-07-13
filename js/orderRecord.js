@@ -42,7 +42,7 @@ fetch("../php/retrieve_orderData.php")
 // `;
 // destinationGrid.appendChild(card);
     
-fetch("../php/test.json")
+/*fetch("../php/test.json")
 .then(response => response.json())
 .then(data => {
     order = data;
@@ -59,7 +59,7 @@ fetch("../php/test.json")
     });
 }).catch(data => {
     console.log(data);
-});
+});*/
 // testing
 
 
