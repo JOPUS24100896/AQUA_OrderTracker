@@ -14,7 +14,6 @@
         </div>
         <ul id="navbar">
             <li><a href="/admin UI/SalesRecord.html">Sales Record</a></li>
-            <li><a href="/admin UI/ManageProfile.html" id="current">Manage Profile</a></li>
             <li><a href="/admin UI/OrderRecord.html">Order Record</a></li>
             <li><a href="/admin UI/InventoryUI.html">Inventory</a></li>
         </ul>
@@ -22,15 +21,51 @@
             <img alt="User Account" class="account-icon" id="accountBtn" src="/images/dropdown_icon.jpg"></img>
             <div class="account-popup" id="accountPopup">
                 <ul>
-                    <a href="###" class="popopt">Manage Profile</a>
+                    <a href="/admin UI/ManageProfile.html" class="popopt">Manage Profile</a>
                     <a href="###" onclick="localStorage.removeItem('currUser')" class="popopt">Logout</a>
                 </ul>
             </div>
         </div>
     </div>
+    
+    <!-- content -->
+    <div id="content">
+        <h1 id="page_title">MANAGE PROFILE</h1>
+        <!-- <div id="search_container">
+            <input type="text" id="search" placeholder="Search Something...">
+            <button>SEARCH</button>
+        </div> -->
+        
+        <!-- <div id="OrderRecordTable">
+            <table>
+                <thead>
+                    <div id="header_background"></div>
+                    <tr id="table_header">    
+                        <th id="order_id">ID</th>
+                        <th id="customer_name">Customer Name</th>
+                        <th id="order_date">Order Date</th>
+                        <th id="status">Status</th>
+                    </tr>
+                </thead>
+                <tbody id="orderForm">
+                    <tr>
+                        <td>1</td>
+                        <td>John Doe</td>
+                        <td>2023-10-01</td>
+                        <td>Completed</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Jane Smith</td>
+                        <td>2023-10-02</td>
+                        <td>Pending</td>
+                    </tr>
 
-    
-    
+                </tbody>
+            </table>
+        </div> -->
+        
+    </div>
 
     
     

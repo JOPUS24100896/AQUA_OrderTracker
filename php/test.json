@@ -2,23 +2,6 @@
   {
     "OrderID": "101",
     "FullName": "John Doe",
-    "OrderDate": "2023-10-01",
-    "Status": "Completed"
-  },
-  {
-    "OrderID": "102",
-    "FullName": "Jane Smith",
-    "OrderDate": "2023-10-02",
-    "Status": "Processing"
-  },
-  {
-    "OrderID": "103",
-    "FullName": "Carlos Reyes",
-    "OrderDate": "2023-10-03"
-  },
-  {
-    "OrderID": "101",
-    "FullName": "John Doe",
     "ItemID": "1",
     "ItemQuantity": "2",
     "OrderDate": "2023-10-01",
