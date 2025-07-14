@@ -7,7 +7,7 @@ then(data => {
     console.log(data);
     data.forEach(rowData => {
         row += `
-        <tr>
+        <tr onclick="allowEdit()">
             <td>${rowData.UserID}</td>
             <td>${rowData.OrderID}</td>
             <td>${rowData.ItemID}</td>
@@ -17,6 +17,26 @@ then(data => {
             <td>${rowData.OrderStatus}</td>
         </tr>
     `;
+/*somehow get the orderID from the db when clicked and use it to edit*/
     })
     table.innerHTML = row;
+    filter();
 });
+
+function filter() {
+    var row, column, i;
+    row = table.getElementsByTagName("tr");
+    for (i = 0; i < row.length; i++) {
+        column = row[i].getElementsByTagName("td")[6];
+        if(column.innerHTML != 'Complete') {
+            row[i].style.display = "";
+        }else {
+            row[i].style.display = "none";
+        }       
+    }
+}
+function allowEdit(){
+    function edit(status){
+    /*depending on what button was clicked, the status in the function is different, the function inside the other function is supposed to only allow the button to change the status if a row is clicked then maybe a popup? but not necessary, but idk if thats how this works*/
+}
+}
