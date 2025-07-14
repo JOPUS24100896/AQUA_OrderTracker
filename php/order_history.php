@@ -2,7 +2,9 @@
     session_start();
     $conn = new mysqli("localhost", "root", "", "aquadelsol_ordertracker");
     $result_array = [];
-    $query = "SELECT * FROM orders INNER JOIN order_details ON orders.OrderID = order_details.OrderID;";
+    $user_id = (int) $_SESSION["user_id"];
+    $query = "SELECT * FROM orders INNER JOIN order_details ON orders.OrderID = order_details.OrderID 
+    INNER JOIN items ON items.ItemID = order_details.ItemID WHERE orders.UserID = $user_id";
     if($data = $conn->query($query)){
         while($dataRow = $data->fetch_assoc()){
             array_push($result_array, $dataRow);
