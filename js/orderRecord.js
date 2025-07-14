@@ -1,21 +1,5 @@
 // fetch("../php/retrieve_orderData.php")
-// .then(response => response.json())
-// .then(data => {
-//     const tableRow = document.getElementById("orderForm");
-//     console.log(data);
-//     data.forEach(order => {
-//         const card = document.createElement('tr');
-//         card.innerHTML = `
-//             <td>${order.OrderID}</td>
-//             <td>${order.FullName}</td>
-//             <td>${order.OrderDate}</td>
-//             <td>${order.Price}</td>
-//         `;
-//         tableRow.appendChild(card);
-//     });
-// })
-
-fetch("../php/test.json")
+fetch('http://localhost/php/retrieve_orderData.php')
 .then(response => response.json())
 .then(data => {
     const tableRow = document.getElementById("orderForm");
@@ -31,7 +15,6 @@ fetch("../php/test.json")
         tableRow.appendChild(card);
     });
 })
-
 function myFunction() {
   // Declare variables
   var input, filter, table, tr, td, i, txtValue;
