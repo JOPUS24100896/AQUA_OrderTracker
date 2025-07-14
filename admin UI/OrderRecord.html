@@ -33,18 +33,24 @@
     <!-- content -->
     <div id="content">
         <h1 id="page_title">ORDER RECORD</h1>
-        <div id="search_container">
-        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">        </div>
+        <!-- <div id="search_container">
+        <input type="text" id="myInput" onkeyup="searchFunction()" placeholder="Search for names.."></div> -->
         
         <div id="OrderRecordTable">
             <table>
                 <thead>
                     <div id="header_background"></div>
                     <tr id="table_header">    
-                        <th id="order_id">ID</th>
+                        <!-- <th id="order_id">ID</th>
                         <th id="customer_name">Customer Name</th>
                         <th id="order_date">Order Date</th>
-                        <th id="status">Status</th>
+                        <th id="amount">Amount</th> -->
+                        <td class="orderData">ID</td>
+                        <td class="orderData">ItemName</td>
+                        <td class="orderData">ItemQuantity</td>
+                        <td class="orderData">Unit Price</td>
+                        <td class="orderData">OrderDate</td>
+                        <td class="orderData">TotalPrice</td>
                     </tr>
                 </thead>
                 <tbody id="orderForm">
