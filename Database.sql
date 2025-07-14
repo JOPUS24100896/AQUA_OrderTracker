@@ -3,9 +3,10 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 14, 2025 at 08:22 AM
+-- Generation Time: Jul 14, 2025 at 01:18 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
+DROP DATABASE aquadelsol_ordertracker;
 CREATE DATABASE IF NOT EXISTS aquadelsol_ordertracker;
 USE aquadelsol_ordertracker;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -59,7 +60,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `create_Order` (IN `user_id` INT, IN
     END IF;
     CALL return_total_price(item_id_list, item_val_list, @totalprice);
     SELECT @totalprice INTO total_Price;
-    INSERT INTO orders VALUES (DEFAULT, user_id , return_deadline_id, delivery_id, total_Price, DEFAULT);
+    INSERT INTO orders VALUES (DEFAULT, user_id , return_deadline_id, delivery_id, DEFAULT, total_Price, DEFAULT);
     SELECT LAST_INSERT_ID() INTO order_id;
     CALL create_OrderDetail(item_id_list, order_id,item_val_list);
     END$$
@@ -157,7 +158,14 @@ CREATE TABLE `deliveries` (
 INSERT INTO `deliveries` (`DeliveryID`, `DeliveryDate`, `DeliveryStatus`, `PortID`) VALUES
 (1, '2025-07-11 00:20:52', 'Pending', NULL),
 (2, '2025-07-14 01:18:14', 'Pending', NULL),
-(3, '2025-07-14 14:16:11', 'Pending', NULL);
+(3, '2025-07-14 14:16:11', 'Pending', NULL),
+(4, '2025-07-14 14:26:10', 'Pending', NULL),
+(5, '2025-07-14 14:27:17', 'Pending', NULL),
+(6, '2025-07-14 14:32:59', 'Pending', NULL),
+(7, '2025-07-14 17:22:14', 'Pending', NULL),
+(8, '2025-07-14 17:24:28', 'Pending', NULL),
+(9, '2025-07-14 17:24:38', 'Pending', NULL),
+(10, '2025-07-14 17:24:44', 'Pending', NULL);
 
 -- --------------------------------------------------------
 
@@ -216,6 +224,7 @@ CREATE TABLE `orders` (
   `UserID` int(11) NOT NULL,
   `ReturnDeadlineID` int(11) DEFAULT NULL,
   `DeliveryID` int(11) DEFAULT NULL,
+  `Status` enum('Pending','Ready','Cancelled','Complete') NOT NULL DEFAULT 'Pending',
   `TotalPrice` decimal(10,2) DEFAULT NULL,
   `OrderDate` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -224,13 +233,20 @@ CREATE TABLE `orders` (
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`OrderID`, `UserID`, `ReturnDeadlineID`, `DeliveryID`, `TotalPrice`, `OrderDate`) VALUES
-(1, 1, 1, 1, 75.00, '2025-07-11 00:20:52'),
-(2, 1, 2, NULL, 95.00, '2025-07-11 00:33:27'),
-(3, 1, NULL, NULL, 70.00, '2025-07-11 00:33:55'),
-(4, 1, 3, NULL, 400.00, '2025-07-12 18:21:29'),
-(5, 1, 4, 2, 520.00, '2025-07-14 01:18:14'),
-(6, 1, 5, 3, 95.00, '2025-07-14 14:16:11');
+INSERT INTO `orders` (`OrderID`, `UserID`, `ReturnDeadlineID`, `DeliveryID`, `Status`, `TotalPrice`, `OrderDate`) VALUES
+(1, 1, 1, 1, 'Complete', 75.00, '2025-07-11 00:20:52'),
+(2, 1, 2, NULL, 'Pending', 95.00, '2025-07-11 00:33:27'),
+(3, 1, NULL, NULL, 'Pending', 70.00, '2025-07-11 00:33:55'),
+(4, 1, 3, NULL, 'Pending', 400.00, '2025-07-12 18:21:29'),
+(5, 1, 4, 2, 'Pending', 520.00, '2025-07-14 01:18:14'),
+(6, 1, 5, 3, 'Pending', 95.00, '2025-07-14 14:16:11'),
+(7, 1, 6, 4, 'Pending', 95.00, '2025-07-14 14:26:10'),
+(8, 1, 7, 5, 'Pending', 95.00, '2025-07-14 14:27:17'),
+(9, 4, 8, 6, 'Pending', 275.00, '2025-07-14 14:32:59'),
+(10, 4, 10, 8, 'Pending', 95.00, '2025-07-14 17:24:28'),
+(11, 4, 11, 9, 'Pending', 95.00, '2025-07-14 17:24:38'),
+(12, 4, 12, 10, 'Pending', 95.00, '2025-07-14 17:24:44'),
+(13, 4, 13, NULL, 'Pending', 95.00, '2025-07-14 17:24:50');
 
 -- --------------------------------------------------------
 
@@ -264,7 +280,27 @@ INSERT INTO `order_details` (`OrderDetailID`, `ItemID`, `OrderID`, `ItemQuantity
 (12, 3, 5, 6),
 (13, 1, 6, 1),
 (14, 2, 6, 1),
-(15, 3, 6, 1);
+(15, 3, 6, 1),
+(16, 1, 7, 1),
+(17, 2, 7, 1),
+(18, 3, 7, 1),
+(19, 1, 8, 1),
+(20, 2, 8, 1),
+(21, 3, 8, 1),
+(22, 1, 9, 3),
+(23, 2, 9, 4),
+(24, 1, 10, 1),
+(25, 2, 10, 1),
+(26, 3, 10, 1),
+(27, 1, 11, 1),
+(28, 2, 11, 1),
+(29, 3, 11, 1),
+(30, 1, 12, 1),
+(31, 2, 12, 1),
+(32, 3, 12, 1),
+(33, 1, 13, 1),
+(34, 2, 13, 1),
+(35, 3, 13, 1);
 
 -- --------------------------------------------------------
 
@@ -287,7 +323,15 @@ INSERT INTO `return_deadlines` (`ReturnDeadlineID`, `ReturnDateTime`, `ReturnSta
 (2, '2025-07-16 00:33:27', 0),
 (3, '2025-07-17 18:21:29', 0),
 (4, '2025-07-19 01:18:14', 0),
-(5, '2025-07-19 14:16:11', 0);
+(5, '2025-07-19 14:16:11', 0),
+(6, '2025-07-19 14:26:10', 0),
+(7, '2025-07-19 14:27:17', 0),
+(8, '2025-07-19 14:32:59', 0),
+(9, '2025-07-19 17:22:14', 0),
+(10, '2025-07-19 17:24:28', 0),
+(11, '2025-07-19 17:24:38', 0),
+(12, '2025-07-19 17:24:44', 0),
+(13, '2025-07-19 17:24:50', 0);
 
 -- --------------------------------------------------------
 
@@ -312,7 +356,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`UserID`, `FullName`, `Address`, `Contact`, `Username`, `Email`, `Password`, `Type`) VALUES
 (1, 'test', 'test', 'test', 'test', 'test', 'test', 'CUST'),
-(2, 'test', 'test', 'test', 'test1', 'test1', 'test', 'CUST');
+(2, 'test', 'test', 'test', 'test1', 'test1', 'test', 'CUST'),
+(4, 'John', 'cebu', '14543616', 'Test2', 'example@email.com', 'qwerty', 'CUST');
 
 --
 -- Indexes for dumped tables
@@ -378,7 +423,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `deliveries`
 --
 ALTER TABLE `deliveries`
-  MODIFY `DeliveryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `DeliveryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `delivery_port`
@@ -396,25 +441,25 @@ ALTER TABLE `items`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `OrderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `OrderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `OrderDetailID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `OrderDetailID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `return_deadlines`
 --
 ALTER TABLE `return_deadlines`
-  MODIFY `ReturnDeadlineID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ReturnDeadlineID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
