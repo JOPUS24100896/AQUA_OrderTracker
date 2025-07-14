@@ -4,7 +4,7 @@
     $result_array = [];
     $user_id = (int) $_SESSION["user_id"];
     $query = "SELECT * FROM orders INNER JOIN order_details ON orders.OrderID = order_details.OrderID 
-    INNER JOIN items ON items.ItemID = order_details.ItemID WHERE orders.UserID = $user_id";
+    INNER JOIN items ON items.ItemID = order_details.ItemID WHERE orders.UserID = $user_id ORDER BY orders.OrderID";
     if($data = $conn->query($query)){
         while($dataRow = $data->fetch_assoc()){
             array_push($result_array, $dataRow);
