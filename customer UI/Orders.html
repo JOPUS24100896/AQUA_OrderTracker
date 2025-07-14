@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/orders.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css">
+    <style>
+        td {
+            border: 1px solid black; 
+        }
+    </style>
 </head>
 
 <body>
@@ -35,15 +40,16 @@
 
     <!-- Content -->
     <div id="content">
-        <h1 id="page_title">ORDER HISTORY</h1>
+        <h1 id="page_title">PENDING ORDERS</h1>
         <div class="OrderList">
             <table>
                 <thead>
                     <tr>
                         <th>Order ID</th>
-                        <th>Delivery ID</th>
+                        <th>Item Name</th>
+                        <th>Price</th>
                         <th>Order Date</th>
-                        <th>Total Price</th>
+                        <th>TotalPrice</th>
                         <th>Status</th>
                     </tr>
                 </thead>
@@ -67,7 +73,8 @@
         </div>
     </div>
 
-    <script src="js/dropdown.js"></script>
+    <script src="../js/dropdown.js"></script>
+    <script src="../js/pendingOrder.js"></script>
     <script>
         document.querySelectorAll('.ProductCard').forEach(card => {
             const minus = card.querySelector('button:first-child');
