@@ -13,14 +13,6 @@ fetch("../php/retrieve_orderData.php")
         `;
         tableRow.appendChild(card);
     });
-    // const card = document.createElement('tr');
-    //     card.innerHTML = `
-    //         <td>${data.OrderID}</td>
-    //         <td>${data.FullName}</td>
-    //         <td>${data.OrderDate}</td>
-    //         <td>${data.Price}</td>
-    //     `;
-    //     tableRow.appendChild(card);
 }).catch(data => {
     console.log(data);
 });
@@ -31,6 +23,23 @@ fetch("../php/retrieve_orderData.php")
 
 
 
+// testing
+// fetch("../php/test.json")
+// .then(response => response.json())
+// .then(data => {
+//     orderData = data;
+//     const tableRow = document.getElementById("orderForm");
+//     data.forEach(order => {
+//         const card = document.createElement('tr');
+//         card.innerHTML = `
+//             <td>${order.OrderID}</td>
+//             <td>${order.FullName}</td>
+//             <td>${order.OrderDate}</td>
+//             <td>${order.Price}</td>
+//         `;
+//         tableRow.appendChild(card);
+//     });
+// });
 // testing
 // const destinationGrid = document.getElementById("orderForm");
 // const card = document.createElement('tr');

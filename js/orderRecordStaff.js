@@ -20,3 +20,17 @@ then(data => {
     })
     table.innerHTML = row;
 });
+
+function filter() {
+    var table, row, column, i;
+    table = document.getElementById("recordTable");
+    row = table.getElementsByTagName("tr");
+    for (i = 0; i < row.length; i++) {
+        column = row[i].getElementsByTagName("td")[6];
+        if(column.innerHTML != 'Delivered') {
+            row[i].style.display = "";
+        }else {
+            row[i].style.display = "none";
+        }       
+    }
+}
