@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order Record</title>
-    <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/orderrecord.css">
+    <link rel="stylesheet" href="\css/main.css">
+    <link rel="stylesheet" href="\css/orderRecordStaff.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
@@ -14,9 +14,9 @@
             <a href="/index.html"><h1>Aqua Del Sol</h1></a>
         </div>
         <ul id="navbar">
-            <li><a href="/staff UI/MakeAnOrder.html">Make an Order</a></li>
-            <li><a href="/staff UI/OrderRecordStaff.html">Order Record</a></li>
-            <li><a href="/staff UI/ManageOrders.html" id="current">Manage Orders</a></li>
+            <li><a href="\staff UI/MakeAnOrder.html">Make an Order</a></li>
+            <li><a href="\staff UI/OrderRecordStaff.html">Order Record</a></li>
+            <li><a href="\staff UI/ManageOrders.html" id="current">Manage Orders</a></li>
         </ul>
         <div class="account-container">
             <img alt="User Account" class="account-icon" id="accountBtn" src="/images/dropdown_icon.jpg"></img>
@@ -33,12 +33,7 @@
     <!-- content -->
     <div id="content">
         <h1 id="page_title">MANAGE ORDERS</h1>
-        <div id="search_container">
-            <input type="text" id="search" placeholder="Search Something...">
-            <button>SEARCH</button>
-        </div>
-        
-        <div class="HistoryList">
+        <div class="recordTable">
             <table>
                 <thead>
                     <tr>
@@ -55,7 +50,11 @@
                 </tbody>
             </table>
         </div>
-        
+        <div class="buttoncontainer">
+            <button onclick="edit('Pending')">Set to Pending</button>
+
+            <button onclick="edit('Ready')">Set to Ready</button>
+        </div>
     </div>
 
     
