@@ -94,5 +94,4 @@
     }
     
     echo json_encode($json_placeholder);
-    // file_put_contents('orderData.json', json_encode($json_placeholder, JSON_PRETTY_PRINT));
 ?>
