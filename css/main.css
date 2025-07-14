@@ -88,9 +88,7 @@ a{
     height: 100%;
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    background-image: url(../images/dropdown_icon.png);
-    /* background-size: cover;
-    background-position: right; */
+    background-image: url(../images/dropdown_icon.jpg);
 }
 .account-popup {
     display: none;
