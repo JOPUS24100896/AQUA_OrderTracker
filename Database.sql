@@ -3,12 +3,11 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 10, 2025 at 06:45 PM
+-- Generation Time: Jul 14, 2025 at 08:22 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 CREATE DATABASE IF NOT EXISTS aquadelsol_ordertracker;
 USE aquadelsol_ordertracker;
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -156,7 +155,9 @@ CREATE TABLE `deliveries` (
 --
 
 INSERT INTO `deliveries` (`DeliveryID`, `DeliveryDate`, `DeliveryStatus`, `PortID`) VALUES
-(1, '2025-07-11 00:20:52', 'Pending', NULL);
+(1, '2025-07-11 00:20:52', 'Pending', NULL),
+(2, '2025-07-14 01:18:14', 'Pending', NULL),
+(3, '2025-07-14 14:16:11', 'Pending', NULL);
 
 -- --------------------------------------------------------
 
@@ -226,7 +227,10 @@ CREATE TABLE `orders` (
 INSERT INTO `orders` (`OrderID`, `UserID`, `ReturnDeadlineID`, `DeliveryID`, `TotalPrice`, `OrderDate`) VALUES
 (1, 1, 1, 1, 75.00, '2025-07-11 00:20:52'),
 (2, 1, 2, NULL, 95.00, '2025-07-11 00:33:27'),
-(3, 1, NULL, NULL, 70.00, '2025-07-11 00:33:55');
+(3, 1, NULL, NULL, 70.00, '2025-07-11 00:33:55'),
+(4, 1, 3, NULL, 400.00, '2025-07-12 18:21:29'),
+(5, 1, 4, 2, 520.00, '2025-07-14 01:18:14'),
+(6, 1, 5, 3, 95.00, '2025-07-14 14:16:11');
 
 -- --------------------------------------------------------
 
@@ -252,7 +256,15 @@ INSERT INTO `order_details` (`OrderDetailID`, `ItemID`, `OrderID`, `ItemQuantity
 (4, 2, 2, 1),
 (5, 3, 2, 1),
 (6, 2, 3, 1),
-(7, 3, 3, 1);
+(7, 3, 3, 1),
+(8, 1, 4, 10),
+(9, 2, 4, 3),
+(10, 1, 5, 4),
+(11, 2, 5, 6),
+(12, 3, 5, 6),
+(13, 1, 6, 1),
+(14, 2, 6, 1),
+(15, 3, 6, 1);
 
 -- --------------------------------------------------------
 
@@ -272,7 +284,10 @@ CREATE TABLE `return_deadlines` (
 
 INSERT INTO `return_deadlines` (`ReturnDeadlineID`, `ReturnDateTime`, `ReturnStatus`) VALUES
 (1, '2025-07-16 00:20:52', 0),
-(2, '2025-07-16 00:33:27', 0);
+(2, '2025-07-16 00:33:27', 0),
+(3, '2025-07-17 18:21:29', 0),
+(4, '2025-07-19 01:18:14', 0),
+(5, '2025-07-19 14:16:11', 0);
 
 -- --------------------------------------------------------
 
@@ -363,7 +378,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `deliveries`
 --
 ALTER TABLE `deliveries`
-  MODIFY `DeliveryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `DeliveryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `delivery_port`
@@ -381,19 +396,19 @@ ALTER TABLE `items`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `OrderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `OrderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `OrderDetailID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `OrderDetailID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `return_deadlines`
 --
 ALTER TABLE `return_deadlines`
-  MODIFY `ReturnDeadlineID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ReturnDeadlineID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `users`
