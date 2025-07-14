@@ -1,6 +1,6 @@
 const table = document.getElementById("table_history");
 
-fetch("C:/Users/USER/Documents/GitHub/AQUA_OrderTracker/php/order_history.php").
+fetch("../php/order_history.php").
 then(response => response.json()). 
 then(data => {
     let row = "";

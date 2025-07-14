@@ -26,13 +26,14 @@ if($verify_prep->execute()){
             "Error_Location" => "Bad verification, returned null"
         ]);
     }else{
+        $_SESSION["user_id"] = $verify_assoc["UserID"];
+        $_SESSION["user_type"] = $verify_assoc["Type"];
         echo json_encode([
             "Error" => false,
             "ID" => $verify_assoc["UserID"], //Temporary debugging 
             "Type" => $verify_assoc["Type"]
         ]);
-        $_SESSION["user_id"] = $verify_assoc["UserID"];
-        $_SESSION["user_type"] = $verify_assoc["Type"];
+        
     }
 }
 else echo json_encode([

@@ -10,11 +10,22 @@ forms.addEventListener("submit", function(event){
         method: 'POST',
         body: formsData
     }).
-    then(response=>response.text()).
+    then(response=>response.json()).
     then(data => {
         console.log(data);
         if(!data.Error){
-            window.location.assign("../customer UI/CreateOrder.html");
+            switch(data.Type) {
+                case "CUST":
+                    window.location.assign("../customer UI/CreateOrder.html");
+                break;
+                case "ADMIN":
+                    window.location.assign("../admin UI/InventoryUI.html");
+                break;
+                case "STAFF":
+                    window.location.assign("../staff UI/ManageOrders.html");
+                break;
+            }
+            
         }else{
             errorVerification();    
         }
