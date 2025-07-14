@@ -2,6 +2,7 @@ fetch("../php/retrieve_orderData.php")
 .then(response => response.json())
 .then(data => {
     const tableRow = document.getElementById("orderForm");
+    console.log(data);
     data.forEach(order => {
         const card = document.createElement('tr');
         card.innerHTML = `
@@ -20,6 +21,8 @@ fetch("../php/retrieve_orderData.php")
     //         <td>${data.Price}</td>
     //     `;
     //     tableRow.appendChild(card);
+}).catch(data => {
+    console.log(data);
 });
 
 

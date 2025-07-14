@@ -5,9 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Order</title>
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/orderHistory.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/orderHistory.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css">
+    <!--Temp style for table-->
+    <style>
+        td {
+            border: 1px solid black;
+        }
+    </style>
 </head>
 
 <body>
@@ -24,11 +30,11 @@
             <li><a href="Notifications.html">NOTIFICATIONS</a></li>
         </ul>
         <div class="account-container">
-            <img alt="User Account" class="account-icon" id="accountBtn" src="/images/dropdown_icon.jpg"></img>
+            <img alt="User Account" class="account-icon" id="accountBtn" src="../images/dropdown_icon.jpg"></img>
             <div class="account-popup" id="accountPopup">
                 <ul>
                     <a href="###" class="popopt">Manage Profile</a>
-                    <a href="###" onclick="localStorage.removeItem('currUser')" class="popopt">Logout</a>
+                    <a href="###" onclick="logOut()" class="popopt">Logout</a>
                 </ul>
             </div>
         </div>
@@ -38,7 +44,21 @@
     <div id="content">
         <h1 id="page_title">ORDER HISTORY</h1>
         <div class="HistoryList">
+            <table>
+                <thead>
+                    <tr>
+                        <th>User ID</th>
+                        <th>Order ID</th>
+                        <th>Item ID</th>
+                        <th>Item Quantity</th>
+                        <th>Order Date</th>
+                        <th>Total Price</th>
+                    </tr>
+                </thead>
+                <tbody id="table_history">
 
+                </tbody>
+            </table>
         </div>
 
     </div>
@@ -56,8 +76,8 @@
         </div>
     </div>
 
-    <script src="js/dropdown.js"></script>
-
+    <script src="../js/dropdown.js"></script>
+    <script src="../js/orderHistory.js"></script>
 </body>
 
 </html>
