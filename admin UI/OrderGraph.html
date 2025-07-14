@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sales Record</title>
     <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/adminsales.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <link rel="stylesheet" href="../css/trend.css">
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script> -->
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="/js/graphFunction.js"></script>
 </head>
 <body>
     <div id="header" class="flex_center">
@@ -14,9 +16,9 @@
             <a href="/index.html"><h1>Aqua Del Sol</h1></a>
         </div>
         <ul id="navbar">
-            <li><a href="/admin UI/SalesRecord.html" id="current">Sales Record</a></li>
-            <li><a href="/admin UI/OrderRecord.html">Order Record</a></li>
-            <li><a href="/admin UI/InventoryUI.html">Inventory</a></li>
+            <li><a href="/admin UI/OrderGraph.html" id="current">ORDER TREND</a></li>
+            <li><a href="/admin UI/OrderRecord.html">ORDER RECORD</a></li>
+            <li><a href="/admin UI/InventoryUI.html">INVENTORY</a></li>
         </ul>
         <div class="account-container">
             <img alt="User Account" class="account-icon" id="accountBtn" src="/images/dropdown_icon.jpg"></img>
@@ -30,10 +32,10 @@
     </div>
 
     <div id="content">
-        <h1 id="page_title">SALES RECORD</h1>
+        <h1 id="page_title">ORDER TREND</h1>
         <div id="salesChartContainer" class="flex_center">
           <div class="chart">
-            <canvas id="myChart"></canvas>
+            <div id="myChart"></div>
           </div>
           <div id="salesLedgend">
             Legend
@@ -50,7 +52,7 @@
         </div>     
     </div>
 
-  <script src="/js/graphFunction.js"></script>
+  
   <script src="/js/dropdown.js"></script>
 </body>
 </html>

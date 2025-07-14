@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventory</title>
         <link rel="stylesheet" href="/css/main.css">
-        <link rel="stylesheet" href="../css/orderrecord.css">
+        <link rel="stylesheet" href="../css/inventory.css">
 </head>
 <body>
     <div id="header" class="flex_center">
@@ -13,9 +13,9 @@
             <a href="/index.html"><h1>Aqua Del Sol</h1></a>
         </div>
         <ul id="navbar">
-            <li><a href="/admin UI/SalesRecord.html">Sales Record</a></li>
-            <li><a href="/admin UI/OrderRecord.html">Order Record</a></li>
-            <li><a href="/admin UI/InventoryUI.html" id="current">Inventory</a></li>
+            <li><a href="/admin UI/OrderGraph.html">ORDER GRAPH</a></li>
+            <li><a href="/admin UI/OrderRecord.html">ORDER RECORD</a></li>
+            <li><a href="/admin UI/InventoryUI.html" id="current">INVENTORY</a></li>
         </ul>
         <div class="account-container">
             <img alt="User Account" class="account-icon" id="accountBtn" src="/images/dropdown_icon.jpg"></img>
@@ -30,30 +30,42 @@
 
     <div id="content">
         <h1 id="page_title">INVENTORY</h1>
-        <div class="flex_center">
-            <div id="OrderRecordTable">
-                <table>
-                    <thead>
-                        <div id="header_background"></div>
-                        <tr id="table_header">    
-                            <th id="order_id">ID</th>
-                            <th id="customer_name">Product Name</th>
-                            <th id="order_date">No. in Stock</th>
-                            <th id="status">Price</th>
-                        </tr>
-                    </thead>
-                    <tbody id="orderForm">
-           
-    
-                    </tbody>
-                </table>
-            </div>
+        <div id="OrderRecordTable">
+            <table>
+                <thead>
+                    <div id="header_background"></div>
+                    <tr id="table_header">    
+                        <th id="order_id">ID</th>
+                        <th id="product_name">Product Name</th>
+                        <th id="stock_num">No. in Stock</th>
+                        <th id="unit_price">Price</th>
+                    </tr>
+                </thead>
+                <tbody id="orderForm">
+                    <tr>
+                        <td>1</td>
+                        <td>product1</td>
+                        <td>50</td>
+                        <td>50</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>product1</td>
+                        <td>50</td>
+                        <td>50</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>product1</td>
+                        <td>50</td>
+                        <td>50</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
     </div>
 
-    
-    
-
-    
     
     <div id="footer">
         <div class="flex_center">

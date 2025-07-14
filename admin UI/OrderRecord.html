@@ -14,9 +14,9 @@
             <a href="/index.html"><h1>Aqua Del Sol</h1></a>
         </div>
         <ul id="navbar">
-            <li><a href="/admin UI/SalesRecord.html">Sales Record</a></li>
-            <li><a href="/admin UI/OrderRecord.html" id="current">Order Record</a></li>
-            <li><a href="/admin UI/InventoryUI.html">Inventory</a></li>
+            <li><a href="/admin UI/OrderGraph.html">ORDER TREND</a></li>
+            <li><a href="/admin UI/OrderRecord.html" id="current">ORDER RECORD</a></li>
+            <li><a href="/admin UI/InventoryUI.html">INVENTORY</a></li>
         </ul>
         <div class="account-container">
             <img alt="User Account" class="account-icon" id="accountBtn" src="/images/dropdown_icon.jpg"></img>
@@ -34,9 +34,7 @@
     <div id="content">
         <h1 id="page_title">ORDER RECORD</h1>
         <div id="search_container">
-            <input type="text" id="search" placeholder="Search Something...">
-            <button>SEARCH</button>
-        </div>
+        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">        </div>
         
         <div id="OrderRecordTable">
             <table>
@@ -50,7 +48,7 @@
                     </tr>
                 </thead>
                 <tbody id="orderForm">
-
+                   
                 </tbody>
             </table>
         </div>
