@@ -73,7 +73,7 @@ table{
 #order_date{
   width: 11%;
 }
-#status{
+#amount{
   width: 7%;
 }
 tbody{
@@ -82,7 +82,8 @@ tbody{
   overflow-y: auto;
   margin-top: 5%;
 }
-td{
+
+tbody td{
   padding: 8px;
   margin: 1rem;
   text-align: center;
@@ -91,15 +92,41 @@ td{
   border-radius: 10px;
   width: 15%;
 }
-td:nth-child(1){
-  width: 5%;
+.orderData:nth-child(1){
+  width: 2%;
+  /* background-color: rgb(172, 225, 225);  uncomment to see the problem */
 }
-td:nth-child(2){
-  width: 30%;
+.orderData:nth-child(2){
+  width: 15%;
 }
-td:nth-child(3){
-  width: 18%;
+.orderData:nth-child(3){
+  width: 10%;
+  
 }
-td:nth-child(4){
+.orderData:nth-child(4){
   width: 8%;
 }
+.orderData:nth-child(5){
+  width: 10%;
+}
+.orderData:nth-child(6){
+  width: 10%;
+}
+/* #th_ID{
+  width: 9%;
+}
+#th_Name{
+
+}
+#th_Quantity{
+
+}
+#th_unitPrice{
+
+}
+#th_orderDate{
+
+}
+#th_tPrice{
+
+} */

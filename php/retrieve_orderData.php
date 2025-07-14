@@ -4,7 +4,7 @@
 
     session_start();
     $conn = new mysqli("localhost", "root", "", "aquadelsol_ordertracker");
-    $sql2 = "SELECT `order_details`.`OrderID`, `users`.`FullName`, `order_details`.`ItemID`, `order_details`.`ItemQuantity`, `orders`.`OrderDate`, `items`.`Price`
+    $sql2 = "SELECT `order_details`.`OrderID`, `users`.`FullName`, `order_details`.`ItemID`, `items`.`ItemName`, `order_details`.`ItemQuantity`, `orders`.`OrderDate`, `items`.`Price`, `orders`.`TotalPrice`
             FROM `order_details`
             INNER JOIN `items`
             ON `order_details`.`ItemID` = `items`.`ItemID`
