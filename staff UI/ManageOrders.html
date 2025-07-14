@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Record</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/orderrecord.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div id="header" class="flex_center">
+        <div id="brand_Admin">
+            <a href="/index.html"><h1>Aqua Del Sol</h1></a>
+        </div>
+        <ul id="navbar">
+            <li><a href="/staff UI/MakeAnOrder.html">Make an Order</a></li>
+            <li><a href="/staff UI/OrderRecordStaff.html">Order Record</a></li>
+            <li><a href="/staff UI/ManageOrders.html" id="current">Manage Orders</a></li>
+        </ul>
+        <div class="account-container">
+            <img alt="User Account" class="account-icon" id="accountBtn" src="/images/dropdown_icon.jpg"></img>
+            <div class="account-popup" id="accountPopup">
+                <ul>
+                    <a href="###" class="popopt">Manage Profile</a>
+                    <a href="###" onclick="localStorage.removeItem('currUser')" class="popopt">Logout</a>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- content -->
+    <div id="content">
+        <h1 id="page_title">MANAGE ORDERS</h1>
+        <div id="search_container">
+            <input type="text" id="search" placeholder="Search Something...">
+            <button>SEARCH</button>
+        </div>
+        
+        <div class="HistoryList">
+            <table>
+                <thead>
+                    <tr>
+                        <th>User ID</th>
+                        <th>Order ID</th>
+                        <th>Item ID</th>
+                        <th>Item Quantity</th>
+                        <th>Order Date</th>
+                        <th>Total Price</th>
+                    </tr>
+                </thead>
+                <tbody id="table_history">
+
+                </tbody>
+            </table>
+        </div>
+        
+    </div>
+
+    
+
+    <div id="footer">
+        <div class="flex_center">
+            <a href="/ContactInfo.html"><h4>Where to find us</h4></a>
+            <a href="/PrivacyPolicy.html"><h4>Privacy Policy</h4></a>
+        </div>     
+    </div>
+
+    <script src="/js/dropdown.js"></script>
+    <script src="/js/manageOrders.js"></script>    
+</body>
+</html>
