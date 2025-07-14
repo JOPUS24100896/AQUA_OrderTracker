@@ -14,15 +14,15 @@
             <a href="/index.html"><h1>Aqua Del Sol</h1></a>
         </div>
         <ul id="navbar">
-            <li><a href="/admin UI/SalesRecord.html">Sales Record</a></li>
-            <li><a href="/admin UI/OrderRecord.html" id="current">Order Record</a></li>
-            <li><a href="/admin UI/InventoryUI.html">Inventory</a></li>
+            <li><a href="/staff UI/MakeAnOrder.html">Make an Order</a></li>
+            <li><a href="/staff UI/OrderRecordStaff.html" id="current">Order Record</a></li>
+            <li><a href="/staff UI/ManageOrders.html">Manage Orders</a></li>
         </ul>
         <div class="account-container">
             <img alt="User Account" class="account-icon" id="accountBtn" src="/images/dropdown_icon.jpg"></img>
             <div class="account-popup" id="accountPopup">
                 <ul>
-                    <a href="/admin UI/ManageProfile.html" class="popopt">Manage Profile</a>
+                    <a href="###" class="popopt">Manage Profile</a>
                     <a href="###" onclick="localStorage.removeItem('currUser')" class="popopt">Logout</a>
                 </ul>
             </div>
@@ -38,18 +38,20 @@
             <button>SEARCH</button>
         </div>
         
-        <div id="OrderRecordTable">
+        <div class="recordTable">
             <table>
                 <thead>
-                    <div id="header_background"></div>
-                    <tr id="table_header">    
-                        <th id="order_id">ID</th>
-                        <th id="customer_name">Customer Name</th>
-                        <th id="order_date">Order Date</th>
-                        <th id="status">Status</th>
+                    <tr>
+                        <th>User ID</th>
+                        <th>Order ID</th>
+                        <th>Item ID</th>
+                        <th>Item Quantity</th>
+                        <th>Order Date</th>
+                        <th>Total Price</th>
+                        <th>Order Status</th>
                     </tr>
                 </thead>
-                <tbody id="orderForm">
+                <tbody id="table_history">
 
                 </tbody>
             </table>
@@ -67,6 +69,6 @@
     </div>
 
     <script src="/js/dropdown.js"></script>
-    <script src="/js/orderRecord.js"></script>    
+    <script src="/js/orderRecordStaff.js"></script>    
 </body>
 </html>
