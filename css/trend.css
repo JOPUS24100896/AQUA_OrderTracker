@@ -1,29 +1,37 @@
 /* graph style */
 #salesChartContainer{
-  gap: 2.5rem;
+  /* gap: 2.5rem; */
 }
 
-.chart{
+/* .chart{
   position: relative;
   background-color: #e0f2ff;
-  /* box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); */
+  /* box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); 
   z-index: 1;
-  width: 43rem;
-  height: 22.5rem;
+  width: 60%;
+  height: 200%;
   border-radius: 20px;
-  padding: 1rem;
-  box-shadow: 1px 4px 8px black;
-}
+  
+  
+} */
 .shadow{
   box-shadow: 1px 4px 8px black;
 }
-#salesLedgend{
-  background-color: #838383;
+#myChart{
+  width: 60%;
+  height: 100%;
+  box-shadow: 1px 4px 8px black;
+}
+#salesLegend{
+
   width: 20vw;
+  
+}
+.Legend_Content{
+  background-color: #c6c5c5;
   border-radius: 20px;
   padding: 1rem;
-}
-
-#myChart{
-  height: 100%;
+  margin: 1rem;
+  width: 100%;
+  box-shadow: 0 4px 8px black;
 }

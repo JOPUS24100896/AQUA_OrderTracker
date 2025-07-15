@@ -1,7 +1,6 @@
 <?php
     header("Access-Control-Allow-Origin: *");
     header("Content-Type: application/json");
-
     session_start();
     $conn = new mysqli("localhost", "root", "", "aquadelsol_ordertracker");
     $sql2 = "SELECT `order_details`.`OrderID`, `users`.`FullName`, `order_details`.`ItemID`, `items`.`ItemName`, `order_details`.`ItemQuantity`, `orders`.`OrderDate`, `items`.`Price`, `orders`.`TotalPrice`
