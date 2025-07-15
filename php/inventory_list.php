@@ -11,6 +11,5 @@
             array_push($data_array, $data_row);
         echo json_encode($data_array);
     }
-    echo json_encode($data_array);
     
 ?>
