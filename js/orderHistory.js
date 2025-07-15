@@ -10,7 +10,6 @@ then(data => {
         let itemQuantPrice = parseFloat(rowData.ItemQuantity) * rowData.Price;
         row += `
         <tr class="orderRow">
-            <td class="orderData OrderId${rowData.OrderID}">${rowData.OrderID}</td>
             <td class="orderData">${rowData.ItemName}</td>
             <td class="orderData">${rowData.ItemQuantity}</td>
             <td class="orderData">${itemQuantPrice}</td>

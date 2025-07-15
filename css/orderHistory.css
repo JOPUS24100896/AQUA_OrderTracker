@@ -50,6 +50,10 @@
             border: 1px solid #ccc;
         }
 
+        td{
+            border: 1px solid black;
+        }
+
 
         th {
             font-weight: bold;
