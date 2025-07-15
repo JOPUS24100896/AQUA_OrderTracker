@@ -26,7 +26,7 @@
             <div class="account-popup" id="accountPopup">
                 <ul>
                     <a href="###" class="popopt">Manage Profile</a>
-                    <a href="###" class="popopt">Logout</a>
+                    <a href="../php/EndSession.php" class="popopt">Logout</a>
                 </ul>
             </div>
         </div>
@@ -35,27 +35,14 @@
     <!-- Content -->
     <div id="content">
         <h1 id="page_title">CREATE ORDER</h1>
-        <div class="ProductList">
-            <table>
-                <thead>
-                    <tr>
-                        <th>
-                            PRODUCTS
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr id="Products"></tr>
-                    <div>
-                        <tr id="orderForm">
-                            <form method="post">
-                                <!--Order forms procedureally generated-->
-                            </form>
-                        </tr>
-                    </div>
-                </tbody>
-            </table>
-        </div>
+        <form method="post" id="orderForm">
+            <!--Order forms procedureally generated-->
+            <div class="ProductList">
+                <h2>PRODUCTS</h2>
+                <div id="Products" class="productCards"></div>
+            </div>
+        </form>
+
     </div>
 
 
@@ -70,8 +57,26 @@
         </div>
     </div>
 
+    <script src="../js/dropdown.js"></script>
     <script src="../js/productlist.js"></script>
     <script src="../js/createorder.js"></script>
+    <script>
+        document.querySelectorAll('.ProductCard').forEach(card => {
+            const minus = card.querySelector('button:first-child');
+            const plus = card.querySelector('button:last-child');
+            const count = card.querySelector('span');
+
+            minus.addEventListener('click', () => {
+                let val = parseInt(count.textContent);
+                if (val > 0) count.textContent = val - 1;
+            });
+
+            plus.addEventListener('click', () => {
+                let val = parseInt(count.textContent);
+                count.textContent = val + 1;
+            });
+        });
+    </script>
 </body>
 
 </html>

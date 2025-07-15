@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/orders.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css">
+    <style>
+        td {
+            border: 1px solid black; 
+        }
+    </style>
 </head>
 
 <body>
@@ -27,7 +32,7 @@
             <div class="account-popup" id="accountPopup">
                 <ul>
                     <a href="###" class="popopt">Manage Profile</a>
-                    <a href="###" onclick="localStorage.removeItem('currUser')" class="popopt">Logout</a>
+                    <a href="../php/EndSession.php" class="popopt">Logout</a>
                 </ul>
             </div>
         </div>
@@ -35,9 +40,23 @@
 
     <!-- Content -->
     <div id="content">
-        <h1 id="page_title">ORDERS</h1>
+        <h1 id="page_title">PENDING ORDERS</h1>
         <div class="OrderList">
-            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Item Name</th>
+                        <th>Price</th>
+                        <th>Order Date</th>
+                        <th>TotalPrice</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="table_history">
+
+                </tbody>
+            </table>
         </div>
     </div>
 
@@ -54,24 +73,25 @@
         </div>
     </div>
 
-    <script src="js/dropdown.js"></script>
+    <script src="../js/dropdown.js"></script>
+    <script src="../js/pendingOrder.js"></script>
     <script>
-  document.querySelectorAll('.ProductCard').forEach(card => {
-    const minus = card.querySelector('button:first-child');
-    const plus = card.querySelector('button:last-child');
-    const count = card.querySelector('span');
+        document.querySelectorAll('.ProductCard').forEach(card => {
+            const minus = card.querySelector('button:first-child');
+            const plus = card.querySelector('button:last-child');
+            const count = card.querySelector('span');
 
-    minus.addEventListener('click', () => {
-      let val = parseInt(count.textContent);
-      if (val > 0) count.textContent = val - 1;
-    });
+            minus.addEventListener('click', () => {
+                let val = parseInt(count.textContent);
+                if (val > 0) count.textContent = val - 1;
+            });
 
-    plus.addEventListener('click', () => {
-      let val = parseInt(count.textContent);
-      count.textContent = val + 1;
-    });
-  });
-</script>
+            plus.addEventListener('click', () => {
+                let val = parseInt(count.textContent);
+                count.textContent = val + 1;
+            });
+        });
+    </script>
 
 </body>
 

@@ -13,7 +13,8 @@ formBody.addEventListener("submit", function(event){
         }
         else {
             console.log(data);
-            //window.location.assign("index.html"); //Uncomment if no longer debugging
+            alert("Sign Up complete, log in to continue");
+            window.location.assign("index.html"); 
         }
     })
 })
