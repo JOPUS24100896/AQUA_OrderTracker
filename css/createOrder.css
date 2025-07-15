@@ -126,10 +126,10 @@ padding-bottom: 5%;
 }
 
 .ProdImg{
-scale: 50%;
-margin-left: -20%;
-margin-top: -30%;
-margin-bottom: -20%;
+scale: 30%;
+margin-left: -40%;
+margin-top: -60%;
+margin-bottom: -60%;
 }
 
 .ProdName[type="checkbox"]{
@@ -138,5 +138,5 @@ margin-right: 1%;
 }
 
 .title{
-  font-size: 180%;
+  font-size: 170%;
 }
