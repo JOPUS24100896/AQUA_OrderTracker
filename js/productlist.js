@@ -17,9 +17,10 @@ fetch("../php/create_prod_list.php").
         document.dispatchEvent(event);
     })
 function createProductList(item) {
-    items.innerHTML += `<div class="productCard"><img src="../php/viewImage.php?id=${item.ItemID}" alt="Product Image"><br><label for="p${item.ItemID}"><input type="checkbox" name="product[]" id="p${item.ItemID}" value="${item.ItemID}" class="ProdName"> ${item.ItemName}
+    items.innerHTML += `<div class="productCard"><img src="../php/viewImage.php?id=${item.ItemID}" alt="Product Image" class="ProdImg"><br><label for="p${item.ItemID}"><input type="checkbox" name="product[]" id="p${item.ItemID}" value="${item.ItemID}" class="ProdName"> ${item.ItemName}
                         </label> <br>
 
+                        <h2>₱${item.Price}</h2> <br>
                         <label for="p${item.ItemID}val">Number of Orders:</label> <br>
                         <input type="button" value="-" id="p${item.ItemID}min" class="ProdMin"> 
                         <input type="text" name="product_amount[]" id="p${item.ItemID}val" class="ProdVal">
