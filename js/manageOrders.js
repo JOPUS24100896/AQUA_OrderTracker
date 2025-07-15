@@ -113,7 +113,8 @@ function current_select(orderId){
         event = new CustomEvent("SelectionChange", {
             detail: {
                 selectedID: selectId,
-                active: true
+                active: true,
+                display:"none"
             }
         });
     }
