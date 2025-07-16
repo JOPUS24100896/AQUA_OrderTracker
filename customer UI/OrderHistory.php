@@ -64,7 +64,7 @@ include "../php/cust_auth.php";
             <a href="/ContactInfo.html">
                 <h4>Where to find us</h4>
             </a>
-            <a href="/.html">
+            <a href="/PrivacyPolicy.html">
                 <h4>Privacy Policy</h4>
             </a>
         </div>
