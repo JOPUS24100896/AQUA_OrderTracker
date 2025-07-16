@@ -66,22 +66,21 @@ table{
   height: 6vh;
   padding: 0.5% 0;
 }
-
 th:nth-child(1){
   width: 3%;
 }
 th:nth-child(2){
-  width: 14%;
+  width: 13%;
 }
 th:nth-child(3){
-  width: 15%;
+  width: 13%;
   
 }
 th:nth-child(4){
-  width: 9%;
+  width: 10%;
 }
 th:nth-child(5){
-  width: 10%;
+  width: 9%;
 }
 th:nth-child(6){
   width: 10%;
