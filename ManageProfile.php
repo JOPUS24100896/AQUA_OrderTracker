@@ -96,39 +96,58 @@ if(!isset($_SESSION["user_id"])){
                         <p>Email: <strong id="outEmail">
                             <?php echo $user_info['Email']?>
                         </strong></p>
-                        <p>Password: <strong id="outPass">***********</strong></p>
+                        <p><strong id="outPass">
+                            <?php echo ($user_info['Type'] == "CUST")?"CUSTOMER":$user_info['Type'] ?>
+                        </strong></p>
                     </div>
                 </div>
             </div>
             <div class="container">
-                <h2>Edit Profile</h2>
                 <form id="profileForm">
+                    <h2>Edit Profile</h2>
                     <div class="flex_center">
+                        
+
                         <div class="input_boxes">
-                            <label for="partnerName">FullName:*</label>
-                            <input type="text" id="partnerName" name="partnerName" required>
+                            <label for="partnerName">Full Name <span style="color: red;">*</span></label>
+                            <input type="text" name="partnerName" required>
 
-                            <label for="Address">Address:*</label>
-                            <input type="text" id="Address" name="Address" required>
+                            <label for="Address">Address <span style="color: red;">*</span></label>
+                            <input type="text" name="Address" required>
 
-                            <label for="contactNumber">Contact Number:*</label>
-                            <input type="text" id="contactNumber" name="contactNumber" required>    
+                            <label for="contactNumber">Contact Number <span style="color: red;">*</span></label>
+                            <input type="text" name="contactNumber" required>    
                         </div>
                         
 
                         <div class="input_boxes">
-                            <label for="Username">Username:*</label>
+                            <label for="Username">Username <span style="color: red;">*</span></label>
                             <input type="text" id="Username" name="Username" required>
 
-                            <label for="partnerEmail">Email:*</label>
+                            <label for="partnerEmail">Email <span style="color: red;">*</span></label>
                             <input type="email" id="partnerEmail" name="partnerEmail" required>
 
-                            <label for="Password">Password:*</label>
-                            <input type="password" id="Password" name="Password" required>
+                            <label for="Password">Password <span style="color: red;">*</span></label>
+                            <input type="password" id="Password" name="UpdatePassword" required>
                         </div>
                     </div>
+                    
                     <button type="submit">Update Profile</button>
                 </form>
+                <div id="verifyDiv" hidden>
+                    <form id="verifyForm">
+                        <h2>User Verification</h2>
+                        <div class="flex_center">
+                            <div class="input_boxes">
+                                <label for="verifyPass">Enter Current Password <span style="color: red;">*</span></label><br>
+                                <input type="password" id="verifPass" name="password" required>    
+                                <span style="color: red;" id="errFeedback"></span>
+                            </div>   
+                        </div>
+                        <button type="submit">Update</button>
+                    </form>   
+                    <button id="backForm">Back</button>
+                </div>
             </div>
         </div>
     </div>
@@ -139,6 +158,8 @@ if(!isset($_SESSION["user_id"])){
         </div>     
     </div>
 
-    <script src="/js/dropdown.js"></script>
+    <script src="js/dropdown.js"></script>
+    <script>const Username = <?php echo json_encode($user_info['Username'])?>;</script>
+    <script src="js/manageProfile_form.js"></script>
 </body>
 </html>

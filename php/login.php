@@ -5,7 +5,6 @@ $login_key = $_POST["login_key"];
 $pass_key = $_POST["password"];
 /**select UserID, Type from users where (Username = login_key or Email = login_key) and Password = pass_key;
 END */
-
 $verify_query = "SELECT UserID, `Type`, `Password` FROM users WHERE Username = ? or Email = ? ";
 $verify_prep = $conn->prepare($verify_query);
 $verify_prep->bind_param("ss", $login_key, $login_key);

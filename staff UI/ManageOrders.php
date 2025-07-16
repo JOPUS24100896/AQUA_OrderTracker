@@ -48,22 +48,6 @@ include "../php/staff_auth.php";
     <!-- content -->
     <div id="content">
         <h1 id="page_title" style="display:inline-block;">MANAGE ORDERS</h1>
-        <label for="dropdown" style="color: white;">Filter By:</label>
-        <select id="dropdown" name="type">
-            <option value="Order ID">Order ID</option>
-            <option value="User ID">User ID</option>
-            <option value="Name">Name</option>
-            <option value="Status">Status</option>
-        </select>
-        <label style="color: white;">Enter Filter Value<input id="dropButton" value="" type="text"></label>
-        <label id="dropdownStat" style="color: white;" >
-            Enter Filter Value
-            <select name="type" title="Select Status Value">
-                <option value="Order ID">Ready</option>
-                <option value="User ID">Pending</option>
-            </select>
-        </label>
-        
         <div class="recordTable">
             <table>
                 <thead>
