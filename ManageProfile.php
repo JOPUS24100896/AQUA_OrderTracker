@@ -48,14 +48,14 @@ if(!isset($_SESSION["user_id"])){
             <div id="profile">
                 <div id="flex">
                     <div class="output_boxes">
-                        <p>Fullname <strong> Admin</strong></p>
-                        <p>Address: <strong>Address,address</strong></p>
+                        <p>Fullname <strong>John Doe</strong></p>
+                        <p>Address: <strong>Yati, Liloan</strong></p>
                         <p>Contact Number: <strong>0875209562</strong></p>
                     </div>
                     
 
                     <div class="output_boxes">
-                        <p>Username <strong> Admin00</strong></p>
+                        <p>Username <strong>John</strong></p>
                         <p>Email: <strong>email@gmail.com</strong></p>
                         <p>Password: <strong>***********</strong></p>
                     </div>
