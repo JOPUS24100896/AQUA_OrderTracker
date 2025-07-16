@@ -42,7 +42,7 @@ include "../php/admin_auth.php";
                         <th><strong>Product Image</strong></th>
                         <th><strong>Name</strong></th>
                         <th><strong>Price</strong></th>
-                        <th><strong> No. in Stock</strong></th>
+                        <th><strong>Items in Stock</strong></th>
                         <th><strong>Add Stock</strong></th>
                     </tr>
                 </thead>
