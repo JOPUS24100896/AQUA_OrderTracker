@@ -2,14 +2,13 @@ let chartReady = false;
 let dataReady = false;
 let chartData = null;
 
-// Load Google Charts
+// Load Google Charts after everything else
 google.charts.load('current', { packages: ['corechart'] });
 google.charts.setOnLoadCallback(() => {
   chartReady = true;
   tryRenderChart();
 });
 
-// Fetch data
 fetch('http://localhost/php/retrieve_orderData.php')
   .then(response => response.json())
   .then(data => {
@@ -19,16 +18,39 @@ fetch('http://localhost/php/retrieve_orderData.php')
     const x = [], y = [];
     let sumOrder = 0;
 
+    // Track item frequency and names
+    const itemFrequency = {}; // { 'ItemName': count }
+    const itemNameMap = {};   // { 'ItemID': 'ItemName' }
+
     data.forEach(order => {
       const orderDate = new Date(order.OrderDate);
       const dayName = orderDate.toLocaleDateString('en-US', { weekday: 'long' });
       const orderKey = `${order.OrderID}`;
+      const itemID = order.ItemID;
+      const itemName = order.ItemName;
 
+      // Count unique orders per day
       if (!uniqueOrders.has(orderKey)) {
         uniqueOrders.add(orderKey);
         orderCountsByDay[dayName] = (orderCountsByDay[dayName] || 0) + 1;
       }
+
+      // Map ItemID to ItemName
+      itemNameMap[itemID] = itemName;
+
+      // Count item frequency by name
+      itemFrequency[itemName] = (itemFrequency[itemName] || 0) + 1;
     });
+
+    let mostSoughtItemName = null;
+    let maxCount = 0;
+
+    for (const [name, count] of Object.entries(itemFrequency)) {
+      if (count > maxCount) {
+        maxCount = count;
+        mostSoughtItemName = name;
+      }
+    }
 
     weekDays.forEach(day => {
       if (orderCountsByDay[day]) {
@@ -51,6 +73,12 @@ fetch('http://localhost/php/retrieve_orderData.php')
       <div class="Legend_Content">
         <h1>Average No. of Orders: ${avgOrder.toFixed(1)}</h1>
       </div>
+       <div class="Legend_Content">
+        <h1>Most Sought Item:<br>${mostSoughtItemName}</h1>
+        <p>Ordered ${maxCount} times</p>
+      </div>
+
+
     `;
 
     dataReady = true;
@@ -85,3 +113,4 @@ function tryRenderChart() {
     }
   }
 }
+

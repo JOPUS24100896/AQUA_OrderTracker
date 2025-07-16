@@ -8,15 +8,13 @@
   box-shadow: 1px 4px 8px black;
 }
 #salesLegend{
-
-  width: 20vw;
-  
+  width: 21vw;
 }
 .Legend_Content{
   background-color: #c6c5c5;
   border-radius: 20px;
   padding: 1rem;
-  margin: 1rem;
+  margin: 0 1rem 1rem 1rem;
   width: 100%;
   box-shadow: 0 4px 8px black;
 }

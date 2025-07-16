@@ -48,12 +48,12 @@ include "../php/admin_auth.php";
                         <th id="customer_name">Customer Name</th>
                         <th id="order_date">Order Date</th>
                         <th id="amount">Amount</th> -->
-                        <td class="orderData"><strong>ID</strong></td>
-                        <td class="orderData"><strong>ItemName</strong></td>
-                        <td class="orderData"><strong>ItemQuantity</strong></td>
-                        <td class="orderData"><strong>Unit Price</strong></td>
-                        <td class="orderData"><strong>OrderDate</strong></td>
-                        <td class="orderData"><strong>TotalPrice</strong></td>
+                        <th>ID</th>
+                        <th>ItemName</th>
+                        <th>ItemQuantity</th>
+                        <th>Unit Price</th>
+                        <th>OrderDate</th>
+                        <th>TotalPrice</th>
                     </tr>
                 </thead>
                 <tbody id="orderForm">

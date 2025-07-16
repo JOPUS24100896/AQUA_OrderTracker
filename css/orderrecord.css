@@ -58,19 +58,27 @@ table{
   position: fixed;
   width: 68%;
   height: 6vh;
-  padding: 0.5%;
+  padding: 0.5% 0;
 }
-#order_id{
+
+th:nth-child(1){
   width: 3%;
 }
-#customer_name{
-  width: 19%;
+th:nth-child(2){
+  width: 14%;
 }
-#order_date{
-  width: 11%;
+th:nth-child(3){
+  width: 15%;
+  
 }
-#amount{
-  width: 7%;
+th:nth-child(4){
+  width: 9%;
+}
+th:nth-child(5){
+  width: 10%;
+}
+th:nth-child(6){
+  width: 10%;
 }
 tbody{
   display: block;
