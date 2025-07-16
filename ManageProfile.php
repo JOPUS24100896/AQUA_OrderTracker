@@ -1,3 +1,15 @@
+<?php
+session_start();
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+if(!isset($_SESSION["user_id"])){
+    header("Location:index.php");
+    exit();
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,16 +26,38 @@
             <a href="/index.html"><h1>Aqua Del Sol</h1></a>
         </div>
         <ul id="navbar">
-            <li><a href="/admin UI/OrderGraph.html">ORDER GRAPH</a></li>
-            <li><a href="/admin UI/OrderRecord.html">ORDER RECORD</a></li>
-            <li><a href="/admin UI/InventoryUI.html">INVENTORY</a></li>
+            <?php
+            switch($_SESSION["user_type"]){
+                case "CUST":
+                    echo `
+                        <li><a href="customer UI/CreateOrder.php">CREATE ORDER</a></li>
+                        <li><a href="customer UI/Orders.php">PENDING ORDERS</a></li>
+                        <li><a href="customer UI/OrderHistory.php" id="current">ORDER HISTORY</a></li>
+                    `;
+                break;
+                case "ADMIN":
+                    echo `
+                        <li><a href="admin UI/OrderGraph.html">ORDER GRAPH</a></li>
+                        <li><a href="admin UI/OrderRecord.html">ORDER RECORD</a></li>
+                        <li><a href="admin UI/InventoryUI.html">INVENTORY</a></li>
+                    `;
+                break;
+                case "STAFF":
+                    echo `
+                        <li><a href="staff UI/MakeAnOrder.php" >MAKE AN ORDER</a></li>
+                        <li><a href="staff UI/ManageOrders.php" id="current">MANAGE ORDERS</a></li>
+                        <li><a href="staff UI/OrderRecordStaff.php">ORDER HISTORY</a></li>
+                    `;
+                break;
+            }
+            ?>
         </ul>
         <div class="account-container">
             <img alt="User Account" class="account-icon" id="accountBtn" src="/images/dropdown_icon.jpg"></img>
             <div class="account-popup" id="accountPopup">
                 <ul>
-                    <a href="ManageProfile.html" class="popopt">Manage Profile</a>
-                    <a href="../php/EndSession.php" class="popopt">Logout</a>
+                    <a href="ManageProfile.php" class="popopt">Manage Profile</a>
+                    <a href="php/EndSession.php" class="popopt">Logout</a>
                 </ul>
             </div>
         </div>

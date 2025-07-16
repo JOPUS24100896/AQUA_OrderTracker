@@ -15,6 +15,10 @@ include "../php/staff_auth.php";
         td {
             border: 1px solid black;
         }
+
+        .orderRow:hover{
+            cursor: pointer;
+        }
     </style>
     <style id="selectRow">
     </style>
@@ -43,7 +47,23 @@ include "../php/staff_auth.php";
 
     <!-- content -->
     <div id="content">
-        <h1 id="page_title">MANAGE ORDERS</h1>
+        <h1 id="page_title" style="display:inline-block;">MANAGE ORDERS</h1>
+        <label for="dropdown" style="color: white;">Filter By:</label>
+        <select id="dropdown" name="type">
+            <option value="Order ID">Order ID</option>
+            <option value="User ID">User ID</option>
+            <option value="Name">Name</option>
+            <option value="Status">Status</option>
+        </select>
+        <label style="color: white;">Enter Filter Value<input id="dropButton" value="" type="text"></label>
+        <label id="dropdownStat" style="color: white;" >
+            Enter Filter Value
+            <select name="type" title="Select Status Value">
+                <option value="Order ID">Ready</option>
+                <option value="User ID">Pending</option>
+            </select>
+        </label>
+        
         <div class="recordTable">
             <table>
                 <thead>
@@ -81,5 +101,6 @@ include "../php/staff_auth.php";
 
     <script src="../js/dropdown.js"></script>
     <script src="../js/manageOrders.js"></script>    
+    <script src="../js/filterOrdersStaff.js"></script>
 </body>
 </html>
