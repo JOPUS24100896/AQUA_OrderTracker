@@ -51,7 +51,7 @@ include "../php/admin_auth.php";
                         <th>ID</th>
                         <th>ItemName</th>
                         <th>ItemQuantity</th>
-                        <th>Unit Price</th>
+                        <th>Price</th>
                         <th>OrderDate</th>
                         <th>TotalPrice</th>
                     </tr>
