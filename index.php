@@ -1,3 +1,10 @@
+<?php
+//CHECK IF ALREADY LOGGED IN
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+include "php/redirect_auth.php"
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -8,46 +15,6 @@
     <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
-<?php
-//CHECK IF ALREADY LOGGED IN
-session_start();
-if(isset($_SESSION["user_id"])){
-    switch($_SESSION["user_type"]){
-        case "CUST":
-            header("Location:../customer UI/CreateOrder.html");
-        break;
-        case "ADMIN":
-            header("../admin UI/InventoryUI.html");
-        break;
-        case "STAFF":
-            header("../staff UI/ManageOrders.html");
-        break;
-    }
-    echo '<div id="header">
-            <div id="brand"> 
-                <h1>Aqua Del Sol</h1>
-            </div>
-        </div>
-        <div id="about_us">
-            <h2>ABOUT US</h2>
-            <h3>Aqua del Sol is a water refilling station that is currently based in Yati, Liloan.
-             As the name suggests, they deal with the filtration and distribution of clean drinkable water 
-             to their customers.</h3>
-
-        </div>
-        <div id="footer">
-        <div class="flex_center">
-            <a href="ContactInfo.html"><h4>Where to find us</h4></a>
-            <a href="PrivacyPolicy.html"><h4>Privacy Policy</h4></a>
-        </div>     
-    </div>
-        
-        ';
-    exit();
-}
-?>
-
-    <script src="js/loginCheck.js"></script> 
     <div id="header">
         <div id="brand">
             <h1>Aqua Del Sol</h1>
@@ -69,7 +36,7 @@ if(isset($_SESSION["user_id"])){
             </div>
             <h4>Forgot Password?</h4>
             <div id="sign_up">
-                <a href="SignUp.html">
+                <a href="SignUp.php">
                     <h4>SIGN UP</h4>
                 </a>
             </div>

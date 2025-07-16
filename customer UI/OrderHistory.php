@@ -1,3 +1,7 @@
+<?php
+include "../php/cust_auth.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,20 +17,18 @@
 <body>
     <div id="header" class="flex_center">
         <div id="brand_Admin">
-            <a href="/index.html">
-                <h1>Aqua del Sol</h1>
-            </a>
+            <a href="../index.php"><h1>Aqua Del Sol</h1></a>
         </div>
         <ul id="navbar">
-            <li><a href="CreateOrder.html">CREATE ORDER</a></li>
-            <li><a href="Orders.html">PENDING ORDERS</a></li>
-            <li><a href="OrderHistory.html" id="current">ORDER HISTORY</a></li>
+            <li><a href="CreateOrder.php">CREATE ORDER</a></li>
+            <li><a href="Orders.php">PENDING ORDERS</a></li>
+            <li><a href="OrderHistory.php" id="current">ORDER HISTORY</a></li>
         </ul>
         <div class="account-container">
             <img alt="User Account" class="account-icon" id="accountBtn" src="../images/dropdown_icon.jpg"></img>
             <div class="account-popup" id="accountPopup">
                 <ul>
-                    <a href="###" class="popopt">Manage Profile</a>
+                    <a href="../ManageProfile.php" class="popopt">Manage Profile</a>
                     <a href="../php/EndSession.php" class="popopt">Logout</a>
                 </ul>
             </div>

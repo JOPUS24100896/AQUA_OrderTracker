@@ -1,3 +1,9 @@
+<?php
+//CHECK IF ALREADY LOGGED IN
+include "php/redirect_auth.php"
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,7 +31,7 @@
             </div>
             <div class="addmargin2">
                 <label for="fullname">Full Name </label><br><input name="fullname" id="fullname" type="text"><br><br>
-                <label for="address">Address </label><br><input name="address" id="address" type="text"><br><br>
+                <label for="address">Address<span style="color:red;">*</span></label><br><input name="address" id="address" type="text" required><br><br>
                 <label for="contact">Contact </label><br><input name="contact" id="contact" type="text"><br><br>
             </div>
 

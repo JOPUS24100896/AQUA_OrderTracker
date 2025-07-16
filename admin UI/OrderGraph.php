@@ -1,3 +1,6 @@
+<?php
+include "../php/admin_auth.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,18 +16,18 @@
 <body>
     <div id="header" class="flex_center">
         <div id="brand_Admin">
-            <a href="/index.php"><h1>Aqua Del Sol</h1></a>
+            <a href="../index.php"><h1>Aqua Del Sol</h1></a>
         </div>
         <ul id="navbar">
-            <li><a href="/admin UI/OrderGraph.html" id="current">ORDER TREND</a></li>
-            <li><a href="/admin UI/OrderRecord.html">ORDER RECORD</a></li>
-            <li><a href="/admin UI/InventoryUI.html">INVENTORY</a></li>
+            <li><a href="OrderGraph.php"  id="current">ORDER GRAPH</a></li>
+            <li><a href="OrderRecord.php">ORDER RECORD</a></li>
+            <li><a href="InventoryUI.php">INVENTORY</a></li>
         </ul>
         <div class="account-container">
             <img alt="User Account" class="account-icon" id="accountBtn" src="/images/dropdown_icon.jpg"></img>
             <div class="account-popup" id="accountPopup">
                 <ul>
-                    <a href="ManageProfile.html" class="popopt">Manage Profile</a>
+                    <a href="../ManageProfile.php" class="popopt">Manage Profile</a>
                     <a href="../php/EndSession.php" class="popopt">Logout</a>
                 </ul>
             </div>

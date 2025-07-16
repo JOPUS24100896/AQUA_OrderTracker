@@ -4,7 +4,6 @@ var pass_key = document.getElementById("password_input");
 
 forms.addEventListener("submit", function(event){
     event.preventDefault();
-    alert("check1");
     const formsData = new FormData(this);
     fetch("../php/login.php", {
         method: 'POST',
@@ -16,13 +15,13 @@ forms.addEventListener("submit", function(event){
         if(!data.Error){
             switch(data.Type) {
                 case "CUST":
-                    window.location.assign("../customer UI/CreateOrder.html");
+                    window.location.assign("../customer UI/CreateOrder.php");
                 break;
                 case "ADMIN":
-                    window.location.assign("../admin UI/InventoryUI.html");
+                    window.location.assign("../admin UI/InventoryUI.php");
                 break;
                 case "STAFF":
-                    window.location.assign("../staff UI/ManageOrders.html");
+                    window.location.assign("../staff UI/ManageOrders.php");
                 break;
             }
             
@@ -30,20 +29,18 @@ forms.addEventListener("submit", function(event){
             if(data.Error_Number == "Login"){
                 switch(data.Error_Location){
                     case "CUST":
-                        window.location.assign("../customer UI/CreateOrder.html");
+                        window.location.assign("../customer UI/CreateOrder.php");
                     break;
                     case "ADMIN":
-                        window.location.assign("../admin UI/InventoryUI.html");
+                        window.location.assign("../admin UI/InventoryUI.php");
                     break;
                     case "STAFF":
-                        window.location.assign("../staff UI/ManageOrders.html");
+                        window.location.assign("../staff UI/ManageOrders.php");
                     break;
                 }
             }
             errorVerification();    
         }
-    }).catch(data => {
-        console.log(JSON.stringify(data))
     })
 })
 

@@ -1,32 +1,34 @@
+<?php
+include "../php/staff_auth.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Order</title>
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="../css/orderHistory.css">
-    <link rel="stylesheet" href="/css/createOrder.css">
+    <title>Make an Order</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/createOrder.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css">
 </head>
 
 <body>
     <div id="header" class="flex_center">
         <div id="brand_Admin">
-            <a href="/index.html">
-                <h1>Aqua del Sol</h1>
-            </a>
+            <a href="../index.php"><h1>Aqua Del Sol</h1></a>
         </div>
         <ul id="navbar">
-            <li><a href="CreateOrder.html" id="current">CREATE ORDER</a></li>
-            <li><a href="Orders.html">PENDING ORDERS</a></li>
-            <li><a href="OrderHistory.html">ORDER HISTORY</a></li>
+            <li><a href="../staff UI/MakeAnOrder.php" id="current">MAKE AN ORDER</a></li>
+            <li><a href="../staff UI/ManageOrders.php" >MANAGE ORDERS</a></li>
+            <li><a href="../staff UI/OrderRecordStaff.php">ORDER HISTORY</a></li>
         </ul>
         <div class="account-container">
-            <img alt="User Account" class="account-icon" id="accountBtn" src="/images/dropdown_icon.jpg"></img>
+            <img alt="User Account" class="account-icon" id="accountBtn" src="../images/dropdown_icon.jpg"></img>
             <div class="account-popup" id="accountPopup">
                 <ul>
-                    <a href="###" class="popopt">Manage Profile</a>
+                    <a href="../ManageProfile.php" class="popopt">Manage Profile</a>
                     <a href="../php/EndSession.php" class="popopt">Logout</a>
                 </ul>
             </div>
@@ -39,7 +41,6 @@
         <form method="post" id="orderForm">
             <!--Order forms procedureally generated-->
             <div class="ProductList">
-                <h2 class="title">PRODUCTS</h2>
                 <div id="Products" class="productCards"></div>
             </div>
         </form>
@@ -47,20 +48,24 @@
     </div>
 
 
+
+    </div>
+
+
     <div id="footer">
         <div class="flex_center">
-            <a href="/ContactInfo.html">
+            <a href="../ContactInfo.html">
                 <h4>Where to find us</h4>
             </a>
-            <a href="/PrivacyPolicy.html">
+            <a href="../PrivacyPolicy.html">
                 <h4>Privacy Policy</h4>
             </a>
         </div>
     </div>
 
-    <script src="../js/dropdown.js"></script>
     <script src="../js/productlist.js"></script>
     <script src="../js/createorder.js"></script>
+    <script src="../js/dropdown.js"></script>
     <script>
         document.querySelectorAll('.ProductCard').forEach(card => {
             const minus = card.querySelector('button:first-child');
@@ -78,6 +83,7 @@
             });
         });
     </script>
+
 </body>
 
 </html>

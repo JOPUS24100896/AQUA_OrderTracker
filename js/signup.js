@@ -10,11 +10,12 @@ formBody.addEventListener("submit", function(event){
     then(data => {
         if(data.Error){//Not-Unique username
             console.log(data);
+            alert(data.Error_Message);
         }
         else {
             console.log(data);
-            alert("Sign Up complete, log in to continue");
-            window.location.assign("index.html"); 
+            alert("Sign Up complete");
+            window.location.assign("index.php"); 
         }
     })
 })
