@@ -5,19 +5,6 @@ $login_key = $_POST["login_key"];
 $pass_key = $_POST["password"];
 /**select UserID, Type from users where (Username = login_key or Email = login_key) and Password = pass_key;
 END */
-$pass = "e";
-$hash = '$2y$10$rV1lPJHt7Lo1cHDOQaqGnOQttlcwtBw5kC.mE/PVZRx';
-if(password_verify($pass,$hash)){
-    echo json_encode([
-        "Pass" => true
-    ]);
-    exit();
-}else {
-    echo json_encode([
-        "Pass" => false
-    ]);
-    exit();
-}
 
 $verify_query = "SELECT UserID, `Type`, `Password` FROM users WHERE Username = ? or Email = ? ";
 $verify_prep = $conn->prepare($verify_query);
