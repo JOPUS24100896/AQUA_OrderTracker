@@ -2,75 +2,96 @@
 table{
   width: 100%;
 }
-#OrderRecordTable{
-  background-color: beige;
+#InventoryTable{
+  background-color: rgb(244, 239, 239);
   border-radius: 20px;
   box-shadow: 0 4px 8px black;
-  padding: 1rem;
-  margin: 0 15% 0 10%;
+  padding: 0.5rem;
+  margin: 0 15% 0 15%;
   border: 2px solid rgb(7, 7, 7);
   position: fixed;
-  width: 80%;
-  height: 50%;
+  width: 66%;
+  height: 60%;
   
 }
 #table_header{
   background-color: rgb(45, 55, 108);
   border: 2px solid rgb(7, 7, 7);
   color: rgb(255, 255, 255);
-  text-align: center;
   font-size: larger;
-  border-radius: 15px;
+  border-radius: 5px;
   position: fixed;
-  width: 66%;
+  width: 64.5%;
   height: 6vh;
-  padding: 0.5%;
+  padding: 0.3% 0;
 }
-/* th{
-  border: 2px solid rgba(7, 7, 7, 0.47);
-  border-radius: 10px;
-} */
-#order_id, td:nth-child(1){
-  width: 4%;
+th{
+  text-align: center;
 }
-#product_name, td:nth-child(2){
-  width: 20%;
+th:nth-child(1){
+  width: 3%;
 }
-#unit_price, td:nth-child(3){
-  width: 8%;
-}
-#stock_num, td:nth-child(4){
+th:nth-child(2){
   width: 11%;
 }
-
+th:nth-child(3){
+  width: 10%;
+}
+th:nth-child(4){
+  width: 7%;
+}
+th:nth-child(5){
+  width: 10%;
+}
+th:nth-child(6){
+  width: 16%;
+}
 tbody{
   display: block;
-  height: 40vh; 
+  height: 52vh; 
+  width: 70vw;
   overflow-y: auto;
-  margin-top: 5%;
-  margin-right: 2%;
+  margin: 3.8% 0 0 0;
 }
-td:nth-child(1), td:nth-child(2), td:nth-child(3), td:nth-child(4){
-  padding: 20px;
-  margin: 1rem;
-  text-align: center;
-  font-size: larger;
+
+tbody td{
   border: 2px solid rgba(7, 7, 7, 0.47);
-  background-color: aqua;
+  max-width: max-content;
+}
+td:nth-child(1){
+  padding: 1rem;
+}
+td:nth-child(2){
+  padding: 0 0 0 2.3rem;
+  width: 12.1vw;
+}
+td:nth-child(3){
+  text-align: center;
+  width: 12vw;
+}
+td:nth-child(4){
+  text-align: center;
+  width: 8vw;
 }
 td:nth-child(5){
-  /* padding: 20px; */
-  margin: 1rem;
-  /* text-align: center; */
-  font-size: larger;
-  border: 2px solid rgba(7, 7, 7, 0.47);
-  width: 18%;
-  background-color: yellowgreen;
+  text-align: center;
+  width: 10vw;
 }
+td:nth-child(1), td:nth-child(3), td:nth-child(4), td:nth-child(5){
+  font-size: x-large;
+}
+/* td:nth-child(6){
+  width: 10vw;
+} */
 .inputBox input, button{
-  transform: scale(2);
+  transform: scale(1.5);
 }
 .inputBox input{
-  width: 30%;
-  margin: 0 4rem 0 4rem;
+  width: 35%;
+  margin: 0 2rem 0 3rem;
+}
+
+#orderForm img{
+  width: 80%;
+  height: auto;
 }

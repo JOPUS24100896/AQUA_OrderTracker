@@ -24,7 +24,7 @@ if(isset($_SESSION["user_id"])){
         break;
     }
     echo '<div id="header">
-            <div id="brand">
+            <div id="brand"> 
                 <h1>Aqua Del Sol</h1>
             </div>
         </div>
@@ -77,15 +77,6 @@ if(isset($_SESSION["user_id"])){
         <div id="about_us">
             <h2>ABOUT US</h2>
             <h3>Aqua del Sol is a water refilling station that is currently based in Yati, Liloan. As the name suggests, they deal with the filtration and distribution of clean drinkable water to their customers.</h3>
-        
-            <!-- temporary -->
-            <a href="admin UI/OrderGraph.html">ADMIN_side</a>
-            <a href="admin UI/ManageProfile.html">ManageProfile</a>
-            <a href="customer UI/CreateOrder.html">CreateOrder</a>
-            <a href="template.html">Template</a>
-            <a href="test.html">Test</a>
-            <!-- make a new "a" line for direct html access -->
-            <!-- temporary -->
 
         </div>
     </form>     
