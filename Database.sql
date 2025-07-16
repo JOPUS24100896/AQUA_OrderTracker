@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 16, 2025 at 04:13 PM
+-- Generation Time: Jul 16, 2025 at 04:24 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 DROP DATABASE IF EXISTS aquadelsol_ordertracker;
@@ -418,7 +418,7 @@ CREATE TABLE `users` (
   `Contact` varchar(50) DEFAULT NULL,
   `Username` varchar(50) NOT NULL DEFAULT 'Unset',
   `Email` varchar(50) NOT NULL DEFAULT 'Unset',
-  `Password` varchar(50) NOT NULL DEFAULT 'Unset',
+  `Password` varchar(255) NOT NULL,
   `Type` enum('CUST','ADMIN','STAFF') NOT NULL DEFAULT 'CUST'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -437,7 +437,8 @@ INSERT INTO `users` (`UserID`, `FullName`, `Address`, `Contact`, `Username`, `Em
 (12, 'Johnny ', 'Yati, Liloan, Cebu', '09234125', 'john1', 'johnny@email.com', '$2y$10$3fC/u9LsQsWpvPOniv8IJ.ocjYnHpNytwSOlhq4llH6', 'CUST'),
 (13, 'Johnny ', 'Yati, Liloan, Cebu', '09234125', 'john2', 'johnny2@email.com', '$2y$10$Xkm.ieOsLC8vVtxH.hOXXuimJx0gFyWp5hYXzndzkmY', 'CUST'),
 (14, 'Johnny ', 'Yati, Liloan, Cebu', '09234125', 'john3', 'johnny3@email.com', '$2y$10$7MkrKkWVfAtUDl4WZQ9rH.wiSN7ANNp7c/mXO9mkm9K', 'CUST'),
-(15, 'Johnny ', 'Yati, Liloan, Cebu', '09234125', 'john4', 'johnny4@email.com', '$2y$10$rV1lPJHt7Lo1cHDOQaqGnOQttlcwtBw5kC.mE/PVZRx', 'CUST');
+(15, 'Johnny ', 'Yati, Liloan, Cebu', '09234125', 'john4', 'johnny4@email.com', '$2y$10$rV1lPJHt7Lo1cHDOQaqGnOQttlcwtBw5kC.mE/PVZRx', 'CUST'),
+(16, 'Johnny ', 'Yati, Liloan, Cebu', '09234125', 'john5', 'johnny5@email.com', '$2y$10$K0k.5PEVE8ZU4m7UpTaVwefZ/fBJ5WbDnBDLjc4NEl7UdQD0zQ0B.', 'CUST');
 
 -- --------------------------------------------------------
 
@@ -557,7 +558,7 @@ ALTER TABLE `return_deadlines`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Constraints for dumped tables
