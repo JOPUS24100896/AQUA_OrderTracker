@@ -1,3 +1,6 @@
+<?php
+include "../php/admin_auth.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
