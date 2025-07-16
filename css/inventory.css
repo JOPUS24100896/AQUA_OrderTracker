@@ -23,7 +23,8 @@ table{
   position: fixed;
   width: 69%;
   height: 59%;
-  
+  overflow-x: hidden;
+  overflow-y:scroll;
 }
 #table_header{
   background-color: rgb(45, 55, 108);
