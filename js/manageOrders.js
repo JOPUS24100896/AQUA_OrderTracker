@@ -1,4 +1,5 @@
 const table = document.getElementById("table_history");
+let style;
 let pendButton = document.getElementById("pendingButton");
 let readButton = document.getElementById("readyButton");
 let selectId = 0;
@@ -13,7 +14,7 @@ then(data => {
         row += `
        <tr class="orderRow orderNumber${rowData.OrderID}" onclick="current_select(${rowData.OrderID})" data-current-select="0">
             <td class="orderData OrderId${rowData.OrderID}">${rowData.OrderID}</td>
-            <td class="orderData">${rowData.UserID}</td>
+            <td class="orderData OrderUser${rowData.OrderID}">${rowData.UserID} - ${rowData.Username}</td>
             <td class="orderData">${rowData.ItemName}</td>
             <td class="orderData">${rowData.ItemQuantity}</td>
             <td class="orderData OrderDate${rowData.OrderID}">${rowData.OrderDate}</td>
@@ -31,24 +32,25 @@ then(data => {
         const ColDate = document.getElementsByClassName("OrderDate" + row.OrderID);
         const ColStat = document.getElementsByClassName("OrderStat" + row.OrderID);
         const ColPrice = document.getElementsByClassName("OrderPrice" + row.OrderID);
-        console.log(ColID);
-        console.log("OrderId" + row.OrderID)
+        const ColUser = document.getElementsByClassName("OrderUser" + row.OrderID);
         if(span_count == 0){
             span_count = ColID.length - 1;
             ColID[0].rowSpan = span_count + 1;
             ColDate[0].rowSpan = span_count + 1;
             ColPrice[0].rowSpan = span_count + 1;
             ColStat[0].rowSpan = span_count + 1;
+            ColUser[0].rowSpan = span_count + 1;
         }else{
             ColID[ColID.length - span_count].remove();
             ColDate[ColDate.length - span_count].remove();
             ColPrice[ColPrice.length - span_count].remove();
             ColStat[ColStat.length - span_count].remove();
+            ColUser[ColUser.length - span_count].remove();
             span_count--;
         }
             
     });
-
+    style = document.getElementById("selectRow");
     activateListeners();
 
 });
@@ -117,6 +119,7 @@ function current_select(orderId){
                 display:"none"
             }
         });
+    style.textContent = `.orderNumber${orderId} {background-color: #e0f7fa;}`;
     }
         
     else {
@@ -127,6 +130,7 @@ function current_select(orderId){
                 active: false
             }
         });
+        style.textContent = ``;
     }
     pendButton.dispatchEvent(event);
     readButton.dispatchEvent(event);

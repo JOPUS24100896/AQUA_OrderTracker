@@ -5,8 +5,10 @@ ini_set("display_errors", 1);
     
     $conn = new mysqli("localhost", "root", "", "aquadelsol_ordertracker");
     $result_array = [];
-    $query = "SELECT * FROM orders INNER JOIN order_details ON orders.OrderID = order_details.OrderID 
-    INNER JOIN itemnoimages ON itemnoimages.ItemID = order_details.ItemID ORDER BY orders.OrderID";
+    $query = "SELECT * FROM orders 
+    INNER JOIN order_details ON orders.OrderID = order_details.OrderID 
+    INNER JOIN itemnoimages ON itemnoimages.ItemID = order_details.ItemID 
+    INNER JOIN users ON users.UserID = orders.UserID ORDER BY orders.OrderID";
     header("Content-Type: application/json");
     if($data = $conn->query($query)){
         while($dataRow = $data->fetch_assoc()){

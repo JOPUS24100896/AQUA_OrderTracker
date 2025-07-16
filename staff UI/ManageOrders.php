@@ -16,6 +16,8 @@ include "../php/staff_auth.php";
             border: 1px solid black;
         }
     </style>
+    <style id="selectRow">
+    </style>
 </head>
 <body>
     <div id="header" class="flex_center">
@@ -47,7 +49,7 @@ include "../php/staff_auth.php";
                 <thead>
                     <tr>
                         <th>Order ID</th>
-                        <th>User ID</th>
+                        <th>User ID - Name</th>
                         <th>Item</th>
                         <th>Quantity</th>
                         <th>Order Date</th>
