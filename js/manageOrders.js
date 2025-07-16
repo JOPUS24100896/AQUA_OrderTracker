@@ -1,4 +1,5 @@
 const table = document.getElementById("table_history");
+let style;
 let pendButton = document.getElementById("pendingButton");
 let readButton = document.getElementById("readyButton");
 let selectId = 0;
@@ -48,7 +49,7 @@ then(data => {
         }
             
     });
-
+    style = document.getElementById("selectRow");
     activateListeners();
 
 });
@@ -117,6 +118,7 @@ function current_select(orderId){
                 display:"none"
             }
         });
+    style.textContent = `.orderNumber${orderId} {background-color: #e0f7fa;}`;
     }
         
     else {
@@ -127,6 +129,7 @@ function current_select(orderId){
                 active: false
             }
         });
+        style.textContent = ``;
     }
     pendButton.dispatchEvent(event);
     readButton.dispatchEvent(event);

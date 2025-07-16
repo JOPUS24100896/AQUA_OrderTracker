@@ -16,6 +16,8 @@ include "../php/staff_auth.php";
             border: 1px solid black;
         }
     </style>
+    <style id="selectRow">
+    </style>
 </head>
 <body>
     <div id="header" class="flex_center">
