@@ -37,9 +37,9 @@ if(!isset($_SESSION["user_id"])){
                 break;
                 case "ADMIN":
                     echo '
-                        <li><a href="admin UI/OrderGraph.html">ORDER GRAPH</a></li>
-                        <li><a href="admin UI/OrderRecord.html">ORDER RECORD</a></li>
-                        <li><a href="admin UI/InventoryUI.html">INVENTORY</a></li>
+                        <li><a href="admin UI/OrderGraph.php">ORDER GRAPH</a></li>
+                        <li><a href="admin UI/OrderRecord.php">ORDER RECORD</a></li>
+                        <li><a href="admin UI/InventoryUI.php">INVENTORY</a></li>
                     ';
                 break;
                 case "STAFF":

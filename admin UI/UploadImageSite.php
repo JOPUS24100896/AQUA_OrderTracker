@@ -35,9 +35,9 @@ include "../php/admin_auth.php";
         <h2>Upload Image</h2>
         <label class="label">Select Image File:</label>
         <input class="submit" type="file" name="image" required>
-        <label class="label">Enter ID</label>
+        <label class="label">Enter Item ID</label>
         <input id="inputId" type="text" name="id" required>
-        <label for="dropdown" class="label">Choose an option:</label>
+        <label for="dropdown" class="label">Choose Image File Type:</label>
         <select id="dropdown" name="type">
             <option value="jpeg">jpeg</option>
             <option value="png">png</option>
