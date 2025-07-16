@@ -1,3 +1,15 @@
+<?php
+session_start();
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+if(!isset($_SESSION["user_id"])){
+    header("Location:index.php");
+    exit();
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,8 +34,8 @@
             <img alt="User Account" class="account-icon" id="accountBtn" src="/images/dropdown_icon.jpg"></img>
             <div class="account-popup" id="accountPopup">
                 <ul>
-                    <a href="ManageProfile.html" class="popopt">Manage Profile</a>
-                    <a href="../php/EndSession.php" class="popopt">Logout</a>
+                    <a href="ManageProfile.php" class="popopt">Manage Profile</a>
+                    <a href="php/EndSession.php" class="popopt">Logout</a>
                 </ul>
             </div>
         </div>

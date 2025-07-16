@@ -25,7 +25,7 @@ include "../php/admin_auth.php";
             <img alt="User Account" class="account-icon" id="accountBtn" src="/images/dropdown_icon.jpg"></img>
             <div class="account-popup" id="accountPopup">
                 <ul>
-                    <a href="/ManageProfile.html" class="popopt">Manage Profile</a>
+                    <a href="../ManageProfile.php" class="popopt">Manage Profile</a>
                     <a href="../php/EndSession.php" class="popopt">Logout</a>
                 </ul>
             </div>
