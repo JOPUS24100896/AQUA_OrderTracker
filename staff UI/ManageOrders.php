@@ -32,6 +32,7 @@ include "../php/staff_auth.php";
             <li><a href="../staff UI/MakeAnOrder.php" >MAKE AN ORDER</a></li>
             <li><a href="../staff UI/ManageOrders.php" id="current">MANAGE ORDERS</a></li>
             <li><a href="../staff UI/OrderRecordStaff.php">ORDER HISTORY</a></li>
+            <li><a href="../staff UI/OrderRecordStaff.php">DELIVERIES</a></li>
         </ul>
         <div class="account-container">
             <img alt="User Account" class="account-icon" id="accountBtn" src="/images/dropdown_icon.jpg"></img>

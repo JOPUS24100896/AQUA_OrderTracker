@@ -69,14 +69,12 @@ function activateListeners(){
     });
 
     pendButton.addEventListener("click", function(){
-        alert("PENDING" + this.dataset.currentSelected);
         let forms = new FormData();
         forms.append("OrderID", this.dataset.currentSelected);
         forms.append("Status", "Pending");
         sendForm(forms);
     });
     readButton.addEventListener("click", function(){
-        alert("READY"  + this.dataset.currentSelected);
         let forms = new FormData();
         forms.append("OrderID", this.dataset.currentSelected);
         forms.append("Status", "Ready");
@@ -100,7 +98,7 @@ function filter() {
     row = table.getElementsByTagName("tr");
     for (i = 0; i < row.length; i++) {
         column = row[i].getElementsByTagName("td")[6];
-        if(column.innerHTML != 'Complete') {
+        if(column.innerHTML != 'Complete' || column.innerHTML != 'Cancelled') {
             row[i].style.display = "";
         }else {
             row[i].style.display = "none";
@@ -109,6 +107,7 @@ function filter() {
 }
 
 function current_select(orderId){
+    alert
     let event;
     if(selectId != orderId){
         selectId = orderId;
