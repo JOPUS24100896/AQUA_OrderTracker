@@ -4,7 +4,8 @@ $conn = new mysqli("localhost", "root", "", "aquadelsol_ordertracker");//IMPORTA
 
 $username = $_POST['username'];
 $email = $_POST["email"];
-$password = $_POST['password'];
+$password_unhash = $_POST['password'];
+$password = password_hash($password_unhash, PASSWORD_DEFAULT);
 $fullname = $_POST['fullname'];
 $address = $_POST['address'];
 $contact = $_POST['contact'];
