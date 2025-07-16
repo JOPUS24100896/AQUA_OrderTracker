@@ -18,7 +18,7 @@ include "../php/cust_auth.php";
 <body>
     <div id="header" class="flex_center">
         <div id="brand_Admin">
-            <<a href="../index.php"><h1>Aqua Del Sol</h1></a>
+            <a href="../index.php"><h1>Aqua Del Sol</h1></a>
         </div>
         <ul id="navbar">
             <li><a href="CreateOrder.php">CREATE ORDER</a></li>
