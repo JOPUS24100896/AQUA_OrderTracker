@@ -49,7 +49,7 @@ include "../php/staff_auth.php";
                 <thead>
                     <tr>
                         <th>Order ID</th>
-                        <th>User ID</th>
+                        <th>User ID - Name</th>
                         <th>Item</th>
                         <th>Quantity</th>
                         <th>Order Date</th>
