@@ -38,12 +38,12 @@ include "../php/admin_auth.php";
                 <thead>
                     <div id="header_background"></div>
                     <tr id="table_header">    
-                        <th><strong>ID</strong></th>
-                        <th><strong>Product Image</strong></th>
-                        <th><strong>Name</strong></th>
-                        <th><strong>Price</strong></th>
-                        <th><strong> No. in Stock</strong></th>
-                        <th><strong>Add Stock</strong></th>
+                        <th>ID</th>
+                        <th>Product Image</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Items in Stock</th>
+                        <th>Add Stock</th>
                     </tr>
                 </thead>
                 <tbody id="orderForm">

@@ -1,17 +1,22 @@
+/* #content{
+  background-color: aqua;
+} */
+
 /* table style*/
 table{
   width: 100%;
+  background-color: rgb(243, 243, 243);
 }
 #InventoryTable{
-  background-color: rgb(244, 239, 239);
+  background-color: rgb(178, 173, 173);
   border-radius: 20px;
   box-shadow: 0 4px 8px black;
   padding: 0.5rem;
-  margin: 0 15% 0 15%;
+  margin: 0 15% 0 13%;
   border: 2px solid rgb(7, 7, 7);
   position: fixed;
-  width: 66%;
-  height: 60%;
+  width: 70%;
+  height: 58%;
   
 }
 #table_header{
@@ -21,45 +26,47 @@ table{
   font-size: larger;
   border-radius: 5px;
   position: fixed;
-  width: 64.5%;
+  width: 68.4%;
   height: 6vh;
-  padding: 0.3% 0;
+  padding: 0.6% 0;
 }
 th{
   text-align: center;
 }
 th:nth-child(1){
-  width: 3%;
+  width: 3.5%;
 }
 th:nth-child(2){
-  width: 11%;
+  width: 12%;
 }
 th:nth-child(3){
-  width: 10%;
+  width: 15%;
 }
 th:nth-child(4){
-  width: 7%;
+  width: 7.5%;
 }
 th:nth-child(5){
-  width: 10%;
+  width: 12%;
 }
 th:nth-child(6){
-  width: 16%;
+  width: 15%;
 }
 tbody{
   display: block;
-  height: 52vh; 
-  width: 70vw;
+  height: 100%; 
+  width: 100%;
   overflow-y: auto;
-  margin: 3.8% 0 0 0;
+  margin: 5.5% 0 0 0;
+  background-color: rgb(250, 250, 250);
 }
 
 tbody td{
   border: 2px solid rgba(7, 7, 7, 0.47);
-  max-width: max-content;
+  width: max-content;
 }
 td:nth-child(1){
   padding: 1rem;
+  width: 3.5%;
 }
 td:nth-child(2){
   padding: 0 0 0 2.3rem;
@@ -80,15 +87,15 @@ td:nth-child(5){
 td:nth-child(1), td:nth-child(3), td:nth-child(4), td:nth-child(5){
   font-size: x-large;
 }
-/* td:nth-child(6){
-  width: 10vw;
-} */
+td:nth-child(6){
+  width: 23%;
+}
 .inputBox input, button{
   transform: scale(1.5);
 }
 .inputBox input{
   width: 35%;
-  margin: 0 2rem 0 3rem;
+  margin: 0 2rem 0 2rem;
 }
 
 #orderForm img{

@@ -9,7 +9,6 @@ include "../php/admin_auth.php";
     <title>Sales Record</title>
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/trend.css">
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script> -->
     <script src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="/js/graphFunction.js"></script>
 </head>

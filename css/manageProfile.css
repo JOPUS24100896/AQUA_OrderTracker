@@ -1,8 +1,7 @@
 #profile{
-    max-width: 60vw;
-    height: 20vh;
-    margin: auto;
-    margin-bottom: 1rem;
+    width: 30vw;
+    height: 50vh;
+    margin: 0 5rem 0 3rem;
     background: white;
     padding: 1rem;
     border-radius: 5px;
@@ -12,16 +11,24 @@
     font-size: x-large;
     box-shadow: 0 1px 4px black;
     padding: 0.4rem;
-    margin: 0 0 0.3rem 0;
+    margin: 0 0 1rem 0;
     border-radius: 15px;
 }
-
+#flex{
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+}
+.output_boxes{
+  /* margin: 0.5rem; */
+  width: 100%;
+}
 .container {
-    max-width: 60vw;
+    width: 40vw;
     height: 45vh;
-    margin: auto;
+    margin: 0 5rem 0 0 ;
     background: white;
-    padding: 20px;
+    padding: 1%;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -31,17 +38,16 @@
 }
 
 .container h2{
-    text-align: center;
+  text-align: center;
   color: #333;
-  margin-top: 20px;
 }
-label {
+/* label {
   display: block;
   margin: 10px 0 5px;
-}
+} */
 input[type="text"], input[type="email"], textarea {
   width: 100%;
-  padding: 10px;
+  padding: 7px;
   margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;

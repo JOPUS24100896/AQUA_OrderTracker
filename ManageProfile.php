@@ -26,31 +26,9 @@ if(!isset($_SESSION["user_id"])){
             <a href="/index.html"><h1>Aqua Del Sol</h1></a>
         </div>
         <ul id="navbar">
-            <?php
-            switch($_SESSION["user_type"]){
-                case "CUST":
-                    echo `
-                        <li><a href="customer UI/CreateOrder.php">CREATE ORDER</a></li>
-                        <li><a href="customer UI/Orders.php">PENDING ORDERS</a></li>
-                        <li><a href="customer UI/OrderHistory.php" id="current">ORDER HISTORY</a></li>
-                    `;
-                break;
-                case "ADMIN":
-                    echo `
-                        <li><a href="admin UI/OrderGraph.html">ORDER GRAPH</a></li>
-                        <li><a href="admin UI/OrderRecord.html">ORDER RECORD</a></li>
-                        <li><a href="admin UI/InventoryUI.html">INVENTORY</a></li>
-                    `;
-                break;
-                case "STAFF":
-                    echo `
-                        <li><a href="staff UI/MakeAnOrder.php" >MAKE AN ORDER</a></li>
-                        <li><a href="staff UI/ManageOrders.php" id="current">MANAGE ORDERS</a></li>
-                        <li><a href="staff UI/OrderRecordStaff.php">ORDER HISTORY</a></li>
-                    `;
-                break;
-            }
-            ?>
+            <li><a href="/admin UI/OrderGraph.php">ORDER GRAPH</a></li>
+            <li><a href="/admin UI/OrderRecord.php">ORDER RECORD</a></li>
+            <li><a href="/admin UI/InventoryUI.php">INVENTORY</a></li>
         </ul>
         <div class="account-container">
             <img alt="User Account" class="account-icon" id="accountBtn" src="/images/dropdown_icon.jpg"></img>
@@ -66,55 +44,53 @@ if(!isset($_SESSION["user_id"])){
     <!-- content -->
     <div id="content">
         <h1 id="page_title">MANAGE PROFILE</h1>
-        <!-- <div id="search_container">
-            <input type="text" id="search" placeholder="Search Something...">
-            <button>SEARCH</button>
-        </div> -->
-        <div id="profile">
-            <div class="flex_center">
-                <div class="input_boxes">
-                    <p>Fullname <strong> Admin</strong></p>
-                    <p>Address: <strong>Address,address</strong></p>
-                    <p>Contact Number: <strong>0875209562</strong></p>
-                </div>
-                
-
-                <div class="input_boxes">
-                    <p>Username <strong> Admin00</strong></p>
-                    <p>Email: <strong>email@gmail.com</strong></p>
-                    <p>Password: <strong>***********</strong></p>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <h2>Edit Profile</h2>
-            <form id="profileForm">
-                <div class="flex_center">
-                    <div class="input_boxes">
-                        <label for="partnerName">FullName:*</label>
-                        <input type="text" id="partnerName" name="partnerName" required>
-
-                        <label for="Address">Address:*</label>
-                        <input type="text" id="Address" name="Address" required>
-
-                        <label for="contactNumber">Contact Number:*</label>
-                        <input type="text" id="contactNumber" name="contactNumber" required>    
+        <div class="flex_center">
+            <div id="profile">
+                <div id="flex">
+                    <div class="output_boxes">
+                        <p>Fullname <strong> Admin</strong></p>
+                        <p>Address: <strong>Address,address</strong></p>
+                        <p>Contact Number: <strong>0875209562</strong></p>
                     </div>
                     
 
-                    <div class="input_boxes">
-                        <label for="Username">Username:*</label>
-                        <input type="email" id="Username" name="Username" required>
-
-                        <label for="partnerEmail">Email:*</label>
-                        <input type="email" id="partnerEmail" name="partnerEmail" required>
-
-                        <label for="Password">Password:*</label>
-                        <input type="email" id="Password" name="Password" required>
+                    <div class="output_boxes">
+                        <p>Username <strong> Admin00</strong></p>
+                        <p>Email: <strong>email@gmail.com</strong></p>
+                        <p>Password: <strong>***********</strong></p>
                     </div>
                 </div>
-                <button type="submit">Update Profile</button>
-            </form>
+            </div>
+            <div class="container">
+                <h2>Edit Profile</h2>
+                <form id="profileForm">
+                    <div class="flex_center">
+                        <div class="input_boxes">
+                            <label for="partnerName">FullName:*</label>
+                            <input type="text" id="partnerName" name="partnerName" required>
+
+                            <label for="Address">Address:*</label>
+                            <input type="text" id="Address" name="Address" required>
+
+                            <label for="contactNumber">Contact Number:*</label>
+                            <input type="text" id="contactNumber" name="contactNumber" required>    
+                        </div>
+                        
+
+                        <div class="input_boxes">
+                            <label for="Username">Username:*</label>
+                            <input type="email" id="Username" name="Username" required>
+
+                            <label for="partnerEmail">Email:*</label>
+                            <input type="email" id="partnerEmail" name="partnerEmail" required>
+
+                            <label for="Password">Password:*</label>
+                            <input type="email" id="Password" name="Password" required>
+                        </div>
+                    </div>
+                    <button type="submit">Update Profile</button>
+                </form>
+            </div>
         </div>
         
         

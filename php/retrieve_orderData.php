@@ -11,7 +11,7 @@
             ON `orders`.`OrderID` = `order_details`.`OrderID`
             INNER JOIN `users`
             ON `orders`.`UserID` = `users`.`UserID`
-            ORDER By `order_details`.`OrderID`, `order_details`.`ItemID`;";
+            ORDER By `order_details`.`OrderID` DESC, `order_details`.`ItemID`;";
     $raw_Order_Data = $conn->query($sql2);
     $json_placeholder = [];
     while($query_raw_row = $raw_Order_Data->fetch_assoc()){
