@@ -44,7 +44,7 @@ include "../php/admin_auth.php";
     <div id="content">
         <h1 id="page_title">ORDER TREND</h1>
         <div id="salesChartContainer" class="flex_center">
-          <div id="myChart" style="  width: 50vw; height: 50vh; border-radius: 20px;"></div>
+          <div id="myChart" style="  width: 50vw; height: 50vh;"></div>
           <div id="salesLegend">
           </div>          
         </div>
