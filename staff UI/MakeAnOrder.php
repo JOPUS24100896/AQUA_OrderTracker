@@ -38,7 +38,7 @@ include "../php/staff_auth.php";
 
     <!-- Content -->
     <div id="content">
-        <h1 id="page_title">CREATE ORDER</h1>
+        <h1 id="page_title">MAKE AN ORDER</h1>
         <form method="post" id="orderForm">
             <!--Order forms procedureally generated-->
             <div class="ProductList">
