@@ -1,3 +1,9 @@
+#page_title{
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.875);
+  font-weight: lighter;
+  letter-spacing: .1cm;
+}
 #search_container{
     margin: 0 0 0 15%;
     display: flex;
@@ -29,7 +35,7 @@
 }
 #search_container button:hover{
   background-color: rgb(35, 78, 133);
-}
+} */
 
 
 /* table style*/
@@ -45,7 +51,7 @@ table{
   border: 2px solid rgb(7, 7, 7);
   position: fixed;
   width: 70%;
-  height: 50%;
+  height: 58%;
   background-color:rgb(171, 171, 171);
 }
 #table_header{
@@ -58,29 +64,34 @@ table{
   position: fixed;
   width: 68%;
   height: 6vh;
-  padding: 0.5%;
+  padding: 0.5% 0;
 }
-/* th{
-  border: 2px solid rgba(7, 7, 7, 0.47);
-  border-radius: 10px;
-} */
-#order_id{
+
+th:nth-child(1){
   width: 3%;
 }
-#customer_name{
-  width: 19%;
+th:nth-child(2){
+  width: 14%;
 }
-#order_date{
-  width: 11%;
+th:nth-child(3){
+  width: 15%;
+  
 }
-#amount{
-  width: 7%;
+th:nth-child(4){
+  width: 9%;
+}
+th:nth-child(5){
+  width: 10%;
+}
+th:nth-child(6){
+  width: 10%;
 }
 tbody{
   display: block;
-  height: 40vh; 
+  height: 49vh; 
+  width:68vw;
   overflow-y: auto;
-  margin-top: 5%;
+  margin-top: 4.5%;
   background-color: rgb(250, 250, 250);
 }
 
