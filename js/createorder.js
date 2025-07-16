@@ -1,12 +1,11 @@
+const form = document.getElementById("orderForm");
 document.addEventListener("ProductListGenerated", function(){
-    var submit = document.getElementById("orderForm");
     var idArr = JSON.parse(localStorage.getItem("ListedIDs"));
     idArr.forEach(enableEventListener);
 
-    submit.addEventListener("submit", function(event){
+    form.addEventListener("submit", function(event){
         event.preventDefault();
         var orderData = new FormData(this);
-        alert("check");
         fetch("../php/create_order.php", {
             method: 'POST',
             body: orderData
@@ -16,10 +15,11 @@ document.addEventListener("ProductListGenerated", function(){
             let OrderDone_event = new Event("OrderReceived");
             document.dispatchEvent(OrderDone_event);
             console.log(data);
-        })//.catch(data => {
-          // console.log(data);
-        //})
-    })
+            if(!data.Error) alert("Order submitted");
+        });
+        this.reset();
+
+    });
 })
 
 function enableEventListener(item){
@@ -64,5 +64,9 @@ function enableEventListener(item){
         pval.value = parseInt(pval.value) + 1;
     })
 
-    
+    form.addEventListener("reset", function(){
+            padd.disabled=true;
+            pmin.disabled=true;
+            pval.disabled=true;
+    })
 }
