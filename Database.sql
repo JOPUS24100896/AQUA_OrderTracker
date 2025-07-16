@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 14, 2025 at 10:25 PM
+-- Generation Time: Jul 16, 2025 at 04:13 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 DROP DATABASE IF EXISTS aquadelsol_ordertracker;
@@ -81,7 +81,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `create_OrderDetail` (IN `item_list`
     END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `return_all_items` ()   BEGIN
-	SELECT ItemName, ItemID FROM items;
+	SELECT ItemName, ItemID, Price FROM items;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `return_total_price` (IN `itemIdList` VARCHAR(255), IN `itemValList` VARCHAR(255), OUT `total_Price` DECIMAL(10,2))   BEGIN
@@ -165,7 +165,11 @@ INSERT INTO `deliveries` (`DeliveryID`, `DeliveryDate`, `DeliveryStatus`, `PortI
 (7, '2025-07-14 17:22:14', 'Pending', NULL),
 (8, '2025-07-14 17:24:28', 'Pending', NULL),
 (9, '2025-07-14 17:24:38', 'Pending', NULL),
-(10, '2025-07-14 17:24:44', 'Pending', NULL);
+(10, '2025-07-14 17:24:44', 'Pending', NULL),
+(11, '2025-07-15 05:09:05', 'Pending', NULL),
+(12, '2025-07-15 13:44:49', 'Pending', NULL),
+(13, '2025-07-15 13:46:47', 'Pending', NULL),
+(14, '2025-07-15 18:12:49', 'Pending', NULL);
 
 -- --------------------------------------------------------
 
@@ -281,9 +285,16 @@ INSERT INTO `orders` (`OrderID`, `UserID`, `ReturnDeadlineID`, `DeliveryID`, `St
 (9, 4, 8, 6, 'Pending', 275.00, '2025-07-14 14:32:59'),
 (10, 4, 10, 8, 'Pending', 95.00, '2025-07-14 17:24:28'),
 (11, 4, 11, 9, 'Pending', 95.00, '2025-07-14 17:24:38'),
-(12, 4, 12, 10, 'Pending', 95.00, '2025-07-14 17:24:44'),
+(12, 4, 12, 10, 'Ready', 95.00, '2025-07-14 17:24:44'),
 (13, 4, 13, NULL, 'Ready', 95.00, '2025-07-14 17:24:50'),
-(14, 1, 14, NULL, 'Pending', 95.00, '2025-07-14 19:22:37');
+(14, 1, 14, NULL, 'Pending', 95.00, '2025-07-14 19:22:37'),
+(15, 6, NULL, NULL, 'Pending', 75.00, '2025-07-15 05:02:44'),
+(16, 1, 15, 11, 'Ready', 245.00, '2025-07-15 05:09:05'),
+(17, 6, 16, NULL, 'Pending', 100.00, '2025-07-15 05:13:34'),
+(18, 1, 17, 12, 'Pending', 225.00, '2025-07-15 13:44:49'),
+(19, 1, 18, NULL, 'Pending', 200.00, '2025-07-15 13:45:07'),
+(20, 1, 19, 13, 'Pending', 275.00, '2025-07-15 13:46:47'),
+(21, 1, 20, 14, 'Pending', 240.00, '2025-07-15 18:12:49');
 
 -- --------------------------------------------------------
 
@@ -340,7 +351,21 @@ INSERT INTO `order_details` (`OrderDetailID`, `ItemID`, `OrderID`, `ItemQuantity
 (35, 3, 13, 1),
 (36, 1, 14, 1),
 (37, 2, 14, 1),
-(38, 3, 14, 1);
+(38, 3, 14, 1),
+(39, 1, 15, 3),
+(40, 1, 16, 3),
+(41, 2, 16, 3),
+(42, 3, 16, 1),
+(43, 2, 17, 2),
+(44, 1, 18, 1),
+(45, 2, 18, 4),
+(46, 1, 19, 2),
+(47, 2, 19, 3),
+(48, 1, 20, 1),
+(49, 2, 20, 5),
+(50, 1, 21, 2),
+(51, 2, 21, 3),
+(52, 3, 21, 2);
 
 -- --------------------------------------------------------
 
@@ -372,7 +397,13 @@ INSERT INTO `return_deadlines` (`ReturnDeadlineID`, `ReturnDateTime`, `ReturnSta
 (11, '2025-07-19 17:24:38', 0),
 (12, '2025-07-19 17:24:44', 0),
 (13, '2025-07-19 17:24:50', 0),
-(14, '2025-07-19 19:22:37', 0);
+(14, '2025-07-19 19:22:37', 0),
+(15, '2025-07-20 05:09:05', 0),
+(16, '2025-07-20 05:13:34', 0),
+(17, '2025-07-20 13:44:49', 0),
+(18, '2025-07-20 13:45:07', 0),
+(19, '2025-07-20 13:46:47', 0),
+(20, '2025-07-20 18:12:49', 0);
 
 -- --------------------------------------------------------
 
@@ -399,7 +430,14 @@ INSERT INTO `users` (`UserID`, `FullName`, `Address`, `Contact`, `Username`, `Em
 (1, 'test', 'test', 'test', 'test', 'test', 'test', 'CUST'),
 (2, 'test', 'test', 'test', 'test1', 'test1', 'test', 'CUST'),
 (4, 'John', 'cebu', '14543616', 'Test2', 'example@email.com', 'qwerty', 'CUST'),
-(5, NULL, NULL, NULL, 'admin1', 'admin@admin.com', 'ADMINadmin123', 'ADMIN');
+(5, NULL, NULL, NULL, 'admin1', 'admin@admin.com', 'ADMINadmin123', 'ADMIN'),
+(6, 'jane', 'cebu', NULL, 'namename', 'email@gmail.coom', 'password', 'STAFF'),
+(10, 'test', 'test', NULL, 'test5', 'test5', 'test', 'CUST'),
+(11, 'test', 'test', NULL, 'test6', 'test6', 'test', 'CUST'),
+(12, 'Johnny ', 'Yati, Liloan, Cebu', '09234125', 'john1', 'johnny@email.com', '$2y$10$3fC/u9LsQsWpvPOniv8IJ.ocjYnHpNytwSOlhq4llH6', 'CUST'),
+(13, 'Johnny ', 'Yati, Liloan, Cebu', '09234125', 'john2', 'johnny2@email.com', '$2y$10$Xkm.ieOsLC8vVtxH.hOXXuimJx0gFyWp5hYXzndzkmY', 'CUST'),
+(14, 'Johnny ', 'Yati, Liloan, Cebu', '09234125', 'john3', 'johnny3@email.com', '$2y$10$7MkrKkWVfAtUDl4WZQ9rH.wiSN7ANNp7c/mXO9mkm9K', 'CUST'),
+(15, 'Johnny ', 'Yati, Liloan, Cebu', '09234125', 'john4', 'johnny4@email.com', '$2y$10$rV1lPJHt7Lo1cHDOQaqGnOQttlcwtBw5kC.mE/PVZRx', 'CUST');
 
 -- --------------------------------------------------------
 
@@ -483,7 +521,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `deliveries`
 --
 ALTER TABLE `deliveries`
-  MODIFY `DeliveryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `DeliveryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `delivery_port`
@@ -501,25 +539,25 @@ ALTER TABLE `items`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `OrderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `OrderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `OrderDetailID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `OrderDetailID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `return_deadlines`
 --
 ALTER TABLE `return_deadlines`
-  MODIFY `ReturnDeadlineID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `ReturnDeadlineID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Constraints for dumped tables
