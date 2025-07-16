@@ -89,6 +89,7 @@ th:nth-child(6){
 tbody{
   display: block;
   height: 49vh; 
+  width:68vw;
   overflow-y: auto;
   margin-top: 4.5%;
   background-color: rgb(250, 250, 250);
