@@ -7,12 +7,12 @@ then(data => {
         const card = document.createElement('tr');
         card.innerHTML = `
             <td>${item.ItemID}</td>
-            <div class="productCard"><img src="../php/viewImage.php?id=${item.ItemID}
+            <td loading="lazy" class="productCard"><img src="../php/viewImage.php?id=${item.ItemID}"></td>
             <td>${item.ItemName}</td>
-            <td>${item.StockQuantity}</td>
             <td>${item.Price}</td>
+            <td>${item.StockQuantity}</td>
             <td class="inputBox">
-                <input type="number" min="1" placeholder="Add stock" id="stock-${item.ItemID}">
+                <input type="number" min="1" id="stock-${item.ItemID}">
                 <button onclick="updateStock(${item.ItemID})">ADD</button>
             </td>
 

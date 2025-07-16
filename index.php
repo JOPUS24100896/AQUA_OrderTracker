@@ -24,7 +24,7 @@ if(isset($_SESSION["user_id"])){
         break;
     }
     echo '<div id="header">
-            <div id="brand">
+            <div id="brand"> 
                 <h1>Aqua Del Sol</h1>
             </div>
         </div>
