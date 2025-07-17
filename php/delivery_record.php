@@ -9,8 +9,7 @@ ini_set("display_errors", 1);
     INNER JOIN deliveries ON orders.DeliveryID = deliveries.DeliveryID
     INNER JOIN users ON users.UserID = orders.UserID 
     LEFT JOIN delivery_port ON deliveries.PortID = delivery_port.PortID 
-    WHERE orders.Status = 'Ready' AND (deliveries.DeliveryStatus = 'Pending' 
-    OR deliveries.DeliveryStatus = 'Delivered')
+    WHERE orders.Status != 'Pending'
     ORDER BY orders.OrderID 
     ";
     header("Content-Type: application/json");

@@ -3,14 +3,18 @@
 
     $id = (int) $_POST["OrderID"];
     $status = $_POST["Status"];
-
-    $query = "UPDATE orders SET `Status` = ? WHERE `OrderID` = ? ";
+   /**  echo json_encode ([
+            "Error" => false,
+            "Message" => "orderid: ". $id
+        ]);
+    exit();*/
+    $query = "CALL update_order_status(?,?);";
     $query_prepare = $conn->prepare($query);
     $query_prepare->bind_param("si", $status, $id);
     if($query_prepare->execute()){
         echo json_encode ([
             "Error" => false,
-            "Message" => "Execute Complete"
+            "Message" => "Good Execution"
         ]);
     }else {
         echo json_encode ([

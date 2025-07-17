@@ -71,7 +71,8 @@ include "../php/staff_auth.php";
             
             <button id="delivButton" disabled>Set to Delivered</button>
             <select title="Assign to Vehicle" id="portSelect" disabled>
-                <option disabled selected value="0">Select Port</option>
+                <option disabled selected value="null">Select Port</option>
+                <option value="0">None</option>
             <?php
                 $conn = new mysqli("localhost", "root", "", "aquadelsol_ordertracker");
 

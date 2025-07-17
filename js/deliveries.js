@@ -6,30 +6,34 @@ const prtSelect = document.getElementById("portSelect");
 const prtButton = document.getElementById("portButton");
 let selectId = 0;
 let rows;
-fetch("../php/delivery_record.php").
-then(response => response.json()). 
-then(data => {
-    let row = "";
-    let span_count = 0;
-    console.log(data);
-    data.forEach(rowData => {
-        row += `
-       <tr class="orderRow orderNumber${rowData.OrderID}" onclick="current_select(${rowData.OrderID},${rowData.DeliveryID})" data-current-select="0">
-            <td class="orderData">${rowData.OrderID}</td>
-            <td class="orderData">${rowData.UserID} - ${rowData.Username}</td>
-            <td class="orderData">${rowData.OrderDate}</td>
-            <td class="orderData">${rowData.TotalPrice}</td>
-            <td class="orderData">${rowData.DeliveryStatus}</td>   
-            <td class="orderData">${(rowData.PortID == null)?'Not set':rowData.PortID} - ${(rowData.PortNumber == null)?'Not set':rowData.PortNumber}</td>   
-        </tr>
-    `;
-/*somehow get the orderID from the db when clicked and use it to edit*/
-    })
-    rows = document.getElementsByClassName("orderRow");
-    table.innerHTML = row;
-    activateListeners();
 
-});
+genereateDeliveryList();
+activateListeners();
+function genereateDeliveryList(){
+    table.innerHTML = '';
+    fetch("../php/delivery_record.php").
+    then(response => response.json()). 
+    then(data => {
+        let row = "";
+        let span_count = 0;
+        console.log(data);
+        data.forEach(rowData => {
+            row += `
+        <tr class="orderRow orderNumber${rowData.OrderID}" onclick="current_select(${rowData.OrderID},${rowData.DeliveryID})" data-current-select="0">
+                <td class="orderData">${rowData.OrderID}</td>
+                <td class="orderData">${rowData.UserID} - ${rowData.Username}</td>
+                <td class="orderData">${rowData.OrderDate}</td>
+                <td class="orderData">${rowData.TotalPrice}</td>
+                <td class="orderData">${rowData.DeliveryStatus}</td>   
+                <td class="orderData">${(rowData.PortID == null)?'Not set':rowData.PortID} - ${(rowData.PortNumber == null)?'Not set':rowData.PortNumber}</td>   
+            </tr>
+        `;
+    /*somehow get the orderID from the db when clicked and use it to edit*/
+        })
+        rows = document.getElementsByClassName("orderRow");
+        table.innerHTML = row; 
+    });
+}
 
 function activateListeners(){
 
@@ -83,21 +87,8 @@ function sendStat(formData){
     then(data => {
         console.log(data);
         if(!data.Error){
-            location.reload();
-        }
-    })
-}
-
-function sendForm(formData){
-    fetch("../php/changeDeliveryStatus.php", {
-        method: 'POST', 
-        body: formData
-    }).
-    then(response => response.json()). 
-    then(data => {
-        console.log(data);
-        if(!data.Error){
-            location.reload();
+            genereateDeliveryList();
+            alert(data.Message);
         }
     })
 }

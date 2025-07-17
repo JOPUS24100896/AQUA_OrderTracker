@@ -47,6 +47,7 @@ if(!isset($_SESSION["user_id"])){
                         <li><a href="staff UI/MakeAnOrder.php" >MAKE AN ORDER</a></li>
                         <li><a href="staff UI/ManageOrders.php">MANAGE ORDERS</a></li>
                         <li><a href="staff UI/OrderRecordStaff.php">ORDER HISTORY</a></li>
+                        <li><a href="staff UI/Deliveries.php">DELIVERIES</a></li>
                     ';
                 break;
             }
