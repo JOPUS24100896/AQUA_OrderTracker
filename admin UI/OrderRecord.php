@@ -36,18 +36,11 @@ include "../php/admin_auth.php";
     <!-- content -->
     <div id="content">
         <h1 id="page_title">ORDER RECORD</h1>
-        <!-- <div id="search_container">
-        <input type="text" id="myInput" onkeyup="searchFunction()" placeholder="Search for names.."></div> -->
-        
         <div id="OrderRecordTable">
             <table>
                 <thead>
                     <div id="header_background"></div>
                     <tr id="table_header">    
-                        <!-- <th id="order_id">ID</th>
-                        <th id="customer_name">Customer Name</th>
-                        <th id="order_date">Order Date</th>
-                        <th id="amount">Amount</th> -->
                         <th>ID</th>
                         <th>ItemName</th>
                         <th>ItemQuantity</th>

@@ -41,7 +41,6 @@ include "../php/admin_auth.php";
                         <th>ID</th>
                         <th>Product Image</th>
                         <th>Name</th>
-                        <th>Price</th>
                         <th>Items in Stock</th>
                         <th>Add Stock</th>
                     </tr>

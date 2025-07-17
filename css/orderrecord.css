@@ -70,20 +70,20 @@ th:nth-child(1){
   width: 3%;
 }
 th:nth-child(2){
-  width: 13%;
+  width: 16%;
 }
 th:nth-child(3){
-  width: 13%;
+  width: 8%;
   
 }
 th:nth-child(4){
-  width: 10%;
+  width: 8%;
 }
 th:nth-child(5){
-  width: 9%;
+  width: 11%;
 }
 th:nth-child(6){
-  width: 10%;
+  width: 12%;
 }
 tbody{
   display: block;
@@ -102,23 +102,23 @@ tbody td{
   border: 2px solid rgba(7, 7, 7, 0.47);
   width: 15%;
 }
-.orderData:nth-child(1){
+#orderId{
   width: 2%;
   /* background-color: rgb(172, 225, 225);  uncomment to see the problem */
 }
-.orderData:nth-child(2){
+.orderName{
   width: 15%;
 }
-.orderData:nth-child(3){
-  width: 10%;
+.orderQuantity{
+  width:8%;
   
 }
-.orderData:nth-child(4){
+.orderPrice{
   width: 8%;
 }
-.orderData:nth-child(5){
+#orderDate{
   width: 10%;
 }
-.orderData:nth-child(6){
+#orderPrice{
   width: 10%;
 }

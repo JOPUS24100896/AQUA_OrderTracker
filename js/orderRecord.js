@@ -4,26 +4,8 @@ var prev_orderID = null;
 var prev_orderDate = null;
 
 
-// fetch("../php/retrieve_orderData.php")
 fetch('http://localhost/php/retrieve_orderData.php')
 .then(response => response.json())
-// .then(data => {
-//     if(prev_orderID == order.OrderID && prev_orderDate == order.OrderDate){
-
-//     } else{
-//       console.log(data);
-//     data.forEach(order => {
-//         const card = document.createElement('tr');
-//         card.innerHTML = `
-//             <td>${order.OrderID}</td>
-//             <td>${order.FullName}</td>
-//             <td>${order.OrderDate}</td>
-//             <td>${order.Price}</td>
-//         `;
-//     });
-//     }
-//     table.appendChild(card);
-// })
 .then(data => {
     let row = "";
     let span_count = 0;
@@ -32,12 +14,12 @@ fetch('http://localhost/php/retrieve_orderData.php')
         let itemQuantPrice = parseFloat(rowData.ItemQuantity) * rowData.Price;
         row += `
         <tr class="orderRow">
-            <td class="orderData OrderId${rowData.OrderID}">${rowData.OrderID}</td>
-            <td class="orderData">${rowData.ItemName}</td>
-            <td class="orderData">${rowData.ItemQuantity}</td>
-            <td class="orderData">${itemQuantPrice}</td>
-            <td class="orderData OrderDate${rowData.OrderID}">${rowData.OrderDate}</td>
-            <td class="orderData OrderPrice${rowData.OrderID}">${rowData.TotalPrice}</td>
+            <td id="orderId" class="OrderId${rowData.OrderID}">${rowData.OrderID}</td>
+            <td class="orderName">${rowData.ItemName}</td>
+            <td class="orderQuantity">${rowData.ItemQuantity}</td>
+            <td class="orderPrice">${itemQuantPrice}</td>
+            <td id="orderDate" class="OrderDate${rowData.OrderID}">${rowData.OrderDate}</td>
+            <td id="orderPrice" class="OrderPrice${rowData.OrderID}">${rowData.TotalPrice}</td>
         </tr>
     `;
     })
