@@ -9,7 +9,6 @@ then(response => response.json()).
 then(data => {
     let row = "";
     let span_count = 0;
-    console.log(data);
     data.forEach(rowData => {
         row += `
        <tr class="orderRow orderNumber${rowData.OrderID}" onclick="current_select(${rowData.OrderID})" data-current-select="0">
