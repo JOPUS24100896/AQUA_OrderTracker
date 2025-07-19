@@ -16,6 +16,7 @@ document.addEventListener("ProductListGenerated", function(){
             document.dispatchEvent(OrderDone_event);
             console.log(data);
             if(!data.Error) alert("Order submitted");
+            else alert(data.Error_Location);
         });
         this.reset();
 

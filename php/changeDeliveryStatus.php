@@ -37,12 +37,12 @@
                     "Error" => false,
                     "Message" => $row["Message"]
                 ]);
-        }else {
+            }else {
                 echo json_encode ([
                     "Error" => true,
                     "Message" => "There was a problem with updating the databse: $conn->connect_errno"
-                ]);
-        }
+                    ]);
+            }
         }else{
             echo json_encode ([
                     "Error" => true,

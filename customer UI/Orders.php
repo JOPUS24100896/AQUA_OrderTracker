@@ -13,6 +13,8 @@ include "../php/cust_auth.php";
     <link rel="stylesheet" href="/css/orders.css">
     <link rel="stylesheet" href="../css/orderHistory.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css">
+
+    <style id="selectRow"></style>
 </head>
 
 <body>
@@ -55,6 +57,16 @@ include "../php/cust_auth.php";
 
                 </tbody>
             </table>
+        </div>
+        <div class="buttoncontainer">
+            <button id="cancelOrderButton" hidden>Cancel Order</button>
+            <label for ="cancelButton" id="confirmPrompt" hidden> 
+                <span style="color:white;">
+                    <h3>Are you sure you want to cancel your order?<h3>
+                </span>
+                <button id="cancelYesButton" >Yes</button>
+                <button id="cancelNoButton" >No</button>
+            </label>
         </div>
     </div>
 

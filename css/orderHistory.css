@@ -59,3 +59,27 @@
             font-weight: bold;
             letter-spacing: 0.05em;
         }
+
+        .buttoncontainer{
+            text-align: center;
+        }
+
+        .buttoncontainer button{
+            font-size: 2.5vh;
+            background-color:rgb(77, 169, 255);
+            padding: 7px;
+            border:none;
+            margin:20px 10px 10px 10px;
+        }
+
+        .buttoncontainer select{
+            font-size: 2.5vh;
+            background-color:rgb(77, 169, 255);
+            padding: 7px;
+            border:none;
+            margin:20px 10px 10px 10px;
+        }
+
+        button:hover {
+            background-color: rgb(53, 65, 175);
+        }
