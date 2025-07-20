@@ -88,8 +88,8 @@ justify-content: center;
 gap: 15%;
 background-color: #cccccc;
 border-radius: 20px;
-width: 20%;
-margin: 1% 24% 3% 39.9%;
+width: 18vw;
+margin: 1% 5% 3% 5%;
 padding: 1%;
 box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
 }
@@ -102,15 +102,30 @@ gap: 10%;
 white-space: nowrap;
 }
 
+#inputBox{
+  margin: 2vh 5vw 0 0 ;
+  background-color: #cccccc;
+  border-radius: 20px;
+  width: 18vw;
+  height: 7vh;
+  padding: 3%;
+  font-size: larger;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+#inputBox input{
+  height: 2.2rem;
+}
+
 .orderHandling[type="submit"] {
 background-color: #007BFF;
 color: white;
-padding: 12px 24px;
+padding: 1%;
 font-size: 1.2rem;
 border: none;
 border-radius: 10px;
 cursor: pointer;
-margin: 0 auto;
+margin: 0 45%;
 display: block;
 box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
 }
