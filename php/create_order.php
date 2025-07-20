@@ -16,6 +16,7 @@ $item_values = implode(',', $user_chosen_amount);
 $prod_selected = [];
 $prod_values = [];
 $delivery = (int) $_POST["delivery"];
+$address = isset($_POST["address"]) ? $_POST["address"] : null;
 
 //INPUT CHECKS-----------------
 if(!(is_array($user_chosen_products) && is_array($user_chosen_amount)))
@@ -29,6 +30,10 @@ if(count($user_chosen_products) != count($user_chosen_amount))
 
 if($delivery != 1 && $delivery != 0)
     echo_error(true, "Invalid input", "Delivery name tampered");
+
+    // bro I added this MWEHEHE kay i added na the delivery address as required if availing delivery option
+if($address == null && $delivery == 1)
+    echo_error(true, "Invalid input", "Delivery address is Invalid");
 
 
 //MAIN QUERIES-----------------

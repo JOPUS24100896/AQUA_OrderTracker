@@ -7,11 +7,20 @@ fetch("../php/create_prod_list.php").
     then(data => {
         //console.log(data);
         data.forEach(createProductList);
-        submit.innerHTML += `<div class="deliveryOptions">
-                                <label><input type="radio" name="delivery" value="1" class="orderHandling"> Delivery</label>
-                                <label><input type="radio" name="delivery" value="0" class="orderHandling"> On-Site</label>
-                            </div>
-                            <input type="submit" value="Submit Order" class="orderHandling">`;
+        submit.innerHTML += `
+                <div class="flex_center">  
+                    <div class="deliveryOptions">
+                        <label><input type="radio" name="delivery" value="1" class="orderHandling"> Delivery</label>
+                        <label><input type="radio" name="delivery" value="0" class="orderHandling"> On-Site</label>
+                    </div>
+                    <div id="deliveryDetails"></div>
+                </div>  
+                <input type="submit" value="Submit Order" class="orderHandling">`;
+        
+        const deliveryRadios = document.querySelectorAll('input[name="delivery"]');
+        deliveryRadios.forEach(radio => {
+            radio.addEventListener("click", handleDeliveryOption);
+        });
 
         localStorage.setItem("ListedIDs", JSON.stringify(idArr));
         console.log(localStorage.getItem("ListedIDs"));
@@ -34,4 +43,21 @@ function createProductList(item) {
                         
                         `;
     idArr.push(item.ItemID)
+}
+
+function handleDeliveryOption() {
+    const selectedValue = document.querySelector('input[name="delivery"]:checked').value;
+    const deliveryDetails = document.getElementById("deliveryDetails");
+
+    // Clear previous content to make it work basically 
+    deliveryDetails.innerHTML = "";
+
+    if (selectedValue === "1") {
+        deliveryDetails.innerHTML = `
+            <div id="inputBox" class="flex_center">
+                <label for="address">Address:</label>
+                <input type="text" id="address" name="address">
+            </div>
+        `;
+    }
 }
