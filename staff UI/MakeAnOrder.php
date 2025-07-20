@@ -68,6 +68,7 @@ include "../php/staff_auth.php";
     <script src="../js/createorder.js"></script>
     <script src="../js/dropdown.js"></script>
     <script>
+        // Handle the plus and minus buttons for product quantity
         document.querySelectorAll('.ProductCard').forEach(card => {
             const minus = card.querySelector('button:first-child');
             const plus = card.querySelector('button:last-child');
