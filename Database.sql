@@ -3,9 +3,10 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 17, 2025 at 04:29 PM
+-- Generation Time: Jul 20, 2025 at 02:57 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
+
 DROP DATABASE IF EXISTS aquadelsol_ordertracker;
 CREATE DATABASE IF NOT EXISTS aquadelsol_ordertracker;
 USE aquadelsol_ordertracker;
@@ -125,63 +126,34 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `fill_simulation` ()   BEGIN
 (28, 'Benjie Alano', 'Muntinlupa', '09389994567', 'benjiea', 'benjie@gmail.com', '$2a$12$OT9B0HuEkDrao3rCiIlqkOjv/ah7gIrCKe92X5FxwDZAPwOFcUc9u', 'CUST'),
 (29, 'Clarissa Chan', 'Parañaque', '09481114567', 'clarissac', 'clarissa@gmail.com', '$2a$12$OT9B0HuEkDrao3rCiIlqkOjv/ah7gIrCKe92X5FxwDZAPwOFcUc9u', 'CUST'),
 (30, 'Daryl Bautista', 'Manila', '09482224567', 'darylb', 'daryl@gmail.com', '$2a$12$OT9B0HuEkDrao3rCiIlqkOjv/ah7gIrCKe92X5FxwDZAPwOFcUc9u', 'STAFF');
-
 CALL create_order(3, 0, '2,3', '6,3');
-CALL create_order(11, 1, '1', '10');
-CALL create_order(28, 0, '3,2', '7,9');
+CALL create_order(6, 1, '1', '9');
 CALL create_order(8, 1, '2', '5');
 CALL create_order(10, 0, '1,3', '3,8');
-CALL create_order(25, 1, '1,2,3', '2,4,7');
-CALL create_order(15, 0, '3', '6');
-CALL create_order(5, 1, '1,2', '1,5');
-CALL create_order(30, 0, '2,1', '2,9');
-CALL create_order(18, 1, '1', '4');
-CALL create_order(12, 0, '3,1,2', '1,6,7');
-CALL create_order(14, 1, '2', '10');
-CALL create_order(2, 0, '1,3', '5,5');
 CALL create_order(13, 1, '2,3', '3,2');
-CALL create_order(6, 1, '1', '9');
-CALL create_order(9, 0, '2', '8');
-CALL create_order(17, 1, '1,2', '6,3');
-CALL create_order(24, 0, '3', '4');
-CALL create_order(1, 1, '1,2,3', '3,1,2');
-CALL create_order(4, 0, '2', '7');
-CALL create_order(7, 1, '1,3', '2,9');
+CALL create_order(16, 0, '2,3', '3,3');
 CALL create_order(19, 0, '3', '10');
 CALL create_order(27, 1, '1,2', '5,6');
-CALL create_order(16, 0, '2,3', '3,3');
+CALL create_order(30, 0, '2,1', '2,9');
+
+-- One call per CUST only
+CALL create_order(1, 1, '1,2,3', '3,1,2');
+CALL create_order(2, 0, '1,3', '5,5');
+CALL create_order(4, 0, '2', '7');
+CALL create_order(5, 1, '1,2', '1,5');
+CALL create_order(7, 1, '1,3', '2,9');
+CALL create_order(9, 0, '2', '8');
+CALL create_order(11, 1, '1', '10');
+CALL create_order(12, 0, '3,1,2', '1,6,7');
+CALL create_order(14, 1, '2', '10');
+CALL create_order(15, 0, '3', '6');
+CALL create_order(17, 1, '1,2', '6,3');
+CALL create_order(18, 1, '1', '4');
 CALL create_order(20, 1, '1', '8');
+CALL create_order(24, 0, '3', '4');
+CALL create_order(25, 1, '1,2,3', '2,4,7');
+CALL create_order(28, 0, '3,2', '7,9');
 CALL create_order(29, 0, '3,1', '2,7');
-CALL create_order(10, 1, '2', '6');
-CALL create_order(30, 1, '1,3', '1,5');
-CALL create_order(28, 0, '2,3', '4,2');
-CALL create_order(5, 1, '3', '6');
-CALL create_order(1, 1, '1,3', '5,2');
-CALL create_order(2, 0, '2', '3');
-CALL create_order(3, 1, '3', '6');
-CALL create_order(4, 1, '1,2', '2,4');
-CALL create_order(5, 0, '2,3', '1,5');
-CALL create_order(6, 1, '1', '7');
-CALL create_order(7, 0, '1,2,3', '1,3,4');
-CALL create_order(8, 0, '2', '8');
-CALL create_order(9, 1, '3,1', '5,2');
-CALL create_order(10, 1, '1,2', '3,3');
-CALL create_order(11, 0, '3', '9');
-CALL create_order(12, 1, '2,1', '4,6');
-CALL create_order(13, 0, '1,3', '2,2');
-CALL create_order(14, 1, '2,3', '3,5');
-CALL create_order(15, 0, '1', '1');
-CALL create_order(16, 1, '1,2,3', '2,3,1');
-CALL create_order(17, 0, '2', '4');
-CALL create_order(18, 1, '3,1', '1,2');
-CALL create_order(19, 0, '1,3', '3,3');
-CALL create_order(20, 1, '2', '6');
-CALL create_order(24, 0, '3', '2');
-CALL create_order(25, 1, '1,2', '3,4');
-CALL create_order(27, 1, '2,3', '6,2');
-CALL create_order(28, 0, '1', '4');
-CALL create_order(29, 1, '3,1', '5,2');
-CALL create_order(30, 1, '1,2,3', '1,2,3');
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `return_all_items` ()   BEGIN
@@ -312,6 +284,16 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `update_port_status` (IN `port_id_in
         END IF;
 	ELSE
     	SET message = 'Order is already assigned to the SAME vehicle'; 
+    END IF;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `verifyOrder` (IN `user_id` INT, OUT `check` BOOLEAN)   BEGIN
+	DECLARE temp INT;
+	SELECT 1 INTO temp FROM orders WHERE UserID = user_id AND Status NOT IN ('Cancelled', 'Complete') LIMIT 1;
+    IF temp IS NULL THEN
+    	SET `check` = 1;
+    ELSE 
+    	SET `check` = 0;
     END IF;
 END$$
 
