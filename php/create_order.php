@@ -31,12 +31,12 @@ if(count($user_chosen_products) != count($user_chosen_amount))
 if($delivery != 1 && $delivery != 0)
     echo_error(true, "Invalid input", "Delivery name tampered");
 
-    // bro I added this MWEHEHE kay i added na the delivery address as required if availing delivery option
-if($address == null && $delivery == 1)
-    echo_error(true, "Invalid input", "Delivery address is Invalid");
+    // uncomment for delivery_address input check
+// if($address == null && $delivery == 1)
+//     echo_error(true, "Invalid input", "Delivery address is Invalid");
 
 
-//MAIN QUERIES-----------------
+//MAIN QUERIES----------------- FOR CUSTOMERS ra
 if($_SESSION["user_type"] == "CUST"){
             $query = "CALL verifyOrder(?, @bool);";
             $query_prepare = $conn->prepare($query);
@@ -60,7 +60,27 @@ if($_SESSION["user_type"] == "CUST"){
                     ]);
                 exit();
             }
+
+            // check delivery address != null           this is straight up uneccessary since the address is required for Sign up
+            // if($delivery == 1){ 
+            //     $address_query = "SELECT Address FROM users WHERE UserID = ?";
+            //     $delivery_address_ = $conn->query($address_query);
+            //     $raw_address = $delivery_address_->fetch_assoc();
+            //     if( $raw_address["Address"] == null){
+            //         // this is to to be used as for "alert" function and to determin what type of user
+            //         echo json_encode([
+            //             "Error" => true,
+            //             "Error_Message" => "Customer",
+            //             "Error_Location" => "Please set an address in your profile to avail delivery"
+            //         ]);
+            //         exit();
+            //     }
+            // }
+
         }
+
+
+
 
 
 $order_query = "CALL create_order(?, ?, ?, ?)";
