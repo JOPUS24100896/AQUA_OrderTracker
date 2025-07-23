@@ -6,7 +6,7 @@
     $query = "SELECT * FROM orders 
     INNER JOIN order_details ON orders.OrderID = order_details.OrderID 
     INNER JOIN itemnoimages ON itemnoimages.ItemID = order_details.ItemID 
-    WHERE orders.UserID = $user_id AND `Status` IN ('Pending', 'Ready')
+    WHERE orders.UserID = $user_id AND `Status` NOT IN ('Cancelled','Complete')
     ORDER BY orders.OrderID";
     if($data = $conn->query($query)){
         while($dataRow = $data->fetch_assoc()){
