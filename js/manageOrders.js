@@ -94,6 +94,7 @@ function sendForm(formData){
     then(data => {
         console.log(data);
         if(!data.Error) generateOrderList();
+        else alert(data.Message);
     })
 }
 
