@@ -60,28 +60,15 @@ if($_SESSION["user_type"] == "CUST"){
                     ]);
                 exit();
             }
-
-            // check delivery address != null           this is straight up uneccessary since the address is required for Sign up
-            // if($delivery == 1){ 
-            //     $address_query = "SELECT Address FROM users WHERE UserID = ?";
-            //     $delivery_address_ = $conn->query($address_query);
-            //     $raw_address = $delivery_address_->fetch_assoc();
-            //     if( $raw_address["Address"] == null){
-            //         // this is to to be used as for "alert" function and to determin what type of user
-            //         echo json_encode([
-            //             "Error" => true,
-            //             "Error_Message" => "Customer",
-            //             "Error_Location" => "Please set an address in your profile to avail delivery"
-            //         ]);
-            //         exit();
-            //     }
-            // }
-
         }
 
-
-
-
+if($_SESSION["user_type"] == "STAFF" && $delivery == 1){
+    echo json_encode (value: [
+        "Error" => true,
+        "Error_Location" => "Staff cannot create delivery orders"
+    ]);
+    exit();
+}
 
 $order_query = "CALL create_order(?, ?, ?, ?)";
 $order_prepare = $conn->prepare($order_query); 

@@ -71,28 +71,3 @@ function enableEventListener(item){
             pval.disabled=true;
     })
 }
-
-
-// DUNNO IF addding a attribute is possibel pa
-
-// const deliveryRadios = document.querySelectorAll('input[name="delivery"]');
-//         deliveryRadios.forEach(radio => {
-//             radio.addEventListener("click", handleDeliveryOption);
-//         });
-
-// function handleDeliveryOption() {
-//     const selectedValue = document.querySelector('input[name="delivery"]:checked').value;
-//     const deliveryDetails = document.getElementById("deliveryDetails");
-
-//     // Clear previous content to make it work basically 
-//     deliveryDetails.innerHTML = "";
-
-//     if (selectedValue === "1") {
-//         deliveryDetails.innerHTML = `
-//             <div id="inputBox" class="flex_center">
-//                 <label for="address">Address:</label>
-//                 <input type="text" id="address" name="address">
-//             </div>
-//         `;
-//     }
-// }
