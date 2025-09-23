@@ -18,17 +18,13 @@ class OrdersOperation extends BaseController{
     private function isReturnable($item_ids){
         $db = \Config\Database::connect();
         $table = $db->table('items');
-        $val = false;
         foreach($item_ids as $id){
             $table->select("Returnable");
             $table->where("ItemID", $id, true);
             $result = $table->get();
-            if( ($result->getRowArray())['Returnable'] == 1 ){
-                $val = true;
-                break;
-            }
+            if( ($result->getRowArray())['Returnable'] == 1 ) return true;
         }
-        return $val;
+        return false;
     }
 
     private function inputValidate($user_chosen_products, $user_chosen_amount, $delivery){
