@@ -2,38 +2,45 @@
 namespace App\Controllers;
 
 class OrdersOperation extends BaseController{
-//     $user_chosen_products = isset($_POST["product"])?$_POST["product"]:null;
-// $user_chosen_amount = isset($_POST["product_amount"])?$_POST["product_amount"]:null;
-// $user_id = $_SESSION["user_id"];
-// $item_ids = implode(',', $user_chosen_products);
-// $item_values = implode(',', $user_chosen_amount);
-// $prod_selected = [];
-// $prod_values = [];
-// $delivery = (int) $_POST["delivery"];
-// $address = isset($_POST["address"]) ? $_POST["address"] : null;
-
     private function isReturnable($item_ids){
         $db = \Config\Database::connect();
-        $query = $db->query("SELECT return_deadline_needed(?) AS deadline_bool;", [$item_ids]);
-        $result = $query->getRowArray();
-        return $result['deadline_bool'];
+        $table = $db->table('items');
+        $val = false;
+        foreach($item_ids as $id){
+            $table->select("Returnable");
+            $table->where("ItemID", $id, true);
+            $result = $table->get();
+            if( ($result->getRowArray())['Returnable'] == 1 ){
+                $val = true;
+                break;
+            }
+        }
+        return $val;
     }
 
     private function inputValidate($user_chosen_products, $user_chosen_amount, $delivery){
-        if(!(is_array($user_chosen_products) && is_array($user_chosen_amount)))
-            return redirect()->to("/orders")->with('message', "Product keys or amount is not an array");
+        if(!(is_array($user_chosen_products) && is_array($user_chosen_amount))){
+            if(session()->get('user_type') == "STAFF") return redirect()->to("/orders/staff/order")->with('message', "Product keys or amount is not an array");
+            else return redirect()->to("/orders/cust/order")->with('message', "Product keys or amount is not an array");
+        }
+            
 
-        if(empty($user_chosen_products) || empty($user_chosen_amount))
-            return redirect()->to("/orders")->with('message', "Missing product keys or amount");
+        if(empty($user_chosen_products) || empty($user_chosen_amount)){
+            if(session()->get('user_type') == "STAFF") return redirect()->to("/orders/staff/order")->with('message', "Missing product keys or amount");
+            else return redirect()->to("/orders/cust/order")->with('message', "Missing product keys or amount");
+        }
 
 
-        if(count($user_chosen_products) != count($user_chosen_amount))
-            return redirect()->to("/orders")->with('message', "Product keys and amount mismatch");
+        if(count($user_chosen_products) != count($user_chosen_amount)){
+            if(session()->get('user_type') == "STAFF") return redirect()->to("/orders/staff/order")->with('message', "Product keys and amount mismatch");
+            else return redirect()->to("/orders/cust/order")->with('message', "Product keys and amount mismatch");
+        }
 
 
-        if($delivery != 1 && $delivery != 0)
-            return redirect()->to("/orders")->with('message', "Delivery name corrupted");
-
+        if($delivery != 1 && $delivery != 0){
+            if(session()->get('user_type') == "STAFF") return redirect()->to("/orders/staff/order")->with('message', "Delivery name corrupted");
+            else return redirect()->to("/orders/cust/order")->with('message', "Delivery name corrupted");
+        }
         return false;
     }
 
@@ -55,7 +62,7 @@ class OrdersOperation extends BaseController{
         $db = \Config\Database::connect();
         $db->transStart();
 
-            if($this->isReturnable(implode(",", $user_chosen_amount))){
+            if($this->isReturnable($user_products)){
                 $db->query("INSERT INTO return_deadlines VALUES (default, DATE_ADD(NOW(), INTERVAL 5 DAY), default);");
                 $return_id = $db->insertID();
             }
@@ -79,9 +86,11 @@ class OrdersOperation extends BaseController{
 
         $db->transComplete();
         if($db->transStatus()){
-            return redirect()->to("/orders")->with('message', "There was a problem creating the order");
+            if(session()->get('user_type') == "STAFF") return redirect()->to("/orders/staff/order")->with('message', "There was a problem creating the order");
+            else return redirect()->to("/orders/cust/order")->with('message', "There was a problem creating the order");
         }
-        return redirect()->to("/orders")->with('message', "Order completed");
+        if(session()->get('user_type') == "STAFF") return redirect()->to("/orders/staff/order")->with('message', "Order Completed");
+            else return redirect()->to("/orders/cust/order")->with('message', "Order Completed");
     }
 }
 

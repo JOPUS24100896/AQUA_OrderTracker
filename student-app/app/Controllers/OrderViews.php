@@ -174,9 +174,7 @@ class OrderViews extends BaseController
     }
 
     public function orderRecStaff(){
-        $data['url'] = "orderRec";
-
-        
+        $data['url'] = "orderRec";        
 
         switch(session()->get("user_type")){
             case "STAFF":

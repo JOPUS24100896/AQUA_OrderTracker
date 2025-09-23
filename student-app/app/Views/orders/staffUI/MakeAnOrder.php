@@ -17,7 +17,7 @@
 
 <body>
 <?php include "staffHeader.php"?>
-
+    <?php if(isset($message)) echo $message;?>
     <!-- Content -->
     <div id="content">
         <h1 id="page_title">MAKE AN ORDER</h1>
