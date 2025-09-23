@@ -103,7 +103,7 @@ class OrderViews extends BaseController
                 $build->join("order_details", "orders.OrderID = order_details.OrderID", "inner");
                 $build->join("itemnoimages", "itemnoimages.ItemID = order_details.ItemID", "inner");
                 $build->where("orders.UserID", session()->get("user_id"), true);
-                
+               $build->whereIn("orders.Status", ["Pending", "Transit"]);
                 $query = $build->get();
                 $return = $query->getResultArray();
 

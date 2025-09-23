@@ -178,6 +178,19 @@ class OrdersOperation extends BaseController{
         return redirect()->to('/orders/staff/deliveries')->with('message', "Please choose an option");
 
     }
+
+    public function cancelOrder(){
+        $db = \Config\Database::connect();
+        $table = $db->table("orders")
+        ->select("OrderID")
+        ->where("UserID", session()->get('user_id'))
+        ->whereIn("Status", ["Pending", "Transit"]);
+        $orderId = $table->get()->getRowArray();
+
+        $update = ['Status' => "Cancelled"];
+        $db->table("orders")->where("OrderID", $orderId["OrderID"])->update($update);
+        return redirect()->to("/orders/cust/pending")->with("message", "Order has been cancelled");
+    }
 }
 
 ?>

@@ -8,6 +8,7 @@ let confirmNoButton = document.getElementById("cancelNoButton");
 let rows;
 let span_count = 0;
 iteration = 0;
+
 arr.forEach(rowData => {
     const ColID = document.getElementsByClassName("OrderId" + rowData);
     const ColDate = document.getElementsByClassName("OrderDate" + rowData);
@@ -30,20 +31,6 @@ arr.forEach(rowData => {
                 
 });
 activateListeners();
-filter();
-function filter() {
-    var row, column, i;
-    row = table.getElementsByTagName("tr");
-    for (i = 0; i < row.length; i++) {
-        column = row[i].getElementsByTagName("td")[5];
-        if(column.innerHTML != 'Complete') {
-            row[i].style.display = "";
-        }else {
-            row[i].style.display = "none";
-        }       
-    }
-}
-
 
 function activateListeners(){
     canButton = document.getElementById("cancelOrderButton");
@@ -75,16 +62,16 @@ function activateListeners(){
     });
 }
 
-function sendForm(formData){
-    fetch("../php/cancelOrder.php", {
-        method: 'POST',
-        body: formData
-    }). 
-    then(res=>res.json()). 
-    then(data => {
-        generatePendingOrder();
-    })
-}
+// function sendForm(formData){
+//     fetch("../php/cancelOrder.php", {
+//         method: 'POST',
+//         body: formData
+//     }). 
+//     then(res=>res.json()). 
+//     then(data => {
+//         generatePendingOrder();
+//     })
+// }
 
 function current_select(orderId){
     alert

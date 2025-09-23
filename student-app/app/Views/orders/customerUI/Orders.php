@@ -13,7 +13,7 @@
     <style id="selectRow"></style>
     <script>
         const arr = [];
-        <?php foreach ($data as $dat):?> arr.push(<?= $dat['OrderID']?>) <?php endforeach;?> 
+        <?php foreach ($data as $dat):?> arr.push(<?= $dat['OrderID']?>); <?php endforeach;?> 
      </script>
 </head>
 
@@ -50,12 +50,16 @@
             </table>
         </div>
         <div class="buttoncontainer">
-            <button id="cancelOrderButton" hidden>Cancel Order</button>
+            
+                <button id="cancelOrderButton">Cancel Order</button>
+            
             <label for ="cancelButton" id="confirmPrompt" hidden> 
                 <span style="color:white;">
                     <h3>Are you sure you want to cancel your order?<h3>
                 </span>
-                <button id="cancelYesButton" >Yes</button>
+                <form method="post" action="<?= base_url('orders/cust/cancelOrder')?>" style="display: inline-block;">
+                    <button id="cancelYesButton" >Yes</button>
+                </form>
                 <button id="cancelNoButton" >No</button>
             </label>
         </div>

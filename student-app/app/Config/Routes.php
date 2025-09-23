@@ -28,6 +28,8 @@ $routes->post('orders/logInUser', 'AccountManagement::login');
 $routes->post("orders/create/makeOrder", 'OrdersOperation::makeOrder');
 $routes->post("orders/update/orderStatus", 'OrdersOperation::updateStatus');
 $routes->post("orders/update/delivery", 'OrdersOperation::updateDelivery');
+$routes->post("orders/cust/cancelOrder", 'OrdersOperation::cancelOrder');
+
 
 
 
