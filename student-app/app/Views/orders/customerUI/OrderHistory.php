@@ -9,6 +9,10 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/orderHistory.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css">
+    <script>
+        let arr = []
+        <?php foreach($data as $dat):?> arr.push(<?= $dat['OrderID']?>); <?php endforeach;?>
+    </script>
 </head> 
 
 <body>
@@ -27,6 +31,7 @@
                         <th>Price</th>
                         <th>Order Date</th>
                         <th>Total Price</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody id="table_history">
@@ -38,6 +43,8 @@
                             <td class="orderData"><?= $dat['Price']?></td>
                             <td class="orderData OrderDate<?= $dat['OrderID']?>"><?= $dat['OrderDate']?></td>
                             <td class="orderData OrderPrice<?= $dat['OrderID']?>"><?= $dat['TotalPrice']?></td>
+                            <td class="orderData OrderStat<?= $dat['OrderID']?>"><?= $dat['Status']?></td>
+
                         </tr>
                     <?php endforeach;?>
                 </tbody>
