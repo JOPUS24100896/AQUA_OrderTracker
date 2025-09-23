@@ -6,6 +6,7 @@ class OrdersOperation extends BaseController{
         $db = \Config\Database::connect();
         $table = $db->table("orders");
         $table->select("1");
+        $table->where("UserID", session()->get('user_id'), true);
         $table->whereNotIn("Status", ["Cancelled", "Complete"]);
 
         if( $table->get()->getRowArray() )
