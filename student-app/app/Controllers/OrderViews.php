@@ -128,7 +128,7 @@ class OrderViews extends BaseController
                 orders.OrderDate, orders.TotalPrice");
                 $build->join("order_details", "orders.OrderID = order_details.OrderID", "inner");
                 $build->join("itemnoimages", "itemnoimages.ItemID = order_details.ItemID", "inner");
-                $build->where("orders.OrderID", session()->get("user_id"), true);
+                $build->where("orders.UserID", session()->get("user_id"));
                 $build->orderBy("orders.OrderDate", "DESC");
                 $query = $build->get();
                 $return = $query->getResultArray();
