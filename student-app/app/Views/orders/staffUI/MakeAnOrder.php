@@ -21,7 +21,7 @@
     <!-- Content -->
     <div id="content">
         <h1 id="page_title">MAKE AN ORDER</h1>
-        <form method="post" id="orderForm">
+        <form method="post" id="orderForm" action="<?=base_url('orders/create/makeOrder')?>">
             <!--Order forms procedureally generated-->
             <div class="ProductList">
                 <h2 class="title">PRODUCTS</h2>

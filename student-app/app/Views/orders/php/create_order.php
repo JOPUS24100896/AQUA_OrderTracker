@@ -16,7 +16,6 @@ $item_values = implode(',', $user_chosen_amount);
 $prod_selected = [];
 $prod_values = [];
 $delivery = (int) $_POST["delivery"];
-$address = isset($_POST["address"]) ? $_POST["address"] : null;
 
 //INPUT CHECKS-----------------
 if(!(is_array($user_chosen_products) && is_array($user_chosen_amount)))

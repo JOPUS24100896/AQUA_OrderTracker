@@ -1,5 +1,6 @@
 <?php
 
+use App\Controllers\OrdersOperation;
 use CodeIgniter\Router\RouteCollection;
 
 /**
@@ -23,6 +24,8 @@ $routes->get('orders/endSess', 'OrderViews::endSession');
     //ACCOUNT
 $routes->post('orders/signUpUser', 'AccountManagement::signUp');
 $routes->post('orders/logInUser', 'AccountManagement::login');
+    //ORDERING
+$routes->post("orders/create/makeOrder", 'OrdersOperation::makeOrder');
 
 
 

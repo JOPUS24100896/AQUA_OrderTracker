@@ -28,6 +28,7 @@
 </head>
 <body>
 <?php include "staffHeader.php"?>
+<?php if(isset($message)) echo $message?>
     <!-- content -->
     <div id="content">
         <h1 id="page_title" style="display:inline-block;">MANAGE ORDERS</h1>
