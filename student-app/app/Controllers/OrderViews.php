@@ -102,8 +102,8 @@ class OrderViews extends BaseController
                 orders.OrderDate, orders.TotalPrice, orders.Status");
                 $build->join("order_details", "orders.OrderID = order_details.OrderID", "inner");
                 $build->join("itemnoimages", "itemnoimages.ItemID = order_details.ItemID", "inner");
-                $build->where("orders.OrderID", session()->get("user_id"), true);
-
+                $build->where("orders.UserID", session()->get("user_id"), true);
+                
                 $query = $build->get();
                 $return = $query->getResultArray();
 
@@ -233,10 +233,10 @@ class OrderViews extends BaseController
             $build->join("users", "users.UserID = orders.UserID", "inner");
             $build->join("deliveries", "orders.DeliveryID = deliveries.DeliveryID", "inner");
             $build->join("delivery_port", "deliveries.PortID = delivery_port.PortID", "inner");
-
             $query = $build->get();
             $return = $query->getResultArray();
 
+            echo json_encode($return);
             $data['data'] = $return;
                 return view("orders/staffUI/Deliveries", $data);
             break;
