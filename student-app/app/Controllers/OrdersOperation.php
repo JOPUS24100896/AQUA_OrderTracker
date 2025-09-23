@@ -2,6 +2,18 @@
 namespace App\Controllers;
 
 class OrdersOperation extends BaseController{
+    private function haveDuplicateOrder(){
+        $db = \Config\Database::connect();
+        $table = $db->table("orders");
+        $table->select("1");
+        $table->whereNotIn("Status", ["Cancelled", "Complete"]);
+
+        if( $table->get()->getRowArray() )
+           return redirect()->to("/orders/cust/order")->with('message', "Only one order at a time");
+        
+        return false;
+    }
+
     private function isReturnable($item_ids){
         $db = \Config\Database::connect();
         $table = $db->table('items');
@@ -58,6 +70,8 @@ class OrdersOperation extends BaseController{
             return $invalid;
         }
 
+        $duplicate = (session()->get('user_type') == 'CUST')? $this->haveDuplicateOrder():false;
+        if($duplicate) return $duplicate;
 
         $db = \Config\Database::connect();
         $db->transStart();
