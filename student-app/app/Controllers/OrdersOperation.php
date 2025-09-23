@@ -131,9 +131,53 @@ class OrdersOperation extends BaseController{
         if(!$db->transStatus()) return redirect()->to("/orders/staff/manageOrders")->with("message", "There was a problem processing the request");
         
         return redirect()->to("/orders/staff/manageOrders")->with("message", "Status updated");
+    }
+//-------------------UPDATE PORT-----------------
+    private function isDeliveryCancelled($portId){
+        $db = \Config\Database::connect();
+        $table = $db->table("deliveries");
+        $table->select("1");
+        $table->where("DeliveryID", $portId);
+        $table->where("DeliveryStatus", "Cancelled");
         
+        if( $table->get()->getRowArray() ) 
+            return redirect()->to("/orders/staff/deliveries")->with("message", "Order was cancelled by customer");
+        return false;
     }
 
+    private function updateDelPort($portId, $DelId){
+        $db = \Config\Database::connect();
+        $db->query("CALL update_port_status(?,?, @message)", [$portId, $DelId]);
+        $messageRow = $db->query("SELECT @message AS 'message'");
+        $message = ($messageRow->getRowArray()) ['message'];
+        return $message;
+    }
+
+    private function updatePortStatus($status, $DelId){
+        $db = \Config\Database::connect();
+        $db->query("CALL update_delivery_status(?,?, @message)", [$status, $DelId]);
+        $messageRow = $db->query("SELECT @message AS 'message'");
+        $message = ($messageRow->getRowArray()) ['message'];
+        return $message;
+    }
+
+    public function updateDelivery(){
+        $delId = (int) $this->request->getPost('DeliveryID');
+
+        $isCancelled = $this->isDeliveryCancelled($delId);
+        if( $isCancelled ) return $isCancelled;
+
+        if($portId = $this->request->getPost('PortID')){
+            $message = $this->updateDelPort($portId, $delId);
+            return redirect()->to('/orders/staff/deliveries')->with('message', $message);
+        }else if($status = $this->request->getPost('Status')){
+            $message = $this->updatePortStatus($status, $delId);
+            return redirect()->to('/orders/staff/deliveries')->with('message', $message);
+        }
+
+        return redirect()->to('/orders/staff/deliveries')->with('message', "Please choose an option");
+
+    }
 }
 
 ?>
