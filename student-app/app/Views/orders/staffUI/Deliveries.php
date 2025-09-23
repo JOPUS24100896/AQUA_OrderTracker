@@ -89,7 +89,7 @@
 
 
     <script src="/js/dropdown.js"></script>
-    <script src="/js/deliveries.js"></script>    
+    <!--<script src="/js/deliveries.js"></script>-->    
     <script src="/js/filterOrdersStaff.js"></script>
 </body>
 </html>

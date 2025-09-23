@@ -232,11 +232,10 @@ class OrderViews extends BaseController
             orders.Status, delivery_port.PortID, delivery_port.PortNumber, deliveries.DeliveryID, deliveries.DeliveryStatus");
             $build->join("users", "users.UserID = orders.UserID", "inner");
             $build->join("deliveries", "orders.DeliveryID = deliveries.DeliveryID", "inner");
-            $build->join("delivery_port", "deliveries.PortID = delivery_port.PortID", "inner");
+            $build->join("delivery_port", "deliveries.PortID = delivery_port.PortID", "left");
+            $build->where("orders.Status !=", "'Pending'");
             $query = $build->get();
             $return = $query->getResultArray();
-
-            echo json_encode($return);
             $data['data'] = $return;
                 return view("orders/staffUI/Deliveries", $data);
             break;
