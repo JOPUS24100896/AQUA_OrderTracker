@@ -9,6 +9,10 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/createOrder.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css">
+    <script>
+        let arr = [];
+        <?php foreach($data as $dat): ?> arr.push(<?= $dat['ItemID']?>); <?php endforeach;?>
+    </script>
 </head>
 
 <body>
@@ -20,8 +24,28 @@
         <form method="post" id="orderForm">
             <!--Order forms procedureally generated-->
             <div class="ProductList">
-                <div id="Products" class="productCards"></div>
+                <h2 class="title">PRODUCTS</h2>
+                <div id="Products" class="productCards">
+                    <?php foreach($data as $dat): ?>
+                        <div class="productCard">
+                            <img src="/uploads/<?= $dat['ImagePath']?>" style='width: 535px; height: 500px;' alt="Product Image" class="ProdImg"><br>
+                            <label for="p<?= $dat['ItemID']?>">
+                                <input type="checkbox" name="product[]" id="p<?= $dat['ItemID']?>" value="<?= $dat['ItemID']?>" class="ProdName"> 
+                                <?= $dat['ItemName']?>
+                            </label> <br>
+
+                            <h2>₱<?= $dat['Price']?></h2> <br>
+                            <label for="p<?= $dat['ItemID']?>">Number of Orders:</label> <br>
+                            <input type="button" value="-" id="p<?= $dat['ItemID']?>min" class="ProdMin"> 
+                            <input type="text" name="product_amount[]" id="p<?= $dat['ItemID']?>val" class="ProdVal">
+                            <input type="button" value="+" id="p<?= $dat['ItemID']?>add" class="Prodadd"><br>
+                        </div>
+                    <?php endforeach;?>
+                </div>
             </div>
+            <br> <!--FIX THIS WITH STYLE <BR> IS TEMPORARY FORMATTING-->
+            <br>
+            <input type="submit" value="Submit Order" class="orderHandling">
         </form>
 
     </div>
@@ -33,8 +57,6 @@
 
     <?= $this->include("orders/footer")?>
 
-
-    <script src="/js/productlist.js"></script>
     <script src="/js/createorder.js"></script>
     <script src="/js/dropdown.js"></script>
     <script>

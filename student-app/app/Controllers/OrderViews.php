@@ -205,6 +205,14 @@ class OrderViews extends BaseController
         $data['url'] = "order";
         switch(session()->get("user_type")){
             case "STAFF":
+                $db = \Config\Database::connect();
+                $build = $db->table("items");
+                $build->select("*");
+
+                $query = $build->get();
+                $return = $query->getResultArray();
+
+                $data["data"] = $return;
                 return view("orders/staffUI/MakeAnOrder", $data);
             break;
             default:

@@ -17,7 +17,7 @@
 
 <body>
     <?= $this->include("orders/customerUI/custHeader")?>
-    <!--<img src="/uploads/<?=$data[0]['ImagePath']?>" alt="Test">-->
+    <!--<img src="/uploads/bottle_water.webp" alt="Test">-->
     <!-- Content -->
     <div id="content">
         <h1 id="page_title">CREATE ORDER</h1>

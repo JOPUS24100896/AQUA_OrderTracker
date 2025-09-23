@@ -1,6 +1,6 @@
 const form = document.getElementById("orderForm");
 
-    arr.forEach(enableEventListener);
+arr.forEach(enableEventListener);
 
     // form.addEventListener("submit", function(event){
     //     event.preventDefault();
