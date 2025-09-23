@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 23, 2025 at 11:49 AM
+-- Generation Time: Sep 23, 2025 at 12:55 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -42,9 +42,9 @@ CREATE TABLE `items` (
 --
 
 INSERT INTO `items` (`ItemID`, `StockQuantity`, `Price`, `Description`, `ItemName`, `ImagePath`, `Returnable`) VALUES
-(1, 230, 25.00, 'Description not set', 'Bottled Water', 'empty_image.jpg', 0),
-(2, 135, 50.00, 'Description not set', 'Water Gallon', 'empty_image.jpg', 1),
-(3, 141, 20.00, 'Description not set', 'Water Gallon With Faucet', 'empty_image.jpg', 1);
+(1, 230, 25.00, 'Description not set', 'Bottled Water', 'bottle_water.webp', 0),
+(2, 135, 50.00, 'Description not set', 'Water Gallon', 'water_gallon.jpg', 1),
+(3, 141, 20.00, 'Description not set', 'Water Gallon With Faucet', 'wat_gall_faucet.png', 1);
 
 --
 -- Indexes for dumped tables
