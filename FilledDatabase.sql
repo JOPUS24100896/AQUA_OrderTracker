@@ -7,6 +7,15 @@
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
+--
+-- IMPORTANT: MAKE SURE TO USE items.sql FOR ITEMS TABLES
+--
+
+DROP DATABASE IF EXISTS aquadelsol_ordertracker;
+CREATE DATABASE IF NOT EXISTS aquadelsol_ordertracker;
+USE aquadelsol_ordertracker;
+
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -20,6 +29,9 @@ SET time_zone = "+00:00";
 --
 -- Database: `aquadelsol_ordertracker`
 --
+
+
+
 
 DELIMITER $$
 --
