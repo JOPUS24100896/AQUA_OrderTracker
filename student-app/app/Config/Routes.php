@@ -26,6 +26,8 @@ $routes->post('orders/signUpUser', 'AccountManagement::signUp');
 $routes->post('orders/logInUser', 'AccountManagement::login');
     //ORDERING
 $routes->post("orders/create/makeOrder", 'OrdersOperation::makeOrder');
+$routes->post("orders/update/orderStatus", 'OrdersOperation::updateStatus');
+
 
 
 

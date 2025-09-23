@@ -75,28 +75,23 @@ function activateListeners(){
         let forms = new FormData();
         forms.append("OrderID", this.dataset.currentSelected);
         forms.append("Status", "Pending");
-        //sendForm(forms);
+        sendForm(forms);
     });
     readButton.addEventListener("click", function(){
         let forms = new FormData();
         forms.append("OrderID", this.dataset.currentSelected);
         forms.append("Status", "Ready");
-        //sendForm(forms);
+        sendForm(forms);
     });
 }
 
-// function sendForm(formData){
-//     fetch("../php/changeOrderStatus.php", {
-//         method: 'POST', 
-//         body: formData
-//     }).
-//     then(response => response.json()). 
-//     then(data => {
-//         console.log(data);
-//         if(!data.Error) generateOrderList();
-//         else alert(data.Message);
-//     })
-// }
+function sendForm(formData){
+    fetch("/orders/update/orderStatus", {
+                    method: 'POST', 
+                    body: formData
+        }).
+    then(() => { window.location.href = '/orders/staff/manageOrders'})
+}
 
 function filter() {
     var row, column, i;

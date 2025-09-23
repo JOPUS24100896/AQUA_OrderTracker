@@ -2,6 +2,8 @@
 namespace App\Controllers;
 
 class OrdersOperation extends BaseController{
+
+//----------------------MAKE ORDERS--------------------
     private function haveDuplicateOrder(){
         $db = \Config\Database::connect();
         $table = $db->table("orders");
@@ -96,13 +98,42 @@ class OrdersOperation extends BaseController{
             }
 
         $db->transComplete();
-        if($db->transStatus()){
+        if(!$db->transStatus()){
             if(session()->get('user_type') == "STAFF") return redirect()->to("/orders/staff/order")->with('message', "There was a problem creating the order");
             else return redirect()->to("/orders/cust/order")->with('message', "There was a problem creating the order");
         }
         if(session()->get('user_type') == "STAFF") return redirect()->to("/orders/staff/order")->with('message', "Order Completed");
             else return redirect()->to("/orders/cust/order")->with('message', "Order Completed");
     }
+
+//-----------------UPDATE ORDER STATUS----------------------
+    private function isOrderCancelled($id){
+        $db = \Config\Database::connect();
+        $table = $db->table("orders");
+        $table->select("1");
+        $table->where("OrderID", $id, true);
+        $table->where("Status", "Cancelled", true);
+        
+        if( $table->get()->getRowArray() ) 
+            return redirect()->to("/orders/staff/manageOrders")->with("message", "Order was cancelled by customer");
+        return false;
+    }
+
+    public function updateStatus(){
+        $id = (int) $this->request->getPost('OrderID');
+        $status = $this->request->getPost('Status');
+        $isCancelled = $this->isOrderCancelled($id);
+        if( $isCancelled ) return $isCancelled;
+        $db = \Config\Database::connect();
+        $db->transStart();
+            $db->query("CALL update_order_status(?,?)", [$status, $id]);
+        $db->transComplete();
+        if(!$db->transStatus()) return redirect()->to("/orders/staff/manageOrders")->with("message", "There was a problem processing the request");
+        
+        return redirect()->to("/orders/staff/manageOrders")->with("message", "Status updated");
+        
+    }
+
 }
 
 ?>
