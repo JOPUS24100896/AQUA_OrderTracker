@@ -1,0 +1,104 @@
+#page_title{
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.875);
+  font-weight: lighter;
+  letter-spacing: .1cm;
+}
+#profile{
+  width: 30vw;
+  height: 50vh;
+  margin: 0 5rem 0 3rem;
+  background: #c6c6c6;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgb(0 0 0);
+}
+#profile p{
+  font-size: x-large;
+  padding: 0.4rem;
+  margin: 0 0 1rem 0;
+  border-radius: 15px;
+  background-color:#ffffffd1;
+  
+}
+#flex{
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+}
+.output_boxes{
+  /* margin: 0.5rem; */
+  width: 100%;
+}
+.container {
+    width: 40vw;
+    height: 45vh;
+    margin: 0 5rem 0 0 ;
+    background: white;
+    padding: 1%;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgb(0 0 0 / 95%);
+}
+.input_boxes{
+    width: 100%;
+    margin: 1rem;
+}
+
+.container h2{
+  text-align: center;
+  color: #333;
+}
+/* label {
+  display: block;
+  margin: 10px 0 5px;
+} */
+input[type="text"], input[type="email"], input[type="email"], #Password, #verifPass, textarea {
+  width: 100%;
+  padding: 7px;
+  margin-bottom: 10px;
+  border: 1px solid #0a0a0a;
+  border-radius: 4px;
+}
+input[type="file"] {
+  margin-bottom: 10px;
+}
+button {
+  background: #007BFF;
+  color: white;
+  padding: 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 10px 1rem 0 0;
+  float: right;
+    font-size: medium;
+}
+button:hover {
+  background: #0056b3;
+}
+.testimonial {
+  background: #e9ecef;
+  padding: 15px;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+.faq {
+  margin-top: 20px;
+}
+.faq h3 {
+  cursor: pointer;
+  color: #007BFF;
+}
+.faq-content {
+  display: none;
+  padding: 10px;
+  background: #f8f9fa;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+@media (max-width: 600px) {
+  header {
+      font-size: 1.5em;
+  }
+}
+

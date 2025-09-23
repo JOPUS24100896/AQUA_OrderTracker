@@ -1,0 +1,73 @@
+#log_in{
+    background-color: rgb(255, 255, 255);
+    height: max-content;
+    width: 35vw;
+    margin: 2.5rem;
+    padding: 2% 3%;
+    border-radius: 20px;
+}
+#log_in h4{
+    color: black;
+    font-weight: lighter;
+    padding: 2%;
+}
+#log_in input{
+    width: 100%;
+    background-color: #8383836b;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 10px;
+    border: 1px solid #838383;
+}
+#log_in_button [type="submit"]{
+    background-color: rgb(50, 74, 212);
+    color: white;
+    font-size: large;
+    font-weight: normal;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 40px 10px 40px;
+    margin: 0 0 0 0;
+}
+#log_in h4{
+    margin-left: 32%;
+}
+#sign_up{
+    background-color: rgb(7, 19, 71);
+    width: 13vw;
+    margin: 2.5rem 22%;
+    padding: 1rem;
+    border-radius: 20px;
+}
+#sign_up h4{
+    color: white;
+    font-weight: lighter;
+    text-decoration: none;
+}
+#about_us{
+    background-color: rgba(82, 82, 82, 0.712);
+    height: 40vh;
+    width: 80vw;
+    /* height: 45vh; */
+    margin: 2.5rem; 
+    margin-top: 7rem;
+    border-radius: 50px;
+    padding: 2%;
+}
+#about_us h2{
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: lighter;
+    padding: 2%;
+    color: white;
+}
+#about_us h3{
+    text-align: center;
+    font-size: x-large;
+    font-weight: lighter;
+    text-shadow: 3px 0px 3px rgba(255, 255, 255, 0.308);
+    padding: 2% 15% 2% 15%;
+    row-gap: rem;
+    color: white;
+}

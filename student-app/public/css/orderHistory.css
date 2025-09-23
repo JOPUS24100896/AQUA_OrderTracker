@@ -1,0 +1,85 @@
+#page_title {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.875);
+            font-weight: lighter;
+            letter-spacing: .1cm;
+        }
+
+        .HistoryList, .OrderList {
+            display: flex;
+            gap: 2%;
+            background-color: #d9d9d9;
+            padding: 1%;
+            border-radius: 20px;
+            width: 80%;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            justify-content: center;
+            margin: 0 10% 0 10%;
+            overflow: auto;
+            max-height: 55vh;
+            position: static;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+
+        thead {
+            background-color: rgb(6, 17, 83);
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+            width: 80%;
+            margin: 0 auto;
+        }
+
+
+
+        th,
+        td {
+            padding: 3% 1.5%;
+            text-align: center;
+            border: 1px solid #ccc;
+        }
+
+        td{
+            border: 1px solid black;
+        }
+
+
+        th {
+            font-weight: bold;
+            letter-spacing: 0.05em;
+        }
+
+        .buttoncontainer{
+            text-align: center;
+        }
+
+        .buttoncontainer button{
+            font-size: 2.5vh;
+            background-color:rgb(77, 169, 255);
+            padding: 7px;
+            border:none;
+            margin:20px 10px 10px 10px;
+        }
+
+        .buttoncontainer select{
+            font-size: 2.5vh;
+            background-color:rgb(77, 169, 255);
+            padding: 7px;
+            border:none;
+            margin:20px 10px 10px 10px;
+        }
+
+        button:hover {
+            background-color: rgb(53, 65, 175);
+        }
