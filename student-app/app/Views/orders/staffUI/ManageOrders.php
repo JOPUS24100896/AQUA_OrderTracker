@@ -24,6 +24,7 @@
         }
     </style>
     <style id="selectRow">
+        .orderNumber <?php if(session()->getFlashdata('message')) echo esc(session()->getFlashdata('message')[1])?>{background-color: #e0f7fa;}
     </style>
 </head>
 <body>
@@ -76,9 +77,9 @@
 
     
 
-            <?= $this->include("orders/footer")?>
+    <?= $this->include("orders/footer")?>
 
-
+    <form id="form" hidden></form>
     <script src="/js/dropdown.js"></script>
     <script src="/js/manageOrders.js"></script>
     <script src="/js/filterOrdersStaff.js"></script>

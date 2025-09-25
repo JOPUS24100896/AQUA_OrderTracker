@@ -21,18 +21,20 @@ $routes->get('orders', 'OrderViews::index');
 $routes->get('orders/privPolicy', 'OrderViews::privPolicy');
 $routes->get('orders/signup', 'OrderViews::signUp');
 $routes->get('orders/endSess', 'OrderViews::endSession');
-    //ACCOUNT
+
+
+//ACCOUNT
 $routes->post('orders/signUpUser', 'AccountManagement::signUp');
 $routes->post('orders/logInUser', 'AccountManagement::login');
-    //ORDERING
+$routes->post('orders/editUser', 'AccountManagement::editUser');
+$routes->post('orders/verifyPass', 'AccountManagement::verifyEdit');
+
+
+//ORDERING
 $routes->post("orders/create/makeOrder", 'OrdersOperation::makeOrder');
 $routes->post("orders/update/orderStatus", 'OrdersOperation::updateStatus');
 $routes->post("orders/update/delivery", 'OrdersOperation::updateDelivery');
 $routes->post("orders/cust/cancelOrder", 'OrdersOperation::cancelOrder');
-
-
-
-
 
 
 //STAFF
@@ -41,10 +43,12 @@ $routes->get('orders/staff/orderRec', 'OrderViews::orderRecStaff');
 $routes->get('orders/staff/order', 'OrderViews::makeOrderStaff');
 $routes->get('orders/staff/deliveries', 'OrderViews::deliv');
 
+
 //CUST
 $routes->get('orders/cust/order', 'OrderViews::makeOrderCust');
 $routes->get('orders/cust/pending', 'OrderViews::orderHistoryCust');
 $routes->get('orders/cust/history', 'OrderViews::allOrdersCust');
+
 
 //ADMIN
 $routes->get('orders/admin/inventory', 'OrderViews::inventoryAdmin');

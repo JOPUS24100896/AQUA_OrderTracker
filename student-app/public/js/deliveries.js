@@ -91,7 +91,7 @@ function current_select(orderId, deliveryId){
                 display:"none"
             }
         });
-    styleRow.textContent = `.orderNumber${orderId} {background-color: #e0f7fa;}`;
+    styleRow.textContent = `.orderNumber${deliveryId} {background-color: #e0f7fa;}`;
     }
         
     else {

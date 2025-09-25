@@ -19,19 +19,21 @@
         }
     </style>
     <style id="selectRow">
+        <?php if(session()->getFlashdata('message')) echo esc(session()->getFlashdata('message')[1])?>
     </style>
 </head>
 <body>
-<?php if (session()->getFlashdata('message')): ?>
-    <div class="alert alert-info">
-        <?= esc(session()->getFlashdata('message')) ?>
-    </div>
-<?php endif; ?>
+
 
 <?php include "staffHeader.php"?>
     <!-- content -->
     <div id="content">
         <h1 id="page_title" style="display:inline-block;">DELIVERIES</h1>
+        <?php if (session()->getFlashdata('message')): ?>
+                <div class="alert alert-info">
+                    <?= esc(session()->getFlashdata('message')[0]) ?>
+                </div>
+        <?php endif; ?>
         <div class="recordTable">
             <table>
                 <thead>
@@ -46,7 +48,7 @@
                 </thead>
                 <tbody id="table_history">
                     <?php foreach($data as $row):?>
-                        <tr class="orderRow orderNumber<?= $row['OrderID']?>" onclick="current_select(<?= $row['OrderID']?>,<?= $row['DeliveryID']?>)" data-current-select="0">
+                        <tr class="orderRow orderNumber<?= $row['DeliveryID']?>" onclick="current_select(<?= $row['OrderID']?>,<?= $row['DeliveryID']?>)" data-current-select="0">
                             <td class="orderData"><?= $row['OrderID']?></td>
                             <td class="orderData"><?= $row['UserID']." - ".$row["Username"]?></td>
                             <td class="orderData"><?= $row['OrderDate']?></td>

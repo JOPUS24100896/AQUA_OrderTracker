@@ -128,16 +128,16 @@ class OrdersOperation extends BaseController{
         $db->transStart();
             $db->query("CALL update_order_status(?,?)", [$status, $id]);
         $db->transComplete();
-        if(!$db->transStatus()) return redirect()->to("/orders/staff/manageOrders")->with("message", "There was a problem processing the request");
+        if(!$db->transStatus()) return redirect()->to("/orders/staff/manageOrders")->with("message", ["There was a problem processing the request",(string) $id]);
         
-        return redirect()->to("/orders/staff/manageOrders")->with("message", "Status updated");
+        return redirect()->to("/orders/staff/manageOrders")->with("message", ["Status updated", (string) $id]);
     }
 //-------------------UPDATE PORT-----------------
-    private function isDeliveryCancelled($portId){
+    private function isDeliveryCancelled($delId){
         $db = \Config\Database::connect();
         $table = $db->table("deliveries");
         $table->select("1");
-        $table->where("DeliveryID", $portId);
+        $table->where("DeliveryID", $delId);
         $table->where("DeliveryStatus", "Cancelled");
         
         if( $table->get()->getRowArray() ) 
@@ -163,20 +163,19 @@ class OrdersOperation extends BaseController{
 
     public function updateDelivery(){
         $delId = (int) $this->request->getPost('DeliveryID');
-
+        $style = ".orderNumber".(string) $delId." {background-color: #e0f7fa;}";
         $isCancelled = $this->isDeliveryCancelled($delId);
         if( $isCancelled ) return $isCancelled;
 
         if($portId = $this->request->getPost('PortID')){
             $message = $this->updateDelPort($portId, $delId);
-            return redirect()->to('/orders/staff/deliveries')->with('message', $message);
+            return redirect()->to('/orders/staff/deliveries')->with('message', [$message, $style]);
         }else if($status = $this->request->getPost('Status')){
             $message = $this->updatePortStatus($status, $delId);
-            return redirect()->to('/orders/staff/deliveries')->with('message', $message);
+            return redirect()->to('/orders/staff/deliveries')->with('message', [$message, $style]);
         }
 
-        return redirect()->to('/orders/staff/deliveries')->with('message', "Please choose an option");
-
+        return redirect()->to('/orders/staff/deliveries')->with('message', ["Please choose an option", $style]);
     }
 
     public function cancelOrder(){
