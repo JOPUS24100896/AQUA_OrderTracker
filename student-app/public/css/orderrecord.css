@@ -67,17 +67,16 @@ table{
   padding: 0.5% 0;
 }
 th:nth-child(1){
-  width: 3%;
+  width: 10%;
 }
 th:nth-child(2){
-  width: 16%;
+  width: 11%;
 }
 th:nth-child(3){
-  width: 8%;
-  
+  width: 10%;
 }
 th:nth-child(4){
-  width: 8%;
+  width: 11%;
 }
 th:nth-child(5){
   width: 11%;

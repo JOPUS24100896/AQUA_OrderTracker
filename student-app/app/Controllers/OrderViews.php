@@ -98,10 +98,10 @@ class OrderViews extends BaseController
             case "CUST":
                 $db = \Config\Database::connect();
                 $build = $db->table("orders");
-                $build->select("orders.OrderID, itemnoimages.ItemName, itemnoimages.Price, 
+                $build->select("orders.OrderID, items.ItemName, items.Price, 
                 orders.OrderDate, orders.TotalPrice, orders.Status");
                 $build->join("order_details", "orders.OrderID = order_details.OrderID", "inner");
-                $build->join("itemnoimages", "itemnoimages.ItemID = order_details.ItemID", "inner");
+                $build->join("items", "items.ItemID = order_details.ItemID", "inner");
                 $build->where("orders.UserID", session()->get("user_id"), true);
                 
                 $query = $build->get();
@@ -124,10 +124,10 @@ class OrderViews extends BaseController
             case "CUST":
                 $db = \Config\Database::connect();
                 $build = $db->table("orders");
-                $build->select("orders.OrderID, itemnoimages.ItemName, order_details.ItemQuantity, itemnoimages.Price, 
+                $build->select("orders.OrderID, items.ItemName, order_details.ItemQuantity, items.Price, 
                 orders.OrderDate, orders.TotalPrice");
                 $build->join("order_details", "orders.OrderID = order_details.OrderID", "inner");
-                $build->join("itemnoimages", "itemnoimages.ItemID = order_details.ItemID", "inner");
+                $build->join("items", "items.ItemID = order_details.ItemID", "inner");
                 $build->where("orders.OrderID", session()->get("user_id"), true);
                 $build->orderBy("orders.OrderDate", "DESC");
                 $query = $build->get();
@@ -153,11 +153,11 @@ class OrderViews extends BaseController
             case "STAFF":
                 $db = \Config\Database::connect();
                 $build = $db->table("orders");
-                $build->select("orders.OrderID, users.UserID, users.FullName, itemnoimages.ItemID, itemnoimages.ItemName, order_details.ItemQuantity,
+                $build->select("orders.OrderID, users.UserID, users.FullName, items.ItemID, items.ItemName, order_details.ItemQuantity,
                 orders.OrderDate, orders.TotalPrice, orders.Status");
                 $build->join("order_details", "orders.OrderID = order_details.OrderID", "inner");
                 $build->join("users", "users.UserID = orders.UserID", "inner");
-                $build->join("itemnoimages", "itemnoimages.ItemID = order_details.ItemID", "inner");
+                $build->join("items", "items.ItemID = order_details.ItemID", "inner");
                 $build->orderBy("orders.OrderID", "ASC");
                 $query = $build->get();
                 $return = $query->getResultArray();
@@ -180,11 +180,11 @@ class OrderViews extends BaseController
             case "STAFF":
                 $db = \Config\Database::connect();
                 $build = $db->table("orders");
-                $build->select("orders.OrderID, users.UserID, users.FullName, itemnoimages.ItemID, itemnoimages.ItemName, order_details.ItemQuantity,
+                $build->select("orders.OrderID, users.UserID, users.FullName, items.ItemID, items.ItemName, order_details.ItemQuantity,
                 orders.OrderDate, orders.TotalPrice, orders.Status");
                 $build->join("order_details", "orders.OrderID = order_details.OrderID", "inner");
                 $build->join("users", "users.UserID = orders.UserID", "inner");
-                $build->join("itemnoimages", "itemnoimages.ItemID = order_details.ItemID", "inner");
+                $build->join("items", "items.ItemID = order_details.ItemID", "inner");
                 $build->orderBy("orders.OrderID", "ASC");
                 $build->where("users.UserID", session()->get("user_id"), true);
                 $query = $build->get();
@@ -247,19 +247,62 @@ class OrderViews extends BaseController
     }
 //-------------ADMIN-----------------
 
-// $routes->get('orders/admin/inventory', 'OrderViews::inventoryAdmin');
-// $routes->get('orders/admin/orderGraph', 'OrderViews::orderGraphAdmin');
-// $routes->get('orders/admin/orderRecord', 'OrderViews::orderRecordAdmin');
+
 
     public function inventoryAdmin(){
         $data['url'] = "inventory";
         switch(session()->get("user_type")){
             case "ADMIN":
+                $db = \Config\Database::connect();
+                $builder = $db->table('items');
+
+                  $builder = $db->table('items');
+                $builder->select('ItemID, ImagePath, ItemName, StockQuantity');
+
+                $query = $builder->get();
+                $Inventory = $query->getResultArray();
+
+                $data['Inventory'] = $Inventory;
                 return view("orders/adminUI/InventoryUI", $data);
             break;
             default:
                 return redirect()->to("/orders");
             break;
+        }
+    }
+    public function addStock()
+    {
+        header("Access-Control-Allow-Origin: *");
+        $request = $this->request->getJSON();
+        $itemId = $request->ItemID ?? null;
+        $addedStock = $request->AddedStock ?? null;
+
+        if ($itemId && $addedStock) {
+            $db = \Config\Database::connect();
+            $builder = $db->table('items');
+
+            // Fetch current stock
+            $item = $builder->where('ItemID', $itemId)->get()->getRowArray();
+
+            if ($item) {
+                $newQty = $item['StockQuantity'] + $addedStock;
+                $builder->where('ItemID', $itemId)
+                        ->update(['StockQuantity' => $newQty]);
+                return $this->response->setJSON([
+                    "success" => true,
+                    "message" => "Stock updated successfully."
+                ]);
+            } else {
+                return $this->response->setJSON([
+                    "success" => false,
+                    "message" => "Item not found."
+                ]);
+            }
+        } else {
+            return $this->response->setJSON([
+                "success" => false,
+                "message" => "Invalid input."
+            ]);
         }
     }
 
@@ -274,11 +317,42 @@ class OrderViews extends BaseController
             break;
         }
     }
+    
+    public function graphData()
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('orders');
+        $builder->select('orders.OrderID, orders.OrderDate, order_details.ItemID, items.ItemName');
+        $builder->join('order_details', 'order_details.OrderID = orders.OrderID', 'inner');
+        $builder->join('items', 'items.ItemID = order_details.ItemID', 'inner');
+        $query = $builder->get();
+        $orders = $query->getResultArray();
+        return $this->response->setJSON($orders);
+    }
+
 
     public function orderRecordAdmin(){
         $data['url'] = "orderRecord";
         switch(session()->get("user_type")){
             case "ADMIN":
+                $db = \Config\Database::connect();
+                $builder = $db->table('orders');
+                $builder->select(
+                    'orders.OrderID as ID, ' .
+                    'items.ItemName as ItemName, ' .    
+                    'order_details.ItemQuantity as ItemQuantity, ' .
+                    'items.Price as Price, ' .
+                    'orders.OrderDate as OrderDate, ' .
+                    '(order_details.ItemQuantity * items.Price) as TotalPrice'
+                );
+                $builder->join('order_details', 'order_details.OrderID = orders.OrderID', 'inner');
+                $builder->join('items', 'items.ItemID = order_details.ItemID', 'inner');
+                $builder->orderBy('order_details.OrderDetailID', 'DESC');
+
+                $query = $builder->get();
+                $orderRecords = $query->getResultArray();
+
+                $data['orderRecords'] = $orderRecords;
                 return view("orders/adminUI/OrderRecord", $data);
             break;
             default:
@@ -286,6 +360,32 @@ class OrderViews extends BaseController
             break;
         }
     }
+    // public function orderRecordAdmin()
+    // {
+    //     if (session()->get("user_type") == "ADMIN") {
+    //         $db = \Config\Database::connect();
+    //         $builder = $db->table('orders');
+    //         $builder->select(
+    //             'orders.OrderID as ID, ' .
+    //             'items.ItemName as ItemName, ' .    
+    //             'order_details.ItemQuantity as ItemQuantity, ' .
+    //             'items.Price as Price, ' .
+    //             'orders.OrderDate as OrderDate, ' .
+    //             '(order_details.ItemQuantity * items.Price) as TotalPrice'
+    //         );
+    //         $builder->join('order_details', 'order_details.OrderID = orders.OrderID', 'inner');
+    //         $builder->join('items', 'items.ItemID = order_details.ItemID', 'inner');
+    //         // Add more joins/filters if necessary
+
+    //         $query = $builder->get();
+    //         $orderRecords = $query->getResultArray();
+
+    //         $data['orderRecords'] = $orderRecords;
+    //         return view("orders/adminUI/OrderRecord", $data);
+    //     } else {
+    //         return redirect()->to("/orders");
+    //     }
+    // }   
 ///////////////////////////////////////////////////////
     public function store()
     {

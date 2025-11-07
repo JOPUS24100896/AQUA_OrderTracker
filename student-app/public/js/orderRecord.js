@@ -1,49 +1,69 @@
 const table = document.getElementById("orderForm");
 
-var prev_orderID = null;
-var prev_orderDate = null;
+filter();
+
+function filter() {
+    var row, column, ndx;
+    row = table.getElementsByTagName("tr");
+    for (ndx = 0; ndx < row.length; ndx++) {
+        column = row[ndx].getElementsByTagName("td")[6];
+        // if(column.innerHTML != 'Complete') {
+        //     row[ndx].style.display = "";
+        // }else {
+        //     row[ndx].style.display = "none";
+        // }       
+    }
+}
+
+// // JavaScript
+// $.get('/report/output', function(data) {
+//     $('#outputContainer').html(data);
+// });
+
+// var prev_orderID = null;
+// var prev_orderDate = null;
 
 
-fetch('http://localhost/php/retrieve_orderData.php')
-.then(response => response.json())
-.then(data => {
-    let row = "";
-    let span_count = 0;
-    console.log(data);
-    data.forEach(rowData => {
-        let itemQuantPrice = parseFloat(rowData.ItemQuantity) * rowData.Price;
-        row += `
-        <tr class="orderRow">
-            <td id="orderId" class="OrderId${rowData.OrderID}">${rowData.OrderID}</td>
-            <td class="orderName">${rowData.ItemName}</td>
-            <td class="orderQuantity">${rowData.ItemQuantity}</td>
-            <td class="orderPrice">${itemQuantPrice}</td>
-            <td id="orderDate" class="OrderDate${rowData.OrderID}">${rowData.OrderDate}</td>
-            <td id="orderPrice" class="OrderPrice${rowData.OrderID}">${rowData.TotalPrice}</td>
-        </tr>
-    `;
-    })
-    table.innerHTML = row;
-    data.forEach(row => {
-        const ColID = document.getElementsByClassName("OrderId" + row.OrderID);
-        const ColDate = document.getElementsByClassName("OrderDate" + row.OrderID);
-        const ColPrice = document.getElementsByClassName("OrderPrice" + row.OrderID);
-        console.log(ColID);
-        console.log("OrderId" + row.OrderID)
-        if(span_count == 0){
-            span_count = ColID.length - 1;
-            ColID[0].rowSpan = span_count + 1;
-            ColDate[0].rowSpan = span_count + 1;
-             ColPrice[0].rowSpan = span_count + 1;
-        }else{
-            ColID[ColID.length - span_count].remove();
-            ColDate[ColDate.length - span_count].remove();
-            ColPrice[ColPrice.length - span_count].remove();
-            span_count--;
-        }
+// fetch('http://localhost/php/retrieve_orderData.php')
+// .then(response => response.json())
+// .then(data => {
+//     let row = "";
+//     let span_count = 0;
+//     console.log(data);
+//     data.forEach(rowData => {
+//         let itemQuantPrice = parseFloat(rowData.ItemQuantity) * rowData.Price;
+//         row += `
+//         <tr class="orderRow">
+//             <td id="orderId" class="OrderId${rowData.OrderID}">${rowData.OrderID}</td>
+//             <td class="orderName">${rowData.ItemName}</td>
+//             <td class="orderQuantity">${rowData.ItemQuantity}</td>
+//             <td class="orderPrice">${itemQuantPrice}</td>
+//             <td id="orderDate" class="OrderDate${rowData.OrderID}">${rowData.OrderDate}</td>
+//             <td id="orderPrice" class="OrderPrice${rowData.OrderID}">${rowData.TotalPrice}</td>
+//         </tr>
+//     `;
+//     })
+//     table.innerHTML = row;
+//     data.forEach(row => {
+//         const ColID = document.getElementsByClassName("OrderId" + row.OrderID);
+//         const ColDate = document.getElementsByClassName("OrderDate" + row.OrderID);
+//         const ColPrice = document.getElementsByClassName("OrderPrice" + row.OrderID);
+//         console.log(ColID);
+//         console.log("OrderId" + row.OrderID)
+//         if(span_count == 0){
+//             span_count = ColID.length - 1;
+//             ColID[0].rowSpan = span_count + 1;
+//             ColDate[0].rowSpan = span_count + 1;
+//              ColPrice[0].rowSpan = span_count + 1;
+//         }else{
+//             ColID[ColID.length - span_count].remove();
+//             ColDate[ColDate.length - span_count].remove();
+//             ColPrice[ColPrice.length - span_count].remove();
+//             span_count--;
+//         }
             
-    });
-});
+//     });
+// });
 function searchFunction() {
   // Declare variables
   var input, filter, table, tr, td, i, txtValue;

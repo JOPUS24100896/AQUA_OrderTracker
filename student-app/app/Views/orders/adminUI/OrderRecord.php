@@ -7,12 +7,9 @@
     <title>Order Record</title>
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/orderrecord.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
         <?= $this->include("orders/adminUI/adminHeader")?>
-
-
 
     <!-- content -->
     <div id="content">
@@ -31,11 +28,23 @@
                     </tr>
                 </thead>
                 <tbody id="orderForm">
-                   
+                <?php if (!empty($orderRecords)): ?>
+                    <?php foreach ($orderRecords as $record): ?>
+                        <tr>
+                            <td><?= esc($record['ID'] ?? '') ?></td>
+                            <td><?= esc($record['ItemName'] ?? '') ?></td>
+                            <td><?= esc($record['ItemQuantity'] ?? '') ?></td>
+                            <td><?= esc($record['Price'] ?? '') ?></td>
+                            <td><?= esc($record['OrderDate'] ?? '') ?></td>
+                            <td><?= esc($record['TotalPrice'] ?? '') ?></td>
+                        </tr>
+                    <?php endforeach ?>
+                <?php else: ?>
+                    <tr><td colspan="6">No orders found.</td></tr>
+                <?php endif ?>
                 </tbody>
             </table>
-        </div>
-        
+        </div> 
     </div>
 
     

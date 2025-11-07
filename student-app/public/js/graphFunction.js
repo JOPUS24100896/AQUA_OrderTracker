@@ -9,7 +9,7 @@ google.charts.setOnLoadCallback(() => {
   tryRenderChart();
 });
 
-fetch('http://localhost/php/retrieve_orderData.php')
+fetch('/orders/admin/graphData')
   .then(response => response.json())
   .then(data => {
     const orderCountsByDay = {};
@@ -77,8 +77,6 @@ fetch('http://localhost/php/retrieve_orderData.php')
         <h1>Most Sought Item:<br>${mostSoughtItemName}</h1>
         <p>Ordered ${maxCount} times</p>
       </div>
-
-
     `;
 
     dataReady = true;

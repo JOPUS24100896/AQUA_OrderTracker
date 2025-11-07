@@ -44,8 +44,13 @@ $routes->get('orders/cust/history', 'OrderViews::allOrdersCust');
 
 //ADMIN
 $routes->get('orders/admin/inventory', 'OrderViews::inventoryAdmin');
-$routes->get('orders/admin/orderGraph', 'OrderViews::orderGraphAdmin');
+$routes->get('/orders/admin/orderGraph', 'OrderViews::orderGraphAdmin');
+$routes->get('/orders/admin/graphData', 'OrderViews::graphData');
 $routes->get('orders/admin/orderRecord', 'OrderViews::orderRecordAdmin');
+$routes->post('/api/add-stock', 'OrderViews::addStock');
+$routes->get('posts', 'PostController::index');
+
+
 
 
 
