@@ -448,8 +448,6 @@ INSERT INTO `items` (`ItemID`, `StockQuantity`, `Price`, `Description`, `ItemNam
 -- Stand-in structure for view `itemwithimages`
 -- (See below for the actual view)
 --
-CREATE TABLE `itemwithimages` (
-);
 
 -- --------------------------------------------------------
 
@@ -662,16 +660,12 @@ INSERT INTO `users` (`UserID`, `FullName`, `Address`, `Contact`, `Username`, `Em
 --
 DROP TABLE IF EXISTS `itemnoimages`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `itemnoimages`  AS SELECT `items`.`ItemID` AS `ItemID`, `items`.`StockQuantity` AS `StockQuantity`, `items`.`Price` AS `Price`, `items`.`Description` AS `Description`, `items`.`ItemName` AS `ItemName`, `items`.`Returnable` AS `Returnable` FROM `items` ;
-
 -- --------------------------------------------------------
 
 --
 -- Structure for view `itemwithimages`
 --
 DROP TABLE IF EXISTS `itemwithimages`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `itemwithimages`  AS SELECT `items`.`ItemID` AS `ItemID`, `items`.`StockQuantity` AS `StockQuantity`, `items`.`Price` AS `Price`, `items`.`Description` AS `Description`, `items`.`ItemName` AS `ItemName`, `items`.`Image` AS `Image`, `items`.`ImageType` AS `ImageType`, `items`.`Returnable` AS `Returnable` FROM `items` WHERE `items`.`Image` is not null ;
 
 --
 -- Indexes for dumped tables
