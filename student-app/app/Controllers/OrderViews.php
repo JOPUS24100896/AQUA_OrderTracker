@@ -15,10 +15,12 @@ class OrderViews extends BaseController
     public function index()
     {
         $session = session();
-        
+        $this->response->setHeader("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
+        $this->response->setHeader("Pragma", "no-cache");
+        $this->response->setHeader("Expires", "Sat, 26 Jul 1997 05:00:00 GMT");
+
         if(null !== $session->get("user_id")){
-            $userType = $session->get("user_type");
-            switch($userType){
+            switch($session->get("user_type")){
                 case "STAFF":
                     return redirect()->to("orders/staff/manageOrders");
                 break;
@@ -60,6 +62,11 @@ class OrderViews extends BaseController
             case "CUST":
             case "ADMIN":
             case "STAFF":
+                $db = \Config\Database::connect();
+                $table = $db->table('users');
+                $table->select('FullName, Address, Contact, Username, Email');
+                $table->where('UserID', session()->get('user_id'));
+                $data['data'] = $table->get()->getRowArray();
                 return view('orders/ManageProfile', $data);
             break;
             default:
@@ -99,11 +106,11 @@ class OrderViews extends BaseController
                 $db = \Config\Database::connect();
                 $build = $db->table("orders");
                 $build->select("orders.OrderID, items.ItemName, items.Price, 
-                orders.OrderDate, orders.TotalPrice, orders.Status");
+                orders.OrderDate, orders.TotalPrice, order_details.ItemQuantity, orders.Status");
                 $build->join("order_details", "orders.OrderID = order_details.OrderID", "inner");
                 $build->join("items", "items.ItemID = order_details.ItemID", "inner");
                 $build->where("orders.UserID", session()->get("user_id"), true);
-                
+               $build->whereIn("orders.Status", ["Pending", "Transit"]);
                 $query = $build->get();
                 $return = $query->getResultArray();
 
@@ -124,11 +131,11 @@ class OrderViews extends BaseController
             case "CUST":
                 $db = \Config\Database::connect();
                 $build = $db->table("orders");
-                $build->select("orders.OrderID, items.ItemName, order_details.ItemQuantity, items.Price, 
-                orders.OrderDate, orders.TotalPrice");
+                $build->select("orders.OrderID, itemnoimages.ItemName, order_details.ItemQuantity, itemnoimages.Price, 
+                orders.OrderDate, orders.TotalPrice, orders.Status");
                 $build->join("order_details", "orders.OrderID = order_details.OrderID", "inner");
-                $build->join("items", "items.ItemID = order_details.ItemID", "inner");
-                $build->where("orders.OrderID", session()->get("user_id"), true);
+                $build->join("itemnoimages", "itemnoimages.ItemID = order_details.ItemID", "inner");
+                $build->where("orders.UserID", session()->get("user_id"));
                 $build->orderBy("orders.OrderDate", "DESC");
                 $query = $build->get();
                 $return = $query->getResultArray();

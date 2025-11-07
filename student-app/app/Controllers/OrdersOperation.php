@@ -128,12 +128,68 @@ class OrdersOperation extends BaseController{
         $db->transStart();
             $db->query("CALL update_order_status(?,?)", [$status, $id]);
         $db->transComplete();
-        if(!$db->transStatus()) return redirect()->to("/orders/staff/manageOrders")->with("message", "There was a problem processing the request");
+        if(!$db->transStatus()) return redirect()->to("/orders/staff/manageOrders")->with("message", ["There was a problem processing the request",(string) $id]);
         
-        return redirect()->to("/orders/staff/manageOrders")->with("message", "Status updated");
+        return redirect()->to("/orders/staff/manageOrders")->with("message", ["Status updated", (string) $id]);
+    }
+//-------------------UPDATE PORT-----------------
+    private function isDeliveryCancelled($delId){
+        $db = \Config\Database::connect();
+        $table = $db->table("deliveries");
+        $table->select("1");
+        $table->where("DeliveryID", $delId);
+        $table->where("DeliveryStatus", "Cancelled");
         
+        if( $table->get()->getRowArray() ) 
+            return redirect()->to("/orders/staff/deliveries")->with("message", "Order was cancelled by customer");
+        return false;
     }
 
+    private function updateDelPort($portId, $DelId){
+        $db = \Config\Database::connect();
+        $db->query("CALL update_port_status(?,?, @message)", [$portId, $DelId]);
+        $messageRow = $db->query("SELECT @message AS 'message'");
+        $message = ($messageRow->getRowArray()) ['message'];
+        return $message;
+    }
+
+    private function updatePortStatus($status, $DelId){
+        $db = \Config\Database::connect();
+        $db->query("CALL update_delivery_status(?,?, @message)", [$status, $DelId]);
+        $messageRow = $db->query("SELECT @message AS 'message'");
+        $message = ($messageRow->getRowArray()) ['message'];
+        return $message;
+    }
+
+    public function updateDelivery(){
+        $delId = (int) $this->request->getPost('DeliveryID');
+        $style = ".orderNumber".(string) $delId." {background-color: #e0f7fa;}";
+        $isCancelled = $this->isDeliveryCancelled($delId);
+        if( $isCancelled ) return $isCancelled;
+
+        if($portId = $this->request->getPost('PortID')){
+            $message = $this->updateDelPort($portId, $delId);
+            return redirect()->to('/orders/staff/deliveries')->with('message', [$message, $style]);
+        }else if($status = $this->request->getPost('Status')){
+            $message = $this->updatePortStatus($status, $delId);
+            return redirect()->to('/orders/staff/deliveries')->with('message', [$message, $style]);
+        }
+
+        return redirect()->to('/orders/staff/deliveries')->with('message', ["Please choose an option", $style]);
+    }
+
+    public function cancelOrder(){
+        $db = \Config\Database::connect();
+        $table = $db->table("orders")
+        ->select("OrderID")
+        ->where("UserID", session()->get('user_id'))
+        ->whereIn("Status", ["Pending", "Transit"]);
+        $orderId = $table->get()->getRowArray();
+
+        $update = ['Status' => "Cancelled"];
+        $db->table("orders")->where("OrderID", $orderId["OrderID"])->update($update);
+        return redirect()->to("/orders/cust/pending")->with("message", "Order has been cancelled");
+    }
 }
 
 ?>

@@ -1,4 +1,5 @@
 const table = document.getElementById("table_history");
+const form = document.getElementById("form");
 let style;
 let pendButton = document.getElementById("pendingButton");
 let readButton = document.getElementById("readyButton");
@@ -73,15 +74,15 @@ function activateListeners(){
 
     pendButton.addEventListener("click", function(){
         let forms = new FormData();
-        forms.append("OrderID", this.dataset.currentSelected);
-        forms.append("Status", "Pending");
-        sendForm(forms);
+        form.append("OrderID", this.dataset.currentSelected);
+        form.append("Status", "Pending");
+        form.submit();
     });
     readButton.addEventListener("click", function(){
         let forms = new FormData();
-        forms.append("OrderID", this.dataset.currentSelected);
-        forms.append("Status", "Ready");
-        sendForm(forms);
+        form.append("OrderID", this.dataset.currentSelected);
+        form.append("Status", "Ready");
+        form.submit();
     });
 }
 

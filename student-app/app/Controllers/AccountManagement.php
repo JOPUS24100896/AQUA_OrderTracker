@@ -11,6 +11,7 @@ class AccountManagement extends BaseController
         $this->userModel = new UserModel();
     }
 
+
     public function signUp(){
         
         $username = $this->request->getPost("username");
@@ -34,10 +35,9 @@ class AccountManagement extends BaseController
                 'Password' => $pass,
                 'Type' => 'CUST',
         ]);
-        return redirect()->to("/orders");
+        return view("orders/signUpConfirmation");
         }else{
-            $data["message"] = "username or email already exists";
-            return view("orders/SignUp", $data);
+            return redirect()->to("/orders/signup")->with("message", "username or email already exists");
         }
     }
 
@@ -59,6 +59,34 @@ class AccountManagement extends BaseController
         return view("orders/signup");
         }
         
+    }
+
+    public function verifyEdit(){
+        $pass = $this->request->getPost('password');
+        $res = $this->userModel->select('Password')
+        ->where("UserID", session()->get('user_id'))
+        ->first('array');
+
+        if(password_verify($pass,$res['Password'])){
+            return json_encode(true);
+        }else return json_encode(false);
+    }
+
+    public function editUser(){
+        $data = [
+            'FullName' => $this->request->getPost('partnerName'),
+            'Address' => $this->request->getPost('Address'),
+            'Contact' => $this->request->getPost('contactNumber'),
+            'Username' => $this->request->getPost('Username'),
+            'Email' => $this->request->getPost('partnerEmail')
+        ];
+        
+        $db = \Config\Database::connect();
+        $table = $db->table('users');
+        $table->where('UserID', session()->get('user_id'))
+        ->update($data);
+
+        return redirect()->to("orders/manageProf");
     }
 ////////////////////////////////////////////////////
     

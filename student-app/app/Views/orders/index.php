@@ -6,6 +6,9 @@
     <title>Aqua Del Sol</title>
     <link rel="stylesheet" href="<?= base_url('css/main.css') ?>">
     <link rel="stylesheet" href="css/login.css">
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
+    <meta http-equiv="Pragma" content="no-cache">
+
 </head>
 <body>
     <div id="header">
