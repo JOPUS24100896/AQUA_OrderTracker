@@ -24,7 +24,7 @@
         }
     </style>
     <style id="selectRow">
-        <?php if(session()->getFlashdata('message')) echo ".orderNumber".esc(session()->getFlashdata('message')[1])?>{background-color: #e0f7fa;}
+        <?php if(session()->getFlashdata('message')) echo ".orderNumber".esc(session()->getFlashdata('message')[1])."{background-color: #e0f7fa;}"?>
     </style>
 </head>
 <body>
