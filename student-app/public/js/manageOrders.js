@@ -1,5 +1,7 @@
 const table = document.getElementById("table_history");
 const form = document.getElementById("form");
+const orderIdIn = document.getElementsByClassName("orderID");
+const orderStatIn = document.getElementsByClassName("orderStatus");
 let style;
 let pendButton = document.getElementById("pendingButton");
 let readButton = document.getElementById("readyButton");
@@ -62,6 +64,14 @@ function generateOrderList(){
 function activateListeners(){
     pendButton = document.getElementById("pendingButton");
     readButton = document.getElementById("readyButton");
+
+    orderIdIn[0].addEventListener("SelectionChange", function(event){
+        this.value = event.detail.selectedID;
+    })
+
+    orderIdIn[1].addEventListener("SelectionChange", function(event){
+        this.value = event.detail.selectedID;
+    })
 
     pendButton.addEventListener("SelectionChange", function(event){
         this.dataset.currentSelected = event.detail.selectedID;
@@ -134,4 +144,7 @@ function current_select(orderId){
     }
     pendButton.dispatchEvent(event);
     readButton.dispatchEvent(event);
+    orderIdIn[0].dispatchEvent(event);
+    orderIdIn[1].dispatchEvent(event);
+
 }

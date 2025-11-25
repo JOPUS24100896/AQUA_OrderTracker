@@ -24,7 +24,7 @@
         }
     </style>
     <style id="selectRow">
-        .orderNumber <?php if(session()->getFlashdata('message')) echo esc(session()->getFlashdata('message')[1])?>{background-color: #e0f7fa;}
+        <?php if(session()->getFlashdata('message')) echo ".orderNumber".esc(session()->getFlashdata('message')[1])?>{background-color: #e0f7fa;}
     </style>
 </head>
 <body>
@@ -68,9 +68,18 @@
 
 
         <div class="buttoncontainer">
-            <button id="pendingButton" disabled>Set to Pending</button>
+            <form style="display:inline-block" action="<?=base_url("orders/update/orderStatus")?>" method="post">
+                <input type="hidden" name="OrderID" value="" class="orderID">
+                <input type="hidden" name="Status" value="Pending" class="orderStatus">
+                <button id="pendingButton" disabled>Set to Pending</button>
+            </form>
+            <form style="display:inline-block" action="<?=base_url("orders/update/orderStatus")?>" method="post">
+                <input type="hidden" name="OrderID" value="" class="orderID">
+                <input type="hidden" name="Status" value="Ready" class="orderStatus">
+                <button id="readyButton" disabled>Set to Ready</button>
+            </form>
             
-            <button id="readyButton" disabled>Set to Ready</button>
+            
             <!--should only be able to click them when row is selected but idk how to do that-->
         </div>
     </div>
