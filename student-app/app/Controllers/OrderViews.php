@@ -131,10 +131,10 @@ class OrderViews extends BaseController
             case "CUST":
                 $db = \Config\Database::connect();
                 $build = $db->table("orders");
-                $build->select("orders.OrderID, itemnoimages.ItemName, order_details.ItemQuantity, itemnoimages.Price, 
+                $build->select("orders.OrderID, items.ItemName, order_details.ItemQuantity, items.Price, 
                 orders.OrderDate, orders.TotalPrice, orders.Status");
                 $build->join("order_details", "orders.OrderID = order_details.OrderID", "inner");
-                $build->join("itemnoimages", "itemnoimages.ItemID = order_details.ItemID", "inner");
+                $build->join("items", "items.ItemID = order_details.ItemID", "inner");
                 $build->where("orders.UserID", session()->get("user_id"));
                 $build->orderBy("orders.OrderDate", "DESC");
                 $query = $build->get();
