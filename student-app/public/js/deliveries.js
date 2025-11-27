@@ -81,8 +81,24 @@ function sendStat(formData) {
 
 function current_select(orderId, deliveryId){
     let event;
+
+    // Remove highlights from all buttons
+    document.querySelectorAll('.selectBtn').forEach(btn => btn.classList.remove('selectBtn-selected'));
+
     if(selectId != orderId){
         selectId = orderId;
+
+        // Highlight the row
+        styleRow.textContent = `.orderRow { background-color: inherit; } 
+                                .orderNumber${deliveryId} { background-color: #00d4f0ff; }`;
+
+        // Highlight the select button in this row
+        const row = document.querySelector('.orderNumber' + deliveryId);
+        if(row){
+            const btn = row.querySelector('.selectBtn');
+            if(btn) btn.classList.add('selectBtn-selected');
+        }
+
         event = new CustomEvent("SelectionChange", {
             detail: {
                 selectedID: orderId,
@@ -91,11 +107,13 @@ function current_select(orderId, deliveryId){
                 display:"none"
             }
         });
-    styleRow.textContent = `.orderNumber${deliveryId} {background-color: #e0f7fa;}`;
-    }
-        
-    else {
+
+    } else {
         selectId = 0;
+
+        // Remove row highlight
+        styleRow.textContent = `.orderRow { background-color: inherit; }`;
+
         event = new CustomEvent("SelectionChange", {
             detail: {
                 selectedID: selectId,
@@ -103,10 +121,12 @@ function current_select(orderId, deliveryId){
                 active: false
             }
         });
-        styleRow.textContent = ``;
     }
+
+    // Dispatch your existing events
     pendButton.dispatchEvent(event);
     readButton.dispatchEvent(event);
     prtSelect.dispatchEvent(event);
     prtButton.dispatchEvent(event);
 }
+

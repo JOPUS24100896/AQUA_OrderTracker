@@ -68,13 +68,13 @@ fetch('/orders/admin/graphData')
     const avgOrder = sumOrder / 7;
     document.getElementById("salesLegend").innerHTML = `
       <div class="Legend_Content">
-        <h1>Total No. of Orders: ${sumOrder}</h1>
+        <h4>Total No. of Orders: ${sumOrder}</h4>
       </div>
       <div class="Legend_Content">
-        <h1>Average No. of Orders: ${avgOrder.toFixed(1)}</h1>
+        <h4>Average No. of Orders: ${avgOrder.toFixed(1)}</h4>
       </div>
        <div class="Legend_Content">
-        <h1>Most Sought Item:<br>${mostSoughtItemName}</h1>
+        <h4>Most Sought Item:<br>${mostSoughtItemName}</h4>
         <p>Ordered ${maxCount} times</p>
       </div>
     `;

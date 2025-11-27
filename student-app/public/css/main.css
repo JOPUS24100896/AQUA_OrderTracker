@@ -11,19 +11,8 @@ text-decoration: none;
     justify-content: center;
 }
 body{
-    background-image: url(/images/background.jpg);
-    background-size: 100%;
-    background-repeat: no-repeat;
-    background-position: absolute;
-    background-position-y: -23vh;
-    /* background-color: black; */
+    background: linear-gradient(to right, #2b607b, #204c55);
 }
-/* temporary */
-a{
-    color: rgb(255, 255, 255);
-    text-decoration: none;
-}
-/* temp */
 
 
 /* main header */
@@ -52,29 +41,6 @@ a{
     margin: 0 0 3%;
     text-shadow: 5px 1px 3px #0000009a;
 }
-#navbar{
-    display: flex;
-    list-style: none;
-    margin: 0 0 0 10%;
-    gap: 2rem;
-    font-size: larger;
-    padding: 2%;
-}
-#navbar li a{
-    color: white;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-weight: lighter;
-    text-decoration: none;
-    transition: transform 0.3s ease;
-}
-#navbar li a:hover:not(#current) {
-  text-decoration: underline;
-}
-#navbar li a#current {
-  font-weight: bold;
-  pointer-events: none;
-  text-shadow: 0px 0px 2px #ffffffec;
-}
 
 
  /* Account dropdown menu */
@@ -93,11 +59,11 @@ a{
 .account-popup {
     display: none;
     position: absolute;
-    background-color: rgb(31, 31, 31);
+    background-color: rgb(28, 28, 28);
     border: 1px solid #ccc;
     border-radius: 10px;
-    padding: 0.5rem;
-    width: 15%;
+    padding: 0%;
+    width: 10%;
     z-index: 10003;
     opacity: 0;
     transform: translateY(-10px);
@@ -107,31 +73,37 @@ a{
 
 /* Account dropdown menu list */
 .account-popup ul {
-    height: fit-content;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
     display: flex;
     flex-direction: column;
+    align-items: center; 
+    justify-content: center;
 }
 .account-popup a{
-    gap: 0.5rem;
     padding: 10px 20px;
     color: white;
     font-size: 1rem;
-    width: 100%
-} */
+    width: 100%;
+    text-decoration: none;
+    text-align: center;
+    transition: background 0.2s;
+} 
 
 /* Account dropdown menu styling */
 .popopt {
     color: white;
     text-align: center;
-    /* padding: 20px 22px; */
     text-decoration: none;
 }
 
 .popopt:hover {
-    color: #403cff;
+    color: #4085e5;
     cursor: pointer;
     text-decoration: underline;
-    font-weight: bold;
+    transition: ease-in-out 0.5s;
 }
 
 .account-popup.show {

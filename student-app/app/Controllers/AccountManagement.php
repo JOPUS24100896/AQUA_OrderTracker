@@ -41,6 +41,10 @@ class AccountManagement extends BaseController
         }
     }
 
+    public function gotoLogin() {
+        return view('orders/login');
+    }
+
     public function login(){
         $username = $this->request->getPost("login_key");
         $pass = $this->request->getPost("password");

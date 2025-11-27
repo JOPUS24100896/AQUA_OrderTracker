@@ -1,6 +1,7 @@
 <?php ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,41 +10,57 @@
     <link rel="stylesheet" href="/css/trend.css">
     <script src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="/js/graphFunction.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/index.css">
     <style>
-        #page_title{
-        font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-        text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.875);
-        font-weight: lighter;
-        letter-spacing: .1cm;
+        #page_title {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.875);
+            font-weight: lighter;
+            letter-spacing: .1cm;
         }
     </style>
 </head>
+
 <body>
-        <?= $this->include("orders/adminUI/adminHeader")?>
+    <?= $this->include("orders/adminUI/adminHeader") ?>
 
+    <div class="container" style="padding-top: 100px; padding-bottom: 80px">
+        <div class="card shadow-lg rounded-4">
+            <div class="card-body p-5">
 
-    <div id="content">
-        <h1 id="page_title">ORDER TREND</h1>
-        <div id="salesChartContainer" class="flex_center">
-          <div id="myChart" style="  width: 50vw; height: 50vh;"></div>
-          <div id="salesLegend">
-          </div>          
+                <h1 class="fw-bold text-center mb-4">ORDER TREND</h1>
+
+                <div class="row justify-content-center align-items-start">
+
+                    <!-- Chart -->
+                    <div class="col-lg-8 col-md-10 mb-4">
+                        <div class="p-3 border rounded bg-light shadow-sm">
+                            <div id="myChart" style="height: 55vh;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Legend -->
+                    <div class="col-lg-3 col-md-6">
+                        <div id="salesLegend"
+                            class="p-3 border rounded bg-white shadow-sm"
+                            style="min-height: 200px;">
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
         </div>
     </div>
-    
-    
-    
-    <div id="footer">
-        <div class="flex_center">
-            <a href="/ContactInfo.html"><h4>Where to find us</h4></a>
-            <a href="/PrivacyPolicy.html"><h4>Privacy Policy</h4></a>
-        </div>     
-    </div>
 
-  
-  <script src="/js/dropdown.js"></script>
-  
-  <!-- <script>
+
+
+    <?= $this->include("orders/footer") ?>
+
+    <script src="/js/dropdown.js"></script>
+
+    <!-- <script>
     let chartReady = false;
     let dataReady = false;
     let chartData = null;
@@ -162,6 +179,8 @@
 
 
   </script> -->
-</body>
-</html>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
+</body>
+
+</html>

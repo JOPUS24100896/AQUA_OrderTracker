@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,54 +6,82 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Order</title>
     <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/orderHistory.css">
-    <link rel="stylesheet" href="/css/createOrder.css">
+    <!-- <link rel="stylesheet" href="/css/orderHistory.css">
+    <link rel="stylesheet" href="/css/createOrder.css"> -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/index.css">
     <script>
         let arr = [];
-        <?php foreach($data as $dat): ?> arr.push(<?= $dat['ItemID']?>); <?php endforeach;?>
+        <?php foreach ($data as $dat): ?> arr.push(<?= $dat['ItemID'] ?>);
+        <?php endforeach; ?>
     </script>
 </head>
 
 <body>
-    <?= $this->include("orders/customerUI/custHeader")?>
+    <?= $this->include("orders/customerUI/custHeader") ?>
     <!--<img src="/uploads/bottle_water.webp" alt="Test">-->
     <!-- Content -->
-    <div id="content">
-        <h1 id="page_title">CREATE ORDER</h1>
-        <form method="post" id="orderForm" action="<?= base_url('orders/create/makeOrder')?>">
-            <!--Order forms procedureally generated-->
-            <div class="ProductList">
-                <h2 class="title">PRODUCTS</h2>
-                <div id="Products" class="productCards">
-                    <?php foreach($data as $dat): ?>
-                        <div class="productCard">
-                            <img src="/uploads/<?= $dat['ImagePath']?>" style='width: 535px; height: 500px;' alt="Product Image" class="ProdImg"><br>
-                            <label for="p<?= $dat['ItemID']?>">
-                                <input type="checkbox" name="product[]" id="p<?= $dat['ItemID']?>" value="<?= $dat['ItemID']?>" class="ProdName"> 
-                                <?= $dat['ItemName']?>
-                            </label> <br>
+    <section>
+        <div class="container" style="padding-top: 100px; padding-bottom: 20px;">
 
-                            <h2>₱<?= $dat['Price']?></h2> <br>
-                            <label for="p<?= $dat['ItemID']?>">Number of Orders:</label> <br>
-                            <input type="button" value="-" id="p<?= $dat['ItemID']?>min" class="ProdMin"> 
-                            <input type="text" name="product_amount[]" id="p<?= $dat['ItemID']?>val" class="ProdVal">
-                            <input type="button" value="+" id="p<?= $dat['ItemID']?>add" class="Prodadd"><br>
-                        </div>
-                    <?php endforeach;?>
-                </div>
-            </div>
-            <div class="flex_center">  
-                    <div class="deliveryOptions">
-                        <label><input type="radio" name="delivery" value="1" class="orderHandling"> Delivery</label>
-                        <label><input type="radio" name="delivery" value="0" class="orderHandling"> On-Site</label>
+            <div class="card shadow-lg p-4 mb-5 mt-1" style="border-radius: 30px;">
+                <form method="post" id="orderForm" action="<?= base_url('orders/create/makeOrder') ?>">
+
+                    <h1 class="fw-bold mb-3 mt-3 text-center">PRODUCTS</h1>
+                    <div id="errorAlertContainer"></div>
+                    <div class="row g-4">
+                        <?php foreach ($data as $dat): ?>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="card shadow-sm p-3 text-center"
+                                    style="border-radius: 30px; min-height: 300px;">
+
+                                    <img src="/uploads/<?= $dat['ImagePath'] ?>"
+                                        class="card-img-top mb-3 rounded"
+                                        style="height: 250px; object-fit: cover; border-radius: 30px" alt="Product Image">
+
+                                    <div class="card-body">
+
+                                        <label class="form-check-label w-100 mb-2">
+                                            <input type="checkbox"
+                                                name="product[]"
+                                                id="p<?= $dat['ItemID'] ?>"
+                                                value="<?= $dat['ItemID'] ?>"
+                                                class="form-check-input me-2">
+                                            <?= $dat['ItemName'] ?>
+                                        </label>
+
+                                        <h5 class="fw-bold">₱<?= $dat['Price'] ?></h5>
+
+                                        <label class="mt-2">Number of Orders:</label>
+
+                                        <div class="d-flex justify-content-center align-items-center gap-2 mt-2">
+                                            <button type="button" id="p<?= $dat['ItemID'] ?>min" class="btn btn-outline-secondary btn-sm">−</button>
+
+                                            <input type="text"
+                                                name="product_amount[]"
+                                                id="p<?= $dat['ItemID'] ?>val"
+                                                class="form-control text-center"
+                                                style="width: 60px;">
+
+                                            <button type="button" id="p<?= $dat['ItemID'] ?>add" class="btn btn-outline-secondary btn-sm">+</button>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
                     </div>
-                    <div id="deliveryDetails"></div>
-            </div>  
-            <input type="submit" value="Submit Order" class="orderHandling">
-        </form>
 
-    </div>
-    <?= $this->include("orders/footer")?>
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-primary px-4 py-2">Submit Order</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </section>
+    <?= $this->include("orders/footer") ?>
 
     <script src="/js/dropdown.js"></script>
     <!--<script src="/js/productlist.js"></script>-->
@@ -75,7 +102,24 @@
                 count.textContent = val + 1;
             });
         });
+
+
+        document.getElementById('orderForm').addEventListener('submit', function(e) {
+            const hasOrder = <?= !empty($existingOrder) ? 'true' : 'false'; ?>;
+
+            if (hasOrder) {
+                e.preventDefault();
+                const alertContainer = document.getElementById('errorAlertContainer');
+                alertContainer.innerHTML = `
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        You already have an active order. Please complete or cancel it before creating a new one.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                `;
+            }
+        });
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

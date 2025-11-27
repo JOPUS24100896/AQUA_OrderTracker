@@ -46,6 +46,11 @@ class OrderViews extends BaseController
         return view('orders/PrivacyPolicy');
     }
 
+    public function gotoLogin()
+    {
+        return view('orders/LogIn'); 
+    }
+
     public function signUp(){
         return view('orders/SignUp');
     }
