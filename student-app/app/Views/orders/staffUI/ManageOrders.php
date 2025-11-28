@@ -91,7 +91,7 @@
                             <th>Order Date</th>
                             <th>Total Price</th>
                             <th>Status</th>
-                            <th>Actions</th>
+                            <th class="col-1">Actions</th>
                         </tr>
                     </thead>
                     <tbody id="table_history" class="text-center">
@@ -104,7 +104,7 @@
                         <td class="orderData OrderDate<?= $dat["OrderID"]?>"><?= $dat["OrderDate"]?></td>
                         <td class="orderData OrderPrice<?= $dat["OrderID"]?>">₱<?= $dat["TotalPrice"]?></td>
                         <td class="orderData OrderStat<?= $dat["OrderID"]?>"><?= $dat["Status"]?></td>
-                        <td class="d-flex flex-column gap-2">
+                        <td class="flex-column gap-2 orderData OrderAction<?= $dat["OrderID"]?>">
                             <button id="pendingButton" class="btn btn-warning btn-sm">Set to Pending</button>
                             <button id="readyButton" class="btn btn-success btn-sm">Set to Ready</button>
                         </td>
