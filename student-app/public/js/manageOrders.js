@@ -38,6 +38,7 @@ function generateOrderList(){
             const ColStat = document.getElementsByClassName("OrderStat" + arr[iteration]);
             const ColPrice = document.getElementsByClassName("OrderPrice" + arr[iteration]);
             const ColUser = document.getElementsByClassName("OrderUser" + arr[iteration]);
+            const ColAction = document.getElementsByClassName("OrderAction" + arr[iteration]);
             if(span_count == 0){
                 span_count = ColID.length - 1;
                 ColID[0].rowSpan = span_count + 1;
@@ -45,12 +46,14 @@ function generateOrderList(){
                 ColPrice[0].rowSpan = span_count + 1;
                 ColStat[0].rowSpan = span_count + 1;
                 ColUser[0].rowSpan = span_count + 1;
+                ColAction[0].rowSpan = span_count + 1;
             }else{
                 ColID[ColID.length - span_count].remove();
                 ColDate[ColDate.length - span_count].remove();
                 ColPrice[ColPrice.length - span_count].remove();
                 ColStat[ColStat.length - span_count].remove();
                 ColUser[ColUser.length - span_count].remove();
+                ColAction[ColAction.length - span_count].remove();
                 span_count--;
             }
             iteration++;

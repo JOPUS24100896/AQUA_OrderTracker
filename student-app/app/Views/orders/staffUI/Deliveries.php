@@ -88,17 +88,17 @@
 
                 <div class="buttoncontainer mt-3 d-flex flex-wrap gap-2 justify-content-center">
                     <form action="<?= base_url('orders/update/delivery') ?>" method="post">
-                        <input type="hidden" name="DeliveryID" value="" id="pend">
-                        <button id="pendingButton" type="submit" class="btn btn-warning" disabled>Set to Pending</button>
+                        <input type="hidden" name="DeliveryID" value="<?= $row["DeliveryID"] ?>" id="pend">
+                        <button id="pendingButton" name="Status" value="Pending" type="submit" class="btn btn-warning" disabled>Set to Pending</button>
                     </form>
 
                     <form action="<?= base_url('orders/update/delivery') ?>" method="post">
-                        <input type="hidden" name="DeliveryID" value="" id="dev">
-                        <button id="delivButton" type="submit" class="btn btn-success" disabled>Set to Delivered</button>
+                        <input type="hidden" name="DeliveryID" value="<?= $row['DeliveryID'] ?>" id="dev">
+                        <button id="delivButton" name="Status" value="Delivered" type="submit" class="btn btn-success" disabled>Set to Delivered</button>
                     </form>
 
                     <form action="<?= base_url('orders/update/delivery') ?>" method="post" class="gap-2">
-                        <input type="hidden" name="DeliveryID" value="" id="port">
+                        <input type="hidden" name="DeliveryID" value="<?= $row['DeliveryID'] ?>" id="port">
                         <select title="Assign to Vehicle" id="portSelect" name="PortID" class="form-select" disabled>
                             <option disabled selected value="null">Select Port</option>
                             <option value="0">None</option>
@@ -111,8 +111,9 @@
                             }
                             ?>
                         </select>
+                        <button id="portButton" type="submit" class="btn btn-primary px-4" disabled>Assign Vehicle</button>
                     </form>
-                    <button id="portButton" type="submit" class="btn btn-primary px-4" disabled>Assign Vehicle</button>
+                    
 
                 </div>
             </div>

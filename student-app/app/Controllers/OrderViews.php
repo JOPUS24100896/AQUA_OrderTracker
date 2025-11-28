@@ -17,7 +17,7 @@ class OrderViews extends BaseController
         $session = session();
         $this->response->setHeader("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
         $this->response->setHeader("Pragma", "no-cache");
-        $this->response->setHeader("Expires", "Sat, 26 Jul 1997 05:00:00 GMT");
+        $this->response->setHeader("Expires", "0");
 
         if(null !== $session->get("user_id")){
             switch($session->get("user_type")){
@@ -47,11 +47,49 @@ class OrderViews extends BaseController
     }
 
     public function gotoLogin()
-    {
+    {   
+        $session = session();
+        $this->response->setHeader("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
+        $this->response->setHeader("Pragma", "no-cache");
+        $this->response->setHeader("Expires", "0");
+
+        if(null !== $session->get("user_id")){
+            switch($session->get("user_type")){
+                case "STAFF":
+                    return redirect()->to("orders/staff/manageOrders");
+                break;
+                case "CUST":
+                    return redirect()->to("orders/cust/order");
+                break;
+                case "ADMIN":
+                    return redirect()->to("orders/admin/orderGraph");
+                break;
+            }
+        }
+        else
         return view('orders/LogIn'); 
     }
 
     public function signUp(){
+        $session = session();
+        $this->response->setHeader("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
+        $this->response->setHeader("Pragma", "no-cache");
+        $this->response->setHeader("Expires", "0");
+
+        if(null !== $session->get("user_id")){
+            switch($session->get("user_type")){
+                case "STAFF":
+                    return redirect()->to("orders/staff/manageOrders");
+                break;
+                case "CUST":
+                    return redirect()->to("orders/cust/order");
+                break;
+                case "ADMIN":
+                    return redirect()->to("orders/admin/orderGraph");
+                break;
+            }
+        }
+        else
         return view('orders/SignUp');
     }
 

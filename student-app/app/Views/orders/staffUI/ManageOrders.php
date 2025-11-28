@@ -24,7 +24,7 @@
         }
     </style>
     <style id="selectRow">
-        .orderNumber <?php if(session()->getFlashdata('message')) echo esc(session()->getFlashdata('message')[1])?>{background-color: #e0f7fa;}
+        <?php if(session()->getFlashdata('message')) echo ".orderNumber".esc(session()->getFlashdata('message')[1])."{background-color: #e0f7fa;}"?>
     </style>
 </head>
 <body>
@@ -37,6 +37,13 @@
     <div class="card shadow rounded-4">
         <div class="card-body">
             <h1 class="mb-4 fw-bold text-center">ORDER LIST</h1>
+
+            <?php if (session()->getFlashdata('message')): ?>
+                    <div class="alert alert-info">
+                        <?= esc(session()->getFlashdata('message')) ?>
+                    </div>
+                    <?php endif; ?>
+
             <form method="get"> <!--  this is the filter            -->
                 <label for="item">Filter by:</label>
                 <select name="item" id="item" onchange="this.form.submit()">
@@ -57,7 +64,7 @@
                             <th>Order Date</th>
                             <th>Total Price</th>
                             <th>Status</th>
-                            <th>Actions</th>
+                            <th class="col-1">Actions</th>
                         </tr>
                     </thead>
                     <tbody id="table_history" class="text-center">
@@ -70,9 +77,15 @@
                         <td class="orderData OrderDate<?= $dat["OrderID"]?>"><?= $dat["OrderDate"]?></td>
                         <td class="orderData OrderPrice<?= $dat["OrderID"]?>">₱<?= $dat["TotalPrice"]?></td>
                         <td class="orderData OrderStat<?= $dat["OrderID"]?>"><?= $dat["Status"]?></td>
-                        <td class="d-flex flex-column gap-2">
-                            <button id="pendingButton" class="btn btn-warning btn-sm">Set to Pending</button>
-                            <button id="readyButton" class="btn btn-success btn-sm">Set to Ready</button>
+                        <td class="flex-column gap-2 orderData OrderAction<?= $dat["OrderID"]?>">
+                            <form action="<?= base_url("orders/update/orderStatus") ?>" method="post">
+                                <input type="hidden" name="OrderID" value="<?= $dat["OrderID"]?>">
+                                <button id="pendingButton" name="Status" value="Pending" class="btn btn-warning btn-sm">Set to Pending</button>
+                            </form>
+                            <form action="<?= base_url("orders/update/orderStatus") ?>" method="post">
+                                <input type="hidden" name="OrderID" value="<?= $dat["OrderID"]?>">
+                                <button id="readyButton" name="Status" value="Ready" class="btn btn-success btn-sm">Set to Ready</button>
+                            </form>
                         </td>
                     </tr>
                 <?php $iteration++; endforeach; ?>
