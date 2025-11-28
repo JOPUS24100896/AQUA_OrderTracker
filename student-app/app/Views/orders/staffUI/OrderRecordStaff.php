@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order Record</title>
     <link rel="stylesheet" href="/css/main.css">
-    <!-- <link rel="stylesheet" href="/css/orderRecordStaff.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/index.css">
     <script>
@@ -26,6 +24,15 @@
         <div class="card shadow rounded-4">
             <div class="card-body">
                 <h1 class="mb-4 fw-bold text-center">ORDER RECORD</h1>
+                <form method="get"> <!--  this is the filter            -->
+                    <label for="item">Filter by:</label>
+                    <select name="item" id="item" onchange="this.form.submit()">
+                        <option value="all" <?= ($itemFilter == 'all' || empty($itemFilter)) ? 'selected' : '' ?>>ALL</option>
+                        <option value="Bottled Water" <?= ($itemFilter == 'Bottled Water') ? 'selected' : '' ?>>Bottled Water</option>
+                        <option value="Water Gallon" <?= ($itemFilter == 'Water Gallon') ? 'selected' : '' ?>>Water Gallon</option>
+                        <option value="Water Gallon With Faucet" <?= ($itemFilter == 'Water Gallon With Faucet') ? 'selected' : '' ?>>With Faucet</option>
+                    </select>
+                </form>
                 <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
                     <table class="table table-striped table-bordered border-dark table-hover align-middle mb-0">
                         <thead class="table-dark position-sticky top-0">

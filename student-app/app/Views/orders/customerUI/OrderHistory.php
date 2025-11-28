@@ -20,39 +20,6 @@
 <body>
     <?= $this->include("orders/customerUI/custHeader") ?>
 
-    <!-- Content -->
-    <!-- <div id="content">
-        <h1 id="page_title">ORDER HISTORY</h1>
-        <div class="HistoryList">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Order Number</th>
-                        <th>Item Name</th>
-                        <th>Price</th>
-                        <th>Item Quantity</th>
-                        <th>Order Date</th>
-                        <th>Total Price</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody id="table_history">
-                    <?php foreach ($data as $dat): ?>
-                        <tr class="orderRow">
-                            <td class="orderData OrderID<?= $dat['OrderID'] ?>"><?= $dat['OrderID'] ?></td>
-                            <td class="orderData"><?= $dat['ItemName'] ?></td>
-                            <td class="orderData"><?= $dat['Price'] ?></td>
-                            <td class="orderData"><?= $dat['ItemQuantity'] ?></td>
-                            <td class="orderData OrderDate<?= $dat['OrderID'] ?>"><?= $dat['OrderDate'] ?></td>
-                            <td class="orderData OrderPrice<?= $dat['OrderID'] ?>"><?= $dat['TotalPrice'] ?></td>
-                            <td class="orderData OrderStat<?= $dat['OrderID'] ?>"><?= $dat['Status'] ?></td>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-        </div>
-
-    </div> -->
 
     <div id="content" class="container" style="padding-top: 100px; padding-bottom: 400px;">
 
@@ -60,6 +27,16 @@
             <div class="card-body">
 
                 <h1 class="mb-4 fw-bold text-center">ORDER DETAILS</h1>
+
+                <form method="get"> <!--  this is the filter            -->
+                    <label for="item">Filter by:</label>
+                    <select name="item" id="item" onchange="this.form.submit()">
+                        <option value="all" <?= ($itemFilter == 'all' || empty($itemFilter)) ? 'selected' : '' ?>>ALL</option>
+                        <option value="Bottled Water" <?= ($itemFilter == 'Bottled Water') ? 'selected' : '' ?>>Bottled Water</option>
+                        <option value="Water Gallon" <?= ($itemFilter == 'Water Gallon') ? 'selected' : '' ?>>Water Gallon</option>
+                        <option value="Water Gallon With Faucet" <?= ($itemFilter == 'Water Gallon With Faucet') ? 'selected' : '' ?>>With Faucet</option>
+                    </select>
+                </form>
 
                 <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
                     <table class="table table-striped table-bordered border-dark table-hover align-middle mb-0">
@@ -123,7 +100,6 @@
 
     <?= $this->include("orders/footer") ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
     <script src="/js/dropdown.js"></script>
     <script src="/js/orderHistory.js"></script>
 </body>

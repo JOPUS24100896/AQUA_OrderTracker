@@ -142,7 +142,16 @@ class OrderViews extends BaseController
                 $build->join("items", "items.ItemID = order_details.ItemID", "inner");
                 $build->where("orders.UserID", session()->get("user_id"));
                 $build->orderBy("orders.OrderDate", "DESC");
+                
+                //this is the function
+                $itemFilter = $this->request->getGet('item'); 
+                if (!empty($itemFilter) && strtolower($itemFilter) !== 'all') {
+                    $build->where('items.ItemName', $itemFilter);
+                }
+                
+                
                 $query = $build->get();
+                $data['itemFilter']   = $itemFilter; 
                 $return = $query->getResultArray();
 
 
@@ -171,11 +180,27 @@ class OrderViews extends BaseController
                 $build->join("users", "users.UserID = orders.UserID", "inner");
                 $build->join("items", "items.ItemID = order_details.ItemID", "inner");
                 $build->orderBy("orders.OrderID", "ASC");
+                
+              
+
+
+
+                //this is the function
+                $itemFilter = $this->request->getGet('item'); 
+                if (!empty($itemFilter) && strtolower($itemFilter) !== 'all') {
+                    $build->where('items.ItemName', $itemFilter);
+                }
+               
                 $query = $build->get();
                 $return = $query->getResultArray();
 
 
+               
+
+  
+
                 $data["data"] = $return;
+                $data['itemFilter']   = $itemFilter;  // this where it's called to filter it out
                 return view("orders/staffUI/ManageOrders", $data);
             break;
             default:
@@ -199,7 +224,16 @@ class OrderViews extends BaseController
                 $build->join("items", "items.ItemID = order_details.ItemID", "inner");
                 $build->orderBy("orders.OrderID", "ASC");
                 $build->where("users.UserID", session()->get("user_id"), true);
+                
+                //this is the function
+                $itemFilter = $this->request->getGet('item'); 
+                if (!empty($itemFilter) && strtolower($itemFilter) !== 'all') {
+                    $build->where('items.ItemName', $itemFilter);
+                }
+                
+                
                 $query = $build->get();
+                $data['itemFilter']   = $itemFilter; 
                 $return = $query->getResultArray();
 
                 $data["data"] = $return;
@@ -361,44 +395,28 @@ class OrderViews extends BaseController
                 $builder->join('items', 'items.ItemID = order_details.ItemID', 'inner');
                 $builder->orderBy('order_details.OrderDetailID', 'DESC');
 
+
+                //this is the function
+                $itemFilter = $this->request->getGet('item'); // e.g. ?item=Router
+                if (!empty($itemFilter) && strtolower($itemFilter) !== 'all') {
+                    $builder->where('items.ItemName', $itemFilter);
+                }
+               
+
+
                 $query = $builder->get();
                 $orderRecords = $query->getResultArray();
 
                 $data['orderRecords'] = $orderRecords;
+                $data['itemFilter']   = $itemFilter;  // this where it's called to filter it out
                 return view("orders/adminUI/OrderRecord", $data);
-            break;
+            break;  
             default:
                 return redirect()->to("/orders");
             break;
         }
     }
-    // public function orderRecordAdmin()
-    // {
-    //     if (session()->get("user_type") == "ADMIN") {
-    //         $db = \Config\Database::connect();
-    //         $builder = $db->table('orders');
-    //         $builder->select(
-    //             'orders.OrderID as ID, ' .
-    //             'items.ItemName as ItemName, ' .    
-    //             'order_details.ItemQuantity as ItemQuantity, ' .
-    //             'items.Price as Price, ' .
-    //             'orders.OrderDate as OrderDate, ' .
-    //             '(order_details.ItemQuantity * items.Price) as TotalPrice'
-    //         );
-    //         $builder->join('order_details', 'order_details.OrderID = orders.OrderID', 'inner');
-    //         $builder->join('items', 'items.ItemID = order_details.ItemID', 'inner');
-    //         // Add more joins/filters if necessary
-
-    //         $query = $builder->get();
-    //         $orderRecords = $query->getResultArray();
-
-    //         $data['orderRecords'] = $orderRecords;
-    //         return view("orders/adminUI/OrderRecord", $data);
-    //     } else {
-    //         return redirect()->to("/orders");
-    //     }
-    // }   
-///////////////////////////////////////////////////////
+ 
     public function store()
     {
         if($this->request->getPost('price') < 0){

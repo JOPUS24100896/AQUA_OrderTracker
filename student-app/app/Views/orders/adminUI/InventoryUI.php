@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventory</title>
     <link rel="stylesheet" href="/css/main.css">
-    <!-- <link rel="stylesheet" href="/css/inventory.css"> -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/index.css">
 </head>
@@ -14,45 +13,6 @@
 <body>
 
     <?= $this->include("orders/adminUI/adminHeader") ?>
-
-    <!-- <div id="content">
-        <h1 id="page_title">INVENTORY</h1>
-        <div id="InventoryTable">
-            <table>
-                <thead>
-                    <div id="header_background"></div>
-                    <tr id="table_header">    
-                        <th>ID</th>
-                        <th>Product Image</th>
-                        <th>Name</th>
-                        <th>Items in Stock</th>
-                        <th>Add Stock</th>
-                    </tr>
-                </thead>
-                <tbody id="orderForm">
-                <?php if (!empty($Inventory)): ?>
-                    <?php foreach ($Inventory as $item): ?>
-                        <tr>
-                            <td><?= esc($item['ItemID']) ?></td>
-                            <td class="productCard" loading="lazy">
-                                <img src="/uploads/<?= $item['ImagePath'] ?>" style='height: 115px;'
-                                alt="Product Image" />
-                            </td>
-                            <td ><?= esc($item['ItemName']) ?></td>
-                             <td><?= esc($item['StockQuantity']) ?></td>
-                            <td class="inputBox">
-                                <input type="number" min="1" id="stock-<?= esc($item['ItemID']) ?>">
-                                <button type="button" onclick="updateStock(<?= esc($item['ItemID']) ?>)">ADD</button>
-                            </td>
-                        </tr>
-                    <?php endforeach ?>
-                <?php else: ?>
-                    <tr><td colspan="5">No inventory found.</td></tr>
-                <?php endif ?>
-                </tbody>
-            </table>
-        </div>
-    </div> -->
 
     <div class="container" style="padding-top: 80px; padding-bottom: 80px">
         <div class="container mt-3" id="messageBox"></div>
@@ -153,7 +113,7 @@
                 .then(response => response.json())
                 .then(data => {
                     showMessage(data.message, "success");
-                    setTimeout(() => location.reload(), 1200);
+                    setTimeout(() => location.reload(), 1200); // this for reload as stated
                 })
                 .catch(error => {
                     showMessage("Error updating stock.", "danger");

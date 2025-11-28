@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Order</title>
     <link rel="stylesheet" href="/css/main.css">
-    <!-- <link rel="stylesheet" href="/css/orderHistory.css">
-    <link rel="stylesheet" href="/css/createOrder.css"> -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/index.css">
     <script>
@@ -19,8 +17,6 @@
 
 <body>
     <?= $this->include("orders/customerUI/custHeader") ?>
-    <!--<img src="/uploads/bottle_water.webp" alt="Test">-->
-    <!-- Content -->
     <section>
         <div class="container" style="padding-top: 100px; padding-bottom: 20px;">
 
@@ -84,7 +80,6 @@
     <?= $this->include("orders/footer") ?>
 
     <script src="/js/dropdown.js"></script>
-    <!--<script src="/js/productlist.js"></script>-->
     <script src="/js/createorder.js"></script>
     <script>
         document.querySelectorAll('.ProductCard').forEach(card => {
