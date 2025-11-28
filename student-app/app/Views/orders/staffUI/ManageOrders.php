@@ -105,8 +105,14 @@
                         <td class="orderData OrderPrice<?= $dat["OrderID"]?>">₱<?= $dat["TotalPrice"]?></td>
                         <td class="orderData OrderStat<?= $dat["OrderID"]?>"><?= $dat["Status"]?></td>
                         <td class="flex-column gap-2 orderData OrderAction<?= $dat["OrderID"]?>">
-                            <button id="pendingButton" class="btn btn-warning btn-sm">Set to Pending</button>
-                            <button id="readyButton" class="btn btn-success btn-sm">Set to Ready</button>
+                            <form action="<?= base_url("orders/update/orderStatus") ?>" method="post">
+                                <input type="hidden" name="OrderID" value="<?= $dat["OrderID"]?>">
+                                <button id="pendingButton" name="Status" value="Pending" class="btn btn-warning btn-sm">Set to Pending</button>
+                            </form>
+                            <form action="<?= base_url("orders/update/orderStatus") ?>" method="post">
+                                <input type="hidden" name="OrderID" value="<?= $dat["OrderID"]?>">
+                                <button id="readyButton" name="Status" value="Ready" class="btn btn-success btn-sm">Set to Ready</button>
+                            </form>
                         </td>
                     </tr>
                 <?php $iteration++; endforeach; ?>
