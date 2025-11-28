@@ -28,6 +28,11 @@
                 <form method="post" id="orderForm" action="<?= base_url('orders/create/makeOrder') ?>">
 
                     <h1 class="fw-bold mb-3 mt-3 text-center">PRODUCTS</h1>
+                    <?php if (session()->getFlashdata('message')): ?>
+                    <div class="alert alert-info">
+                        <?= esc(session()->getFlashdata('message')) ?>
+                    </div>
+                    <?php endif; ?>
                     <div id="errorAlertContainer"></div>
                     <div class="row g-4">
                         <?php foreach ($data as $dat): ?>
