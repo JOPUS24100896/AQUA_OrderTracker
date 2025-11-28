@@ -80,6 +80,13 @@
     <div class="card shadow rounded-4">
         <div class="card-body">
             <h1 class="mb-4 fw-bold text-center">ORDER LIST</h1>
+
+            <?php if (session()->getFlashdata('message')): ?>
+                    <div class="alert alert-info">
+                        <?= esc(session()->getFlashdata('message')) ?>
+                    </div>
+                    <?php endif; ?>
+
             <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
                 <table class="table table-striped table-bordered border-dark table-hover align-middle mb-0">
                     <thead class="table-dark position-sticky top-0">
