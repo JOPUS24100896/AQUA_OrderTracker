@@ -6,76 +6,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventory</title>
     <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css">
-    <link rel="stylesheet" href="/css/contactinfo.css">
-    <style>
-        #page_title {
-            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-            text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.875);
-            font-weight: lighter;
-            letter-spacing: .1cm;
-        }
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/index.css">
 </head>
 
 <body>
-    <div id="header" class="flex_center">
-        <div id="brand_Admin">
-            <a href="/index.php">
-                <h1>Aqua Del Sol</h1>
-            </a>
-        </div>
-        <ul id="navbar">
-            <li><a href="<?=base_url('orders')?>">BACK</a></li>
-        </ul>
-    </div>
-
-    <!-- Content -->
-    <div id="content">
-        <h1 id="page_title">Privacy Policy</h1>
-        <div id="contacts" class="flex_center">
-            <div>
-                <h3 style="text-align: center; letter-spacing: 0.04cm; color: rgb(21, 21, 21);">
-                    At Aqua del Sol, your privacy is important to us. When you use our Order Tracking System,
-                    we collect essential information such as your name, contact details, delivery address, order
-                    history,
-                    and preferences to ensure timely and accurate order processing and delivery.
-                    We use this data solely to manage your orders, improve our services, and provide delivery updates.
-                    We do not sell or rent your information to third parties. Your data may be shared only with
-                    authorized
-                    personnel or service providers who help operate the system and are bound by confidentiality.
-                    We take reasonable security measures to protect your data, but we cannot guarantee absolute
-                    security.
-                    Your information is retained only as long as necessary to fulfill its intended purpose or comply
-                    with legal obligations.
-                    You have the right to access, correct, or request the deletion of your data at any time by
-                    contacting us.
-                    By using the Order Tracking System, you agree to the collection and use of your information as
-                    outlined in this policy.
-                    For questions, please contact Aqua del Sol at 09123432981.
-                </h3>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background: linear-gradient(to right, #2b607b, #204c55);">
+        <div class="container">
+            <a class="navbar-brand fw-bold fs-2" href="#">Aqua Del Sol</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav" aria-controls="navbarNav"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                </ul>
             </div>
-
         </div>
-
-
-
-    </div>
-
-
-
-    <div id="footer">
-        <div class="flex_center">
-            <a href="<?=base_url('orders/contactInfo')?>">
-                <h4>Where to find us</h4>
-            </a>
-            <a href="<?=base_url('orders/privPolicy')?>">
-                <h4>Privacy Policy</h4>
-            </a>
+    </nav>
+    <section id="privacy-policy" class="container my-5" style="padding-top: 80px; padding-bottom: 200px;">
+        <div class="card shadow rounded-4">
+            <div class="card-body">
+                <h2 class="fw-bold text-center mb-4">Privacy Policy</h2>
+                <div class="card shadow-sm p-4 text-center fs-5">
+                    <p>
+                        At Aqua del Sol, your privacy is important to us. When you use our Order Tracking System,
+                        we collect essential information such as your name, contact details, delivery address, order
+                        history, and preferences to ensure timely and accurate order processing and delivery.
+                        We use this data solely to manage your orders, improve our services, and provide delivery updates.
+                        We do not sell or rent your information to third parties.
+                    </p>
+                    <p>
+                        Your data may be shared only with
+                        authorized
+                        personnel or service providers who help operate the system and are bound by confidentiality.
+                        We take reasonable security measures to protect your data, but we cannot guarantee absolute
+                        security.
+                        Your information is retained only as long as necessary to fulfill its intended purpose or comply
+                        with legal obligations.
+                    </p>
+                    <p>
+                        You have the right to access, correct, or request the deletion of your data at any time by
+                        contacting us. By using the Order Tracking System, you agree to the collection and use of
+                        your information as outlined in this policy.
+                    </p>
+                    <!-- <p>
+                For questions, please contact Aqua del Sol at 09123432981.
+            </p> -->
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
 
-    <!-- <script src="js/signup.js"></script> -->
+
+
+    <?= $this->include("orders/footer") ?>
+
+    <script src="/js/dropdown.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

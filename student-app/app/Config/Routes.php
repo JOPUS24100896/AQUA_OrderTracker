@@ -21,6 +21,8 @@ $routes->get('orders', 'OrderViews::index');
 $routes->get('orders/privPolicy', 'OrderViews::privPolicy');
 $routes->get('orders/signup', 'OrderViews::signUp');
 $routes->get('orders/endSess', 'OrderViews::endSession');
+$routes->get('orders/gotoLogin', 'OrderViews::gotoLogin');
+
 
 
 //ACCOUNT
