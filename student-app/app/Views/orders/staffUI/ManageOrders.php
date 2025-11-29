@@ -45,6 +45,14 @@
                     <?php endif; ?>
 
             <form method="get"> <!--  this is the filter            -->
+                <label for="item">Search by:</label>
+                    <select name="field">
+                        <option value="orders.OrderID" <?= ($searchField == 'orders.OrderID') ? 'selected' : '' ?>>Order ID</option>
+                        <option value="orders.OrderDate" <?= ($searchField == 'orders.OrderDate') ? 'selected' : '' ?>>Order Date</option>
+                    </select>
+                    <input type="text" name="search" value="<?= esc($searchValue) ?>" placeholder="Enter search keyword">
+                    <button type="submit">Search</button>
+
                 <label for="item">Filter by:</label>
                 <select name="item" id="item" onchange="this.form.submit()">
                     <option value="all" <?= ($itemFilter == 'all' || empty($itemFilter)) ? 'selected' : '' ?>>ALL</option>
@@ -108,7 +116,7 @@
     <form id="form" hidden></form>
     <script src="/js/dropdown.js"></script>
     <script src="/js/manageOrders.js"></script>
-    <script src="/js/filterOrdersStaff.js"></script>
+    <!-- <script src="/js/filterOrdersStaff.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

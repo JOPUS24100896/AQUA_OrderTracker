@@ -12,14 +12,20 @@
 
 <body>
     <?= $this->include("orders/adminUI/adminHeader") ?>
-
-
     <div class="container" style="padding-top: 100px; padding-bottom: 80px">
         <div class="card shadow-lg rounded-4">
             <div class="card-body">
                 <h1 class="fw-bold text-center mb-4">ORDER RECORD</h1>
                 
                 <form method="get"> <!--  this is the filter            -->
+                    <label for="item">Search by:</label>
+                    <select name="field">
+                        <option value="orders.OrderID" <?= ($searchField == 'orders.OrderID') ? 'selected' : '' ?>>Order ID</option>
+                        <option value="orders.OrderDate" <?= ($searchField == 'orders.OrderDate') ? 'selected' : '' ?>>Order Date</option>
+                    </select>
+                    <input type="text" name="search" value="<?= esc($searchValue) ?>" placeholder="Enter search keyword">
+                    <button type="submit">Search</button>
+
                     <label for="item">Filter by:</label>
                     <select name="item" id="item" onchange="this.form.submit()">
                         <option value="all" <?= ($itemFilter == 'all' || empty($itemFilter)) ? 'selected' : '' ?>>ALL</option>
@@ -27,6 +33,7 @@
                         <option value="Water Gallon" <?= ($itemFilter == 'Water Gallon') ? 'selected' : '' ?>>Water Gallon</option>
                         <option value="Water Gallon With Faucet" <?= ($itemFilter == 'Water Gallon With Faucet') ? 'selected' : '' ?>>With Faucet</option>
                     </select>
+
                 </form>
 
 

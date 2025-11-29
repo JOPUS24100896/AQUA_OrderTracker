@@ -25,10 +25,16 @@
 
         <div class="card shadow rounded-4">
             <div class="card-body">
-
                 <h1 class="mb-4 fw-bold text-center">ORDER DETAILS</h1>
-
                 <form method="get"> <!--  this is the filter            -->
+                    <label for="item">Search by:</label>
+                    <select name="field">
+                        <option value="orders.OrderID" <?= ($searchField == 'orders.OrderID') ? 'selected' : '' ?>>Order ID</option>
+                        <option value="orders.OrderDate" <?= ($searchField == 'orders.OrderDate') ? 'selected' : '' ?>>Order Date</option>
+                    </select>
+                    <input type="text" name="search" value="<?= esc($searchValue) ?>" placeholder="Enter search keyword">
+                    <button type="submit">Search</button>
+
                     <label for="item">Filter by:</label>
                     <select name="item" id="item" onchange="this.form.submit()">
                         <option value="all" <?= ($itemFilter == 'all' || empty($itemFilter)) ? 'selected' : '' ?>>ALL</option>
@@ -37,7 +43,6 @@
                         <option value="Water Gallon With Faucet" <?= ($itemFilter == 'Water Gallon With Faucet') ? 'selected' : '' ?>>With Faucet</option>
                     </select>
                 </form>
-
                 <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
                     <table class="table table-striped table-bordered border-dark table-hover align-middle mb-0">
                         <thead class="table-dark text-center position-sticky top-0">

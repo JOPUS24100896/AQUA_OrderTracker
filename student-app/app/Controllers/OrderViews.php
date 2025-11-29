@@ -183,17 +183,27 @@ class OrderViews extends BaseController
                 
                 //this is the function
                 $itemFilter = $this->request->getGet('item'); 
+                $searchField = $this->request->getGet('field');
+                $searchValue = $this->request->getGet('search');
+
                 if (!empty($itemFilter) && strtolower($itemFilter) !== 'all') {
                     $build->where('items.ItemName', $itemFilter);
                 }
-                
-                
+               
+                 if (!empty($searchField) && !empty($searchValue)) {
+                    $allowedFields = ['orders.OrderID', 'orders.OrderDate'];
+                    if (in_array($searchField, $allowedFields)) {
+                        $build->like($searchField, $searchValue);
+                    }
+                }
+
                 $query = $build->get();
-                $data['itemFilter']   = $itemFilter; 
                 $return = $query->getResultArray();
 
-
                 $data["data"] = $return;
+                $data['itemFilter']   = $itemFilter; 
+                $data['searchField']  = $searchField;
+                $data['searchValue']  = $searchValue;
                 return view('orders/customerUI/OrderHistory', $data);
             break;
             default:
@@ -217,28 +227,32 @@ class OrderViews extends BaseController
                 $build->join("order_details", "orders.OrderID = order_details.OrderID", "inner");
                 $build->join("users", "users.UserID = orders.UserID", "inner");
                 $build->join("items", "items.ItemID = order_details.ItemID", "inner");
-                $build->orderBy("orders.OrderID", "ASC");
                 
-              
-
-
-
-                //this is the function
+                $searchField = $this->request->getGet('field');
                 $itemFilter = $this->request->getGet('item'); 
+                $searchValue = $this->request->getGet('search');
+                
                 if (!empty($itemFilter) && strtolower($itemFilter) !== 'all') {
                     $build->where('items.ItemName', $itemFilter);
                 }
-               
+                
+                if (!empty($searchField) && !empty($searchValue)) {
+                    $allowedFields = ['orders.OrderID', 'orders.OrderDate'];
+                    if (in_array($searchField, $allowedFields)) {
+                        $build->like($searchField, $searchValue);
+                    }
+                }
+
+                $build->orderBy("orders.OrderID", "ASC");
+                // $build->where("users.UserID", session()->get("user_id"), true);
+
                 $query = $build->get();
                 $return = $query->getResultArray();
 
-
-               
-
-  
-
                 $data["data"] = $return;
-                $data['itemFilter']   = $itemFilter;  // this where it's called to filter it out
+                $data['itemFilter']   = $itemFilter; 
+                 $data['searchField']  = $searchField;
+                $data['searchValue']  = $searchValue;
                 return view("orders/staffUI/ManageOrders", $data);
             break;
             default:
@@ -255,26 +269,46 @@ class OrderViews extends BaseController
             case "STAFF":
                 $db = \Config\Database::connect();
                 $build = $db->table("orders");
-                $build->select("orders.OrderID, users.UserID, users.FullName, items.ItemID, items.ItemName, order_details.ItemQuantity,
-                orders.OrderDate, orders.TotalPrice, orders.Status");
+                $build->select(
+                    "orders.OrderID, 
+                    users.UserID, 
+                    users.FullName, 
+                    items.ItemID, 
+                    items.ItemName, 
+                    order_details.
+                    ItemQuantity,
+                    orders.OrderDate, 
+                    orders.TotalPrice, 
+                    orders.Status");
                 $build->join("order_details", "orders.OrderID = order_details.OrderID", "inner");
                 $build->join("users", "users.UserID = orders.UserID", "inner");
                 $build->join("items", "items.ItemID = order_details.ItemID", "inner");
-                $build->orderBy("orders.OrderID", "ASC");
-                $build->where("users.UserID", session()->get("user_id"), true);
                 
-                //this is the function
+                $searchField = $this->request->getGet('field');
+                $searchValue = $this->request->getGet('search');
                 $itemFilter = $this->request->getGet('item'); 
+           
                 if (!empty($itemFilter) && strtolower($itemFilter) !== 'all') {
                     $build->where('items.ItemName', $itemFilter);
                 }
                 
+                if (!empty($searchField) && !empty($searchValue)) {
+                    $allowedFields = ['orders.OrderID', 'orders.OrderDate'];
+                    if (in_array($searchField, $allowedFields)) {
+                        $build->like($searchField, $searchValue);
+                    }
+                }
+
+                $build->orderBy("orders.OrderID", "ASC");
+                $build->where("users.UserID", session()->get("user_id"), true);
                 
                 $query = $build->get();
-                $data['itemFilter']   = $itemFilter; 
                 $return = $query->getResultArray();
 
-                $data["data"] = $return;
+                $data['data'] = $return;
+                $data['itemFilter']   = $itemFilter; 
+                $data['searchField']  = $searchField;
+                $data['searchValue']  = $searchValue;
                 return view("orders/staffUI/OrderRecordStaff", $data);
             break;
             default:
@@ -431,7 +465,7 @@ class OrderViews extends BaseController
                 );
                 $builder->join('order_details', 'order_details.OrderID = orders.OrderID', 'inner');
                 $builder->join('items', 'items.ItemID = order_details.ItemID', 'inner');
-                $builder->orderBy('order_details.OrderDetailID', 'DESC');
+               
 
 
                 //this is the function
@@ -440,13 +474,26 @@ class OrderViews extends BaseController
                     $builder->where('items.ItemName', $itemFilter);
                 }
                
+                $searchField = $this->request->getGet('field');
+                $searchValue = $this->request->getGet('search');
 
+                 if (!empty($searchField) && !empty($searchValue)) {
+                    $allowedFields = ['orders.OrderID', 'orders.OrderDate'];
+                    if (in_array($searchField, $allowedFields)) {
+                        $builder->like($searchField, $searchValue);
+                    }
+                }
+
+                $builder->orderBy('order_details.OrderDetailID', 'DESC');
 
                 $query = $builder->get();
                 $orderRecords = $query->getResultArray();
 
                 $data['orderRecords'] = $orderRecords;
-                $data['itemFilter']   = $itemFilter;  // this where it's called to filter it out
+                $data['itemFilter']   = $itemFilter; 
+                $data['searchField']  = $searchField;
+                $data['searchValue']  = $searchValue;
+
                 return view("orders/adminUI/OrderRecord", $data);
             break;  
             default:
