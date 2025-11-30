@@ -21,27 +21,40 @@
     <?= $this->include("orders/customerUI/custHeader") ?>
 
 
-    <div id="content" class="container" style="padding-top: 100px; padding-bottom: 400px;">
+    <div id="content" class="container" style="padding-top: 65px; padding-bottom: 100px;">
 
         <div class="card shadow rounded-4">
-            <div class="card-body">
-                <h1 class="mb-4 fw-bold text-center">ORDER DETAILS</h1>
-                <form method="get"> <!--  this is the filter            -->
-                    <label for="item">Search by:</label>
-                    <select name="field">
-                        <option value="orders.OrderID" <?= ($searchField == 'orders.OrderID') ? 'selected' : '' ?>>Order ID</option>
-                        <option value="orders.OrderDate" <?= ($searchField == 'orders.OrderDate') ? 'selected' : '' ?>>Order Date</option>
-                    </select>
-                    <input type="text" name="search" value="<?= esc($searchValue) ?>" placeholder="Enter search keyword">
-                    <button type="submit">Search</button>
+            <div class="card-body"  style="min-height: 550px;">
+                <h1 class="mb-1 fw-bold text-center">ORDER DETAILS</h1>
+                <form method="get" class="container mb-3"> <!--  this is the filter    -->
+                    <div class="d-flex flex-wrap align-items-end gap-2">
+                        <div class="align-items-center gap-2">
+                        <label for="item" class="form-label mb-0 small">Filter by:</label>
+                        <select name="item" id="item" class="form-select form-select-sm" style="min-width: 200px;" onchange="this.form.submit()">
+                            <option value="all" <?= ($itemFilter == 'all' || empty($itemFilter)) ? 'selected' : '' ?>>ALL</option>
+                            <option value="Bottled Water" <?= ($itemFilter == 'Bottled Water') ? 'selected' : '' ?>>Bottled Water</option>
+                            <option value="Water Gallon" <?= ($itemFilter == 'Water Gallon') ? 'selected' : '' ?>>Water Gallon</option>
+                            <option value="Water Gallon With Faucet" <?= ($itemFilter == 'Water Gallon With Faucet') ? 'selected' : '' ?>>With Faucet</option>
+                        </select>
+                        </div>
+                        <div class="ms-auto align-items-center gap-2">
+                            <label class="form-label mb-0 small">Search by:</label>
+                            <div class="d-flex gap-2">
+                            <select name="field" class="form-select form-select-sm" style="min-width: 150px;">
+                                <option value="orders.OrderID" <?= ($searchField == 'orders.OrderID') ? 'selected' : '' ?>>Order ID</option>
+                                <option value="orders.OrderDate" <?= ($searchField == 'orders.OrderDate') ? 'selected' : '' ?>>Order Date</option>
+                            </select>
 
-                    <label for="item">Filter by:</label>
-                    <select name="item" id="item" onchange="this.form.submit()">
-                        <option value="all" <?= ($itemFilter == 'all' || empty($itemFilter)) ? 'selected' : '' ?>>ALL</option>
-                        <option value="Bottled Water" <?= ($itemFilter == 'Bottled Water') ? 'selected' : '' ?>>Bottled Water</option>
-                        <option value="Water Gallon" <?= ($itemFilter == 'Water Gallon') ? 'selected' : '' ?>>Water Gallon</option>
-                        <option value="Water Gallon With Faucet" <?= ($itemFilter == 'Water Gallon With Faucet') ? 'selected' : '' ?>>With Faucet</option>
-                    </select>
+                            <input type="text" name="search"
+                                value="<?= esc($searchValue) ?>"
+                                placeholder="Enter search keyword"
+                                class="form-control form-control-sm"
+                                style="min-width: 200px;">
+
+                            <button type="submit" class="btn btn-primary btn-sm">Search</button>
+                            </div>
+                        </div>
+                    </div>
                 </form>
                 <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
                     <table class="table table-striped table-bordered border-dark table-hover align-middle mb-0">

@@ -21,10 +21,10 @@
 
 <body>
     <?= $this->include("orders/customerUI/custHeader") ?>
-    <div id="content" class="container" style="padding-top: 100px; padding-bottom: 400px;">
+    <div id="content" class="container" style="padding-top: 65px; padding-bottom: 100px;">
 
         <div class="card shadow rounded-4">
-            <div class="card-body">
+            <div class="card-body"  style="min-height: 550px;">
 
                 <h1 class="mb-4 fw-bold text-center">ORDER DETAILS</h1>
 

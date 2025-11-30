@@ -14,26 +14,38 @@
     <?= $this->include("orders/adminUI/adminHeader") ?>
     <div class="container" style="padding-top: 100px; padding-bottom: 80px">
         <div class="card shadow-lg rounded-4">
-            <div class="card-body">
-                <h1 class="fw-bold text-center mb-4">ORDER RECORD</h1>
-                
-                <form method="get"> <!--  this is the filter            -->
-                    <label for="item">Search by:</label>
-                    <select name="field">
-                        <option value="orders.OrderID" <?= ($searchField == 'orders.OrderID') ? 'selected' : '' ?>>Order ID</option>
-                        <option value="orders.OrderDate" <?= ($searchField == 'orders.OrderDate') ? 'selected' : '' ?>>Order Date</option>
-                    </select>
-                    <input type="text" name="search" value="<?= esc($searchValue) ?>" placeholder="Enter search keyword">
-                    <button type="submit">Search</button>
+            <div class="card-body" style="min-height: 600px;">
+                <h1 class="fw-bold text-center mb-1">ORDER RECORD</h1>
 
-                    <label for="item">Filter by:</label>
-                    <select name="item" id="item" onchange="this.form.submit()">
-                        <option value="all" <?= ($itemFilter == 'all' || empty($itemFilter)) ? 'selected' : '' ?>>ALL</option>
-                        <option value="Bottled Water" <?= ($itemFilter == 'Bottled Water') ? 'selected' : '' ?>>Bottled Water</option>
-                        <option value="Water Gallon" <?= ($itemFilter == 'Water Gallon') ? 'selected' : '' ?>>Water Gallon</option>
-                        <option value="Water Gallon With Faucet" <?= ($itemFilter == 'Water Gallon With Faucet') ? 'selected' : '' ?>>With Faucet</option>
-                    </select>
+                <form method="get" class="container mb-3"> <!--  this is the filter    -->
+                    <div class="d-flex flex-wrap align-items-end gap-2">
+                        <div class="align-items-center gap-2">
+                        <label for="item" class="form-label mb-0 small">Filter by:</label>
+                        <select name="item" id="item" class="form-select form-select-sm" style="min-width: 200px;" onchange="this.form.submit()">
+                            <option value="all" <?= ($itemFilter == 'all' || empty($itemFilter)) ? 'selected' : '' ?>>ALL</option>
+                            <option value="Bottled Water" <?= ($itemFilter == 'Bottled Water') ? 'selected' : '' ?>>Bottled Water</option>
+                            <option value="Water Gallon" <?= ($itemFilter == 'Water Gallon') ? 'selected' : '' ?>>Water Gallon</option>
+                            <option value="Water Gallon With Faucet" <?= ($itemFilter == 'Water Gallon With Faucet') ? 'selected' : '' ?>>With Faucet</option>
+                        </select>
+                        </div>
+                        <div class="ms-auto align-items-center gap-2">
+                            <label class="form-label mb-0 small">Search by:</label>
+                            <div class="d-flex gap-2">
+                            <select name="field" class="form-select form-select-sm" style="min-width: 150px;">
+                                <option value="orders.OrderID" <?= ($searchField == 'orders.OrderID') ? 'selected' : '' ?>>Order ID</option>
+                                <option value="orders.OrderDate" <?= ($searchField == 'orders.OrderDate') ? 'selected' : '' ?>>Order Date</option>
+                            </select>
 
+                            <input type="text" name="search"
+                                value="<?= esc($searchValue) ?>"
+                                placeholder="Enter search keyword"
+                                class="form-control form-control-sm"
+                                style="min-width: 200px;">
+
+                            <button type="submit" class="btn btn-primary btn-sm">Search</button>
+                            </div>
+                        </div>
+                    </div>
                 </form>
 
 
@@ -71,8 +83,8 @@
                             <?php endif ?>
                         </tbody>
                     </table>
-                    
-                </div>              
+
+                </div>
             </div>
         </div>
     </div>

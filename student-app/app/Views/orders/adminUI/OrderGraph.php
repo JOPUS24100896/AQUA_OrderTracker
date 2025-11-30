@@ -27,7 +27,7 @@
 
     <div class="container" style="padding-top: 100px; padding-bottom: 80px">
         <div class="card shadow-lg rounded-4">
-            <div class="card-body p-5">
+            <div class="card-body" style="min-height: 600px;">
 
                 <h1 class="fw-bold text-center mb-4">ORDER TREND</h1>
 

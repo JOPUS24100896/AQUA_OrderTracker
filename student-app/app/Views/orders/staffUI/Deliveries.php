@@ -31,7 +31,7 @@
     <div class="container" style="padding-top: 100px; padding-bottom: 80px;">
 
         <div class="card shadow rounded-4">
-            <div class="card-body">
+            <div class="card-body" style="min-height: 600px;">
                 <h1 class="mb-4 fw-bold text-center">DELIVERIES</h1>
                 <?php if (session()->getFlashdata('message')): ?>
                     <div class="alert alert-info">
@@ -86,7 +86,7 @@
                     </table>
                 </div>
 
-                <div class="buttoncontainer mt-3 d-flex flex-wrap gap-2 justify-content-center">
+                <div class="buttoncontainer mt-3 d-flex gap-2 justify-content-center">
                     <form action="<?= base_url('orders/update/delivery') ?>" method="post">
                         <input type="hidden" name="DeliveryID" value="<?= $row["DeliveryID"] ?>" id="pend">
                         <button id="pendingButton" name="Status" value="Pending" type="submit" class="btn btn-warning" disabled>Set to Pending</button>
@@ -98,6 +98,7 @@
                     </form>
 
                     <form action="<?= base_url('orders/update/delivery') ?>" method="post" class="gap-2">
+                        <div class="gap-2" style="max-height: 40px;">
                         <input type="hidden" name="DeliveryID" value="<?= $row['DeliveryID'] ?>" id="port">
                         <select title="Assign to Vehicle" id="portSelect" name="PortID" class="form-select" disabled>
                             <option disabled selected value="null">Select Port</option>
@@ -111,7 +112,8 @@
                             }
                             ?>
                         </select>
-                        <button id="portButton" type="submit" class="btn btn-primary px-4" disabled>Assign Vehicle</button>
+                        <button id="portButton" type="submit" class="mt-2 btn btn-primary px-4" disabled>Assign Vehicle</button>
+                        </div>
                     </form>
                     
 

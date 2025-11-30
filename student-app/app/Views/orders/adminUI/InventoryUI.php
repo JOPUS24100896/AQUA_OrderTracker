@@ -17,7 +17,7 @@
     <div class="container" style="padding-top: 80px; padding-bottom: 80px">
         <div class="container mt-3" id="messageBox"></div>
         <div class="card shadow-lg rounded-4">
-            <div class="card-body">
+            <div class="card-body" style="min-height: 600px;">
                 <h1 class="text-center fw-bold mb-4">INVENTORY</h1>
                 <div id="InventoryTable" class="table-responsive">
                     <table class="table table-striped table-bordered border-dark align-middle text-center">
