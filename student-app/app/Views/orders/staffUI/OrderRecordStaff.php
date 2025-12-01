@@ -58,11 +58,11 @@
                     <table class="table table-striped table-bordered border-dark table-hover align-middle mb-0">
                         <thead class="table-dark position-sticky top-0">
                             <tr class="text-center">
-                                <th>User ID - Name</th>
-                                <th>Order ID</th>
+                                <th>Order Receipt</th>
+                                <th>Order Date</th>
+                                <th>Customer Name</th>
                                 <th>Items</th>
                                 <th>Quantities</th>
-                                <th>Order Date</th>
                                 <th>Total Price</th>
                                 <th>Order Status</th>
                             </tr>
@@ -90,15 +90,16 @@
                             foreach ($groupedOrders as $orderID => $order):
                             ?>
                                 <tr>
-                                    <td><?= $order['User'] ?></td>
                                     <td><?= $orderID ?></td>
+                                    <td><?= $order['OrderDate'] ?></td>
+                                    <td><?= $order['User'] ?></td>
                                     <td>
                                         <?php foreach ($order['Items'] as $item) echo $item . '<br>'; ?>
                                     </td>
                                     <td>
                                         <?php foreach ($order['Quantities'] as $qty) echo $qty . '<br>'; ?>
                                     </td>
-                                    <td><?= $order['OrderDate'] ?></td>
+                                    
                                     <td>₱<?= number_format($order['TotalPrice'], 2) ?></td>
                                     <td><?= $order['Status'] ?></td>
                                 </tr>

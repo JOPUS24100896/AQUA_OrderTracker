@@ -55,11 +55,11 @@
                     <table class="table table-bordered border-dark table-hover align-middle text-center">
                         <thead class="table-dark position-sticky top-0">
                             <tr>
-                                <th>ID</th>
+                                <th>Order Receipt</th>
+                                <th>Order Date</th>
                                 <th>Item Name</th>
                                 <th>Item Quantity</th>
                                 <th>Price</th>
-                                <th>Order Date</th>
                                 <th>Total Price</th>
                             </tr>
                         </thead>
@@ -69,10 +69,10 @@
                                 <?php foreach ($orderRecords as $record): ?>
                                     <tr>
                                         <td><?= esc($record['ID'] ?? '') ?></td>
+                                        <td><?= esc($record['OrderDate'] ?? '') ?></td>
                                         <td><?= esc($record['ItemName'] ?? '') ?></td>
                                         <td><?= esc($record['ItemQuantity'] ?? '') ?></td>
                                         <td>₱<?= esc(number_format($record['Price'] ?? 0, 2)) ?></td>
-                                        <td><?= esc($record['OrderDate'] ?? '') ?></td>
                                         <td>₱<?= esc(number_format($record['TotalPrice'] ?? 0, 2)) ?></td>
                                     </tr>
                                 <?php endforeach ?>

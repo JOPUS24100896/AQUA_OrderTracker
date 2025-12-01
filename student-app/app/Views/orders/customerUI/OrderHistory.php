@@ -61,9 +61,9 @@
                         <thead class="table-dark text-center position-sticky top-0">
                             <tr>
                                 <th>Order Number</th>
+                                <th>Order Date</th>
                                 <th>Items</th>
                                 <th>Quantity</th>
-                                <th>Order Date</th>
                                 <th>Price</th>
                                 <th>Total Price</th>
                                 <th>Status</th>
@@ -93,13 +93,13 @@
                             ?>
                                 <tr class="orderRow">
                                     <td><?= $orderId ?></td>
+                                    <td><?= $order['OrderDate'] ?></td>
                                     <td>
                                         <?php foreach ($order['Items'] as $item) echo $item . '<br>'; ?>
                                     </td>
                                     <td>
                                         <?php foreach ($order['Quantities'] as $qty) echo $qty . '<br>'; ?>
                                     </td>
-                                    <td><?= $order['OrderDate'] ?></td>
                                     <td>
                                         <?php foreach ($order['Prices'] as $price) echo '₱' . number_format($price, 2) . '<br>'; ?>
                                     </td>

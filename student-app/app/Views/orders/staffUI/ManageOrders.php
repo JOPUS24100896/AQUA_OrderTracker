@@ -79,11 +79,11 @@
                     <table class="table table-striped table-bordered border-dark table-hover align-middle mb-0">
                         <thead class="table-dark position-sticky top-0">
                             <tr class="text-center">
-                                <th>Order ID</th>
-                                <th>User ID - Name</th>
+                                <th>Order Receipt</th>
+                                <th>Order Date</th>
+                                <th>Customer Name</th>
                                 <th>Items</th>
                                 <th>Quantities</th>
-                                <th>Order Date</th>
                                 <th>Total Price</th>
                                 <th>Status</th>
                                 <th class="col-1">Actions</th>
@@ -94,10 +94,10 @@
                             foreach ($data as $dat): ?>
                                 <tr class="orderRow orderNumber<?= $dat['OrderID'] ?>" onclick="current_select(<?= $dat['OrderID'] ?>)" data-current-select="0">
                                     <td class="orderData OrderId<?= $dat['OrderID'] ?>"><?= $dat["OrderID"] ?></td>
-                                    <td class="orderData OrderUser<?= $dat['OrderID'] ?>"><?= $dat["UserID"] . " - " . $dat["FullName"] ?></td>
+                                    <td class="orderData OrderDate<?= $dat["OrderID"] ?>"><?= $dat["OrderDate"] ?></td>
+                                    <td class="orderData OrderUser<?= $dat['OrderID'] ?>"><?= $dat["FullName"] ?></td>
                                     <td class="orderData"><?= $dat["ItemID"] . " - " . $dat["ItemName"] ?></td>
                                     <td class="orderData"><?= $dat["ItemQuantity"] ?></td>
-                                    <td class="orderData OrderDate<?= $dat["OrderID"] ?>"><?= $dat["OrderDate"] ?></td>
                                     <td class="orderData OrderPrice<?= $dat["OrderID"] ?>">₱<?= $dat["TotalPrice"] ?></td>
                                     <td class="orderData OrderStat<?= $dat["OrderID"] ?>"><?= $dat["Status"] ?></td>
                                     <td class="flex-column gap-2 orderData OrderAction<?= $dat["OrderID"] ?>">

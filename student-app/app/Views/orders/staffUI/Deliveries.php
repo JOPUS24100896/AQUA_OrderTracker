@@ -46,9 +46,9 @@
                         <thead class="table-dark position-sticky top-0">
                             <tr class="text-center">
                                 <th>Select</th>
-                                <th>Order ID</th>
-                                <th>User ID - Name</th>
+                                <th>Order Receipt</th>
                                 <th>Order Date</th>
+                                <th>User Name</th>
                                 <th>Total Price</th>
                                 <th>Status</th>
                                 <th>Vehicle ID - Number</th>
@@ -64,11 +64,9 @@
                                                 onclick="current_select(<?= $row['OrderID'] ?>, <?= $row['DeliveryID'] ?>, this)">
                                         </div>
                                     </td>
-
-
                                     <td><?= $row['OrderID'] ?></td>
-                                    <td><?= $row['UserID'] . " - " . $row["Username"] ?></td>
                                     <td><?= $row['OrderDate'] ?></td>
+                                    <td><?= $row["Username"] ?></td>
                                     <td>₱<?= number_format($row['TotalPrice'], 2) ?></td>
                                     <td><?= $row['DeliveryStatus'] ?></td>
                                     <td>
