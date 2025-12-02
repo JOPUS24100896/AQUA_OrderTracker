@@ -363,12 +363,6 @@ class OrderViews extends BaseController
                 $return = $query->getResultArray();
                 $return = $this->addCompositeID($return);
 
-                //  foreach ($return as &$record) {
-                //     $orderDate = $record['OrderDate'] ?? '';
-                //     $orderID   = $record['ID'] ?? '';
-                //     $record['CompositeID'] = date("Yd", strtotime($orderDate)) . $orderID;
-                // }
-                // unset($record);
 
                  if (!empty($searchField) && $searchField === 'CompositeID' && !empty($searchValue)) {
                     $return = array_filter($return, function($record) use ($searchValue) {
