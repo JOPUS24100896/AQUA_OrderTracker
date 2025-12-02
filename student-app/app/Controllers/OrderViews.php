@@ -207,19 +207,33 @@ class OrderViews extends BaseController
                 }
                
                  if (!empty($searchField) && !empty($searchValue)) {
-                    $allowedFields = ['orders.OrderID', 'orders.OrderDate'];
+                    $allowedFields = ['orders.OrderDate', 'CompositeID'];
                     if (in_array($searchField, $allowedFields)) {
-                        $build->like($searchField, $searchValue);
+                        if ($searchField === 'CompositeID') {
+                            // skips
+                        } else {
+                            $build->like($searchField, $searchValue);
+                        }
                     }
+                    
                 }
 
                 $query = $build->get();
                 $return = $query->getResultArray();
+                $return = $this->addCompositeID($return);
+
+                if (!empty($searchField) && $searchField === 'CompositeID' && !empty($searchValue)) {
+                    $return = array_filter($return, function($record) use ($searchValue) {
+                        return stripos($record['CompositeID'], $searchValue) !== false;
+                    });
+                }
+
 
                 $data["data"] = $return;
                 $data['itemFilter']   = $itemFilter; 
                 $data['searchField']  = $searchField;
                 $data['searchValue']  = $searchValue;
+                
                 return view('orders/customerUI/OrderHistory', $data);
             break;
             default:
@@ -253,9 +267,13 @@ class OrderViews extends BaseController
                 }
                 
                 if (!empty($searchField) && !empty($searchValue)) {
-                    $allowedFields = ['orders.OrderID', 'orders.OrderDate'];
+                     $allowedFields = ['orders.OrderDate', 'CompositeID'];
                     if (in_array($searchField, $allowedFields)) {
-                        $build->like($searchField, $searchValue);
+                        if ($searchField === 'CompositeID') {
+                            // skips
+                        } else {
+                            $build->like($searchField, $searchValue);
+                        }
                     }
                 }
 
@@ -264,6 +282,25 @@ class OrderViews extends BaseController
 
                 $query = $build->get();
                 $return = $query->getResultArray();
+                
+                $iteration = 1; // start at 1 (or 0 if you prefer)
+                foreach ($return as &$record) {
+                    $orderDate = $record['OrderDate'] ?? '';
+                    $orderID   = $record['ID'] ?? '';
+                    // CompositeID = date(Yd) + OrderID + iteration
+                    $record['CompositeID'] = date("Yd", strtotime($orderDate)) . $orderID . $iteration;
+                    $iteration++;
+                }
+
+                     // $receipt = date("Yd", strtotime($dat['OrderDate'])) . $dat['OrderID'];
+                        // $record['CompositeID'] = date("Yd", strtotime($orderDate)) . $orderID;
+                unset($record);
+
+                if (!empty($searchField) && $searchField === 'CompositeID' && !empty($searchValue)) {
+                    $return = array_filter($return, function($record) use ($searchValue) {
+                        return stripos($record['CompositeID'], $searchValue) !== false;
+                    });
+                }
 
                 $data["data"] = $return;
                 $data['itemFilter']   = $itemFilter; 
@@ -309,9 +346,13 @@ class OrderViews extends BaseController
                 }
                 
                 if (!empty($searchField) && !empty($searchValue)) {
-                    $allowedFields = ['orders.OrderID', 'orders.OrderDate'];
+                     $allowedFields = ['orders.OrderDate', 'CompositeID'];
                     if (in_array($searchField, $allowedFields)) {
-                        $build->like($searchField, $searchValue);
+                        if ($searchField === 'CompositeID') {
+                            // skips
+                        } else {
+                            $build->like($searchField, $searchValue);
+                        }
                     }
                 }
 
@@ -320,6 +361,21 @@ class OrderViews extends BaseController
                 
                 $query = $build->get();
                 $return = $query->getResultArray();
+                $return = $this->addCompositeID($return);
+
+                //  foreach ($return as &$record) {
+                //     $orderDate = $record['OrderDate'] ?? '';
+                //     $orderID   = $record['ID'] ?? '';
+                //     $record['CompositeID'] = date("Yd", strtotime($orderDate)) . $orderID;
+                // }
+                // unset($record);
+
+                 if (!empty($searchField) && $searchField === 'CompositeID' && !empty($searchValue)) {
+                    $return = array_filter($return, function($record) use ($searchValue) {
+                        return stripos($record['CompositeID'], $searchValue) !== false;
+                    });
+                }
+
 
                 $data['data'] = $return;
                 $data['itemFilter']   = $itemFilter; 
@@ -481,29 +537,52 @@ class OrderViews extends BaseController
                 );
                 $builder->join('order_details', 'order_details.OrderID = orders.OrderID', 'inner');
                 $builder->join('items', 'items.ItemID = order_details.ItemID', 'inner');
-               
 
-
-                //this is the function
-                $itemFilter = $this->request->getGet('item'); // e.g. ?item=Router
+                // Item filter
+                $itemFilter = $this->request->getGet('item'); 
                 if (!empty($itemFilter) && strtolower($itemFilter) !== 'all') {
                     $builder->where('items.ItemName', $itemFilter);
                 }
-               
+
+                // Search filter
                 $searchField = $this->request->getGet('field');
                 $searchValue = $this->request->getGet('search');
 
-                 if (!empty($searchField) && !empty($searchValue)) {
-                    $allowedFields = ['orders.OrderID', 'orders.OrderDate'];
+                if (!empty($searchField) && !empty($searchValue)) {
+                    // Allow CompositeID as a virtual field
+                    $allowedFields = ['orders.OrderDate', 'CompositeID'];
+
                     if (in_array($searchField, $allowedFields)) {
-                        $builder->like($searchField, $searchValue);
+                        if ($searchField === 'CompositeID') {
+                            // skip
+                        } else {
+                            $builder->like($searchField, $searchValue);
+                        }
                     }
                 }
 
-                $builder->orderBy('order_details.OrderDetailID', 'DESC');
 
+                $builder->orderBy('order_details.OrderDetailID', 'DESC');
                 $query = $builder->get();
                 $orderRecords = $query->getResultArray();
+                $orderRecords = $this->addCompositeID($orderRecords);
+
+                // // 🔑 Compute CompositeID in PHP
+                // foreach ($orderRecords as &$record) {
+                //     $orderDate = $record['OrderDate'] ?? '';
+                //     $orderID   = $record['ID'] ?? '';
+                //     $record['CompositeID'] = date("Yd", strtotime($orderDate)) . $orderID;
+                // }
+                // unset($record);
+
+               
+                // If searching by CompositeID, filter here
+                if (!empty($searchField) && $searchField === 'CompositeID' && !empty($searchValue)) {
+                    $orderRecords = array_filter($orderRecords, function($record) use ($searchValue) {
+                        return stripos($record['CompositeID'], $searchValue) !== false;
+                    });
+                }
+
 
                 $data['orderRecords'] = $orderRecords;
                 $data['itemFilter']   = $itemFilter; 
@@ -517,6 +596,7 @@ class OrderViews extends BaseController
             break;
         }
     }
+
  
     public function store()
     {
@@ -557,5 +637,16 @@ class OrderViews extends BaseController
 
         return redirect()->to('/products')->with('message', 'Product deleted successfully!');
 
+    }
+
+    private function addCompositeID(array $records): array
+    {
+        foreach ($records as &$record) {
+            $orderDate = $record['OrderDate'] ?? '';
+            $orderID   = $record['ID'] ?? '';
+            $record['CompositeID'] = date("Yd", strtotime($orderDate)) . $orderID;
+        }
+        unset($record); // prevent reference issues
+        return $records;
     }
 }

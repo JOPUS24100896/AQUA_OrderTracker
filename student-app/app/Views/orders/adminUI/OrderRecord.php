@@ -32,7 +32,7 @@
                             <label class="form-label mb-0 small">Search by:</label>
                             <div class="d-flex gap-2">
                             <select name="field" class="form-select form-select-sm" style="min-width: 150px;">
-                                <option value="orders.OrderID" <?= ($searchField == 'orders.OrderID') ? 'selected' : '' ?>>Order ID</option>
+                                <option value="CompositeID" <?= ($searchField == 'CompositeID') ? 'selected' : '' ?>>Order Receipt</option>
                                 <option value="orders.OrderDate" <?= ($searchField == 'orders.OrderDate') ? 'selected' : '' ?>>Order Date</option>
                             </select>
 
@@ -68,13 +68,7 @@
                             <?php if (!empty($orderRecords)): ?>
                                 <?php foreach ($orderRecords as $record): ?>
                                     <tr>
-                                        <td>
-                                            <?php 
-                                            $orderDate = $record['OrderDate'] ?? ''; 
-                                            $orderID = $record['ID'] ?? ''; 
-                                            echo esc(date("Yd", strtotime($orderDate)) . $orderID); 
-                                            ?>
-                                        </td>
+                                        <td><?= esc($record['CompositeID'] ?? '') ?></td>
                                         <td><?= esc($record['OrderDate'] ?? '') ?></td>
                                         <td><?= esc($record['ItemName'] ?? '') ?></td>
                                         <td><?= esc($record['ItemQuantity'] ?? '') ?></td>

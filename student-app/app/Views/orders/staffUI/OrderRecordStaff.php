@@ -39,7 +39,7 @@
                             <label class="form-label mb-0 small">Search by:</label>
                             <div class="d-flex gap-2">
                                 <select name="field" class="form-select form-select-sm" style="min-width: 150px;">
-                                    <option value="orders.OrderID" <?= ($searchField == 'orders.OrderID') ? 'selected' : '' ?>>Order ID</option>
+                                    <option value="CompositeID" <?= ($searchField == 'CompositeID') ? 'selected' : '' ?>>Order Receipt</option>
                                     <option value="orders.OrderDate" <?= ($searchField == 'orders.OrderDate') ? 'selected' : '' ?>>Order Date</option>
                                 </select>
 
@@ -74,6 +74,7 @@
                                 $id = $dat['OrderID'];
                                 if (!isset($groupedOrders[$id])) {
                                     $groupedOrders[$id] = [
+                                        'CompositeID' => $dat['CompositeID'],
                                         'User' => $dat['UserID'] . ' - ' . $dat['FullName'],
                                         'OrderDate' => $dat['OrderDate'],
                                         'Status' => $dat['Status'],
@@ -90,12 +91,7 @@
                             foreach ($groupedOrders as $orderID => $order):
                             ?>
                                 <tr>
-                                    <td>
-                                        <?php
-                                        $receipt = date("Yd", strtotime($dat['OrderDate'])) . $dat['OrderID'];
-                                        echo $receipt;
-                                        ?>
-                                    </td>
+                                    <td><?= $order['CompositeID'] ?></td>
                                     <td><?= $order['OrderDate'] ?></td>
                                     <td><?= $order['User'] ?></td>
                                     <td>

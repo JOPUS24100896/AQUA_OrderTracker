@@ -41,7 +41,7 @@
                             <label class="form-label mb-0 small">Search by:</label>
                             <div class="d-flex gap-2">
                             <select name="field" class="form-select form-select-sm" style="min-width: 150px;">
-                                <option value="orders.OrderID" <?= ($searchField == 'orders.OrderID') ? 'selected' : '' ?>>Order ID</option>
+                                <option value="CompositeID" <?= ($searchField == 'CompositeID') ? 'selected' : '' ?>>Order Receipt</option>
                                 <option value="orders.OrderDate" <?= ($searchField == 'orders.OrderDate') ? 'selected' : '' ?>>Order Date</option>
                             </select>
 
@@ -76,6 +76,7 @@
                                 $id = $dat['OrderID'];
                                 if (!isset($groupedOrders[$id])) {
                                     $groupedOrders[$id] = [
+                                        'CompositeID' => $dat['CompositeID'],
                                         'OrderDate' => $dat['OrderDate'],
                                         'Status' => $dat['Status'],
                                         'TotalPrice' => 0,
@@ -92,12 +93,7 @@
                             foreach ($groupedOrders as $orderId => $order):
                             ?>
                                 <tr class="orderRow">
-                                    <td>
-                                        <?php
-                                        $receipt = date("Yd", strtotime($order['OrderDate'])) . $orderId;
-                                        echo $receipt;
-                                        ?>
-                                    </td>
+                                    <td><?= $order['CompositeID'] ?></td>
                                     <td><?= $order['OrderDate'] ?></td>
                                     <td>
                                         <?php foreach ($order['Items'] as $item) echo $item . '<br>'; ?>
