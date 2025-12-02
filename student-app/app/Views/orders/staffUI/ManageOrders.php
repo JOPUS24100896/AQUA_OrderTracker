@@ -41,7 +41,7 @@
 
                 <?php if (session()->getFlashdata('message')): ?>
                     <div class="alert alert-info">
-                        <?= esc(session()->getFlashdata('message')) ?>
+                        <?= esc(session()->getFlashdata('message'))[0] ?>
                     </div>
                 <?php endif; ?>
 
