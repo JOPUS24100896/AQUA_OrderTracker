@@ -39,12 +39,13 @@
 
                                     <div class="card-body">
 
-                                        <label class="form-check-label w-100 mb-2">
+                                        <label class="form-check-label w-100 mb-2 fw-bold">
                                             <input type="checkbox"
                                                 name="product[]"
                                                 id="p<?= $dat['ItemID'] ?>"
                                                 value="<?= $dat['ItemID'] ?>"
-                                                class="form-check-input me-2">
+                                                class="form-check-input me-2"
+                                                style="transform: scale(1.3);">
                                             <?= $dat['ItemName'] ?>
                                         </label>
 
