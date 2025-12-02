@@ -64,9 +64,14 @@
                                                 onclick="current_select(<?= $row['OrderID'] ?>, <?= $row['DeliveryID'] ?>, this)">
                                         </div>
                                     </td>
-                                    <td><?= $row['OrderID'] ?></td>
+                                    <td>
+                                        <?php
+                                        $receipt = date("Yd", strtotime($row['OrderDate'])) . $row['OrderID'];
+                                        echo $receipt;
+                                        ?>
+                                    </td>
                                     <td><?= $row['OrderDate'] ?></td>
-                                    <td><?= $row["Username"] ?></td>
+                                    <td><?= $row["FullName"] ?></td>
                                     <td>₱<?= number_format($row['TotalPrice'], 2) ?></td>
                                     <td><?= $row['DeliveryStatus'] ?></td>
                                     <td>

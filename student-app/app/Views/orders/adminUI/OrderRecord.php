@@ -68,7 +68,13 @@
                             <?php if (!empty($orderRecords)): ?>
                                 <?php foreach ($orderRecords as $record): ?>
                                     <tr>
-                                        <td><?= esc($record['ID'] ?? '') ?></td>
+                                        <td>
+                                            <?php 
+                                            $orderDate = $record['OrderDate'] ?? ''; 
+                                            $orderID = $record['ID'] ?? ''; 
+                                            echo esc(date("Yd", strtotime($orderDate)) . $orderID); 
+                                            ?>
+                                        </td>
                                         <td><?= esc($record['OrderDate'] ?? '') ?></td>
                                         <td><?= esc($record['ItemName'] ?? '') ?></td>
                                         <td><?= esc($record['ItemQuantity'] ?? '') ?></td>

@@ -65,7 +65,12 @@
                             foreach ($groupedOrders as $orderId => $order):
                             ?>
                                 <tr class="orderRow">
-                                    <td><?= $orderId ?></td>
+                                    <td>
+                                        <?php
+                                        $receipt = date("Yd", strtotime($order['OrderDate'])) . $orderId;
+                                        echo $receipt;
+                                        ?>
+                                    </td>
                                     <td><?= $order['OrderDate'] ?></td>
                                     <td>
                                         <?php foreach ($order['Items'] as $item) echo $item . '<br>'; ?>

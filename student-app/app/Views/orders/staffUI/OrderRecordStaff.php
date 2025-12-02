@@ -90,7 +90,12 @@
                             foreach ($groupedOrders as $orderID => $order):
                             ?>
                                 <tr>
-                                    <td><?= $orderID ?></td>
+                                    <td>
+                                        <?php
+                                        $receipt = date("Yd", strtotime($dat['OrderDate'])) . $dat['OrderID'];
+                                        echo $receipt;
+                                        ?>
+                                    </td>
                                     <td><?= $order['OrderDate'] ?></td>
                                     <td><?= $order['User'] ?></td>
                                     <td>

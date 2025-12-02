@@ -43,7 +43,23 @@ class OrderViews extends BaseController
 
     public function privPolicy()
     {
-        return view('orders/PrivacyPolicy');
+        $data['url'] = "PrivacyPolicy";
+        $data['user_type'] = session()->get("user_type");
+        switch(session()->get("user_type")){
+            case "CUST":
+            case "ADMIN":
+            case "STAFF":
+                $db = \Config\Database::connect();
+                $table = $db->table('users');
+                $table->select('FullName, Address, Contact, Username, Email');
+                $table->where('UserID', session()->get('user_id'));
+                $data['data'] = $table->get()->getRowArray();
+                return view('orders/PrivacyPolicy', $data);
+            break;
+            default:
+                return redirect()->to("/orders");
+            break;
+        }
     }
 
     public function gotoLogin()
@@ -346,7 +362,7 @@ class OrderViews extends BaseController
             case "STAFF":
                 $db = \Config\Database::connect();
             $build = $db->table("orders");
-            $build->select("orders.OrderID, orders.OrderDate, users.UserID, users.Username, orders.TotalPrice,
+            $build->select("orders.OrderID, orders.OrderDate, users.UserID, users.FullName, orders.TotalPrice,
             orders.Status, delivery_port.PortID, delivery_port.PortNumber, deliveries.DeliveryID, deliveries.DeliveryStatus");
             $build->join("users", "users.UserID = orders.UserID", "inner");
             $build->join("deliveries", "orders.DeliveryID = deliveries.DeliveryID", "inner");

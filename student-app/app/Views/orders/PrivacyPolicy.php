@@ -8,23 +8,30 @@
     <link rel="stylesheet" href="/css/main.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/index.css">
+    <script>
+        const base = "<?= base_url()?>";
+    </script>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background: linear-gradient(to right, #2b607b, #204c55);">
-        <div class="container">
-            <a class="navbar-brand fw-bold fs-2" href="#">Aqua Del Sol</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarNav" aria-controls="navbarNav"
-                aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav">
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <?php var_dump($_SESSION); ?>
+
+    <?php
+    if(isset($_SESSION["user_id"])){
+        switch($_SESSION["user_type"]){
+            case "STAFF":
+                echo $this->include("orders/staffUI/staffHeader");
+            break;
+            case "CUST":
+                echo $this->include("orders/customerUI/custHeader");
+            break;
+            case "ADMIN":
+                echo $this->include("orders/adminUI/adminHeader");
+            break;
+        }
+    }
+    ?>
+
     <section id="privacy-policy" class="container my-5" style="padding-top: 80px; padding-bottom: 200px;">
         <div class="card shadow rounded-4">
             <div class="card-body">

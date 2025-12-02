@@ -93,7 +93,12 @@
                             <?php $iteration = 0;
                             foreach ($data as $dat): ?>
                                 <tr class="orderRow orderNumber<?= $dat['OrderID'] ?>" onclick="current_select(<?= $dat['OrderID'] ?>)" data-current-select="0">
-                                    <td class="orderData OrderId<?= $dat['OrderID'] ?>"><?= $dat["OrderID"] ?></td>
+                                    <td class="orderData OrderId<?= $dat['OrderID'] ?>">
+                                        <?php
+                                        $receipt = date("Yd", strtotime($dat['OrderDate'])) . $dat['OrderID'];
+                                        echo $receipt;
+                                        ?>
+                                    </td>
                                     <td class="orderData OrderDate<?= $dat["OrderID"] ?>"><?= $dat["OrderDate"] ?></td>
                                     <td class="orderData OrderUser<?= $dat['OrderID'] ?>"><?= $dat["FullName"] ?></td>
                                     <td class="orderData"><?= $dat["ItemID"] . " - " . $dat["ItemName"] ?></td>
@@ -102,14 +107,14 @@
                                     <td class="orderData OrderStat<?= $dat["OrderID"] ?>"><?= $dat["Status"] ?></td>
                                     <td class="flex-column gap-2 orderData OrderAction<?= $dat["OrderID"] ?>">
                                         <div>
-                                        <form class="mb-2" action="<?= base_url("orders/update/orderStatus") ?>" method="post">
-                                            <input type="hidden" name="OrderID" value="<?= $dat["OrderID"] ?>">
-                                            <button id="pendingButton" name="Status" value="Pending" class="btn btn-warning btn-sm">Set to Pending</button>
-                                        </form>
-                                        <form action="<?= base_url("orders/update/orderStatus") ?>" method="post">
-                                            <input type="hidden" name="OrderID" value="<?= $dat["OrderID"] ?>">
-                                            <button id="readyButton" name="Status" value="Ready" class="btn btn-success btn-sm">Set to Ready</button>
-                                        </form>
+                                            <form class="mb-2" action="<?= base_url("orders/update/orderStatus") ?>" method="post">
+                                                <input type="hidden" name="OrderID" value="<?= $dat["OrderID"] ?>">
+                                                <button id="pendingButton" name="Status" value="Pending" class="btn btn-warning btn-sm">Set to Pending</button>
+                                            </form>
+                                            <form action="<?= base_url("orders/update/orderStatus") ?>" method="post">
+                                                <input type="hidden" name="OrderID" value="<?= $dat["OrderID"] ?>">
+                                                <button id="readyButton" name="Status" value="Ready" class="btn btn-success btn-sm">Set to Ready</button>
+                                            </form>
                                         </div>
                                     </td>
                                 </tr>

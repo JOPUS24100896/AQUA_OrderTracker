@@ -60,7 +60,7 @@
                     <table class="table table-striped table-bordered border-dark table-hover align-middle mb-0">
                         <thead class="table-dark text-center position-sticky top-0">
                             <tr>
-                                <th>Order Number</th>
+                                <th>Order Receipt</th>
                                 <th>Order Date</th>
                                 <th>Items</th>
                                 <th>Quantity</th>
@@ -92,7 +92,12 @@
                             foreach ($groupedOrders as $orderId => $order):
                             ?>
                                 <tr class="orderRow">
-                                    <td><?= $orderId ?></td>
+                                    <td>
+                                        <?php
+                                        $receipt = date("Yd", strtotime($order['OrderDate'])) . $orderId;
+                                        echo $receipt;
+                                        ?>
+                                    </td>
                                     <td><?= $order['OrderDate'] ?></td>
                                     <td>
                                         <?php foreach ($order['Items'] as $item) echo $item . '<br>'; ?>
