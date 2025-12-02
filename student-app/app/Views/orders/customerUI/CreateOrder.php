@@ -75,6 +75,14 @@
                     </div>
 
                     <div class="text-center mt-4">
+                        <label class="form-check-label w-100 mb-2">
+                            <input type="checkbox"
+                                name="delivery"
+                                id="deliveryOption?>"
+                                value="1"
+                                class="form-check-input me-2">
+                                Delivery
+                        </label>
                         <button type="submit" class="btn btn-primary px-4 py-2">Submit Order</button>
                     </div>
 
