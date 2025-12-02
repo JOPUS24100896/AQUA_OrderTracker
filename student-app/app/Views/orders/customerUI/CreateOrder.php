@@ -25,9 +25,9 @@
 
                     <h1 class="fw-bold mb-3 mt-3 text-center">PRODUCTS</h1>
                     <?php if (session()->getFlashdata('message')): ?>
-                    <div class="alert alert-info">
-                        <?= esc(session()->getFlashdata('message')) ?>
-                    </div>
+                        <div class="alert alert-info">
+                            <?= esc(session()->getFlashdata('message')) ?>
+                        </div>
                     <?php endif; ?>
                     <div id="errorAlertContainer"></div>
                     <div class="row g-4">
@@ -42,12 +42,13 @@
 
                                     <div class="card-body">
 
-                                        <label class="form-check-label w-100 mb-2">
+                                        <label class="form-check-label w-100 mb-2 fw-bold">
                                             <input type="checkbox"
                                                 name="product[]"
                                                 id="p<?= $dat['ItemID'] ?>"
                                                 value="<?= $dat['ItemID'] ?>"
-                                                class="form-check-input me-2">
+                                                class="form-check-input me-2"
+                                                style="transform: scale(1.3);">
                                             <?= $dat['ItemName'] ?>
                                         </label>
 
@@ -73,6 +74,22 @@
                             </div>
                         <?php endforeach; ?>
                     </div>
+                    <div class="d-flex justify-content-center mt-3">
+                        <div class="card p-3">
+                            <div class="d-flex flex-column flex-md-row justify-content-center align-items-center gap-4 mt-3">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input orderHandling" type="radio" name="delivery" id="deliveryOption" value="1" style="transform: scale(1.3);">
+                                    <label class="form-check-label fw-bold" for="deliveryOption">Delivery</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input orderHandling" type="radio" name="delivery" id="onSiteOption" value="0" style="transform: scale(1.3);">
+                                    <label class="form-check-label fw-bold" for="onSiteOption">On-Site</label>
+                                </div>
+                            </div>
+                            <div id="deliveryDetails" class="mt-3 text-center"></div>
+                        </div>
+                    </div>
+
 
                     <div class="text-center mt-4">
                         <button type="submit" class="btn btn-primary px-4 py-2">Submit Order</button>
