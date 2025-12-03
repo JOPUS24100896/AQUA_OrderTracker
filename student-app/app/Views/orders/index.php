@@ -56,30 +56,33 @@
             <div class="col-md-4">
                 <div class="card h-100 shadow-sm">
                     <div class="card-body">
-                        <h5 class="card-title">Water Bottle</h5>
                         <div class="ratio ratio-1x1">
                             <img src="<?= base_url('uploads/bottle_water.png') ?>" alt="Water" class="img-fluid rounded shadow object-fit-cover w-100 h-100">
                         </div>
+                        <h5 class="card-title mt-3 text-center fw-bold">Water Bottle</h5>
+                        <p class="text-center text-muted fst-italic lh-base mt-2 fs-6">Our bottled water is clean, safe, and ready to drink. Perfect for staying hydrated anytime, whether at home, at work, or on the go.</p>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card h-100 shadow-sm">
                     <div class="card-body">
-                        <h5 class="card-title">Water Gallon</h5>
                         <div class="ratio ratio-1x1">
                             <img src="<?= base_url('uploads/water_gallon.png') ?>" alt="Water_Gallon" class="img-fluid rounded shadow object-fit-cover w-100 h-100">
                         </div>
+                        <h5 class="card-title mt-3 text-center fw-bold">Water Gallon</h5>
+                        <p class="text-center text-muted fst-italic lh-base mt-2 fs-6">Our water gallons provide pure and fresh water for your home or office. Ideal for families or workplaces that need a reliable source of drinking water.</p>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card h-100 shadow-sm">
                     <div class="card-body">
-                        <h5 class="card-title">Water Gallon with Faucet</h5>
                         <div class="ratio ratio-1x1">
                             <img src="<?= base_url('uploads/wat_gall_faucet.png') ?>" alt="Water_Gallon_Faucet" class="img-fluid rounded shadow">
                         </div>
+                        <h5 class="card-title mt-3 text-center fw-bold">Water Gallon with Faucet</h5>
+                        <p class="text-center text-muted fst-italic lh-base mt-2 fs-6">Our water gallons with faucet make it easy to get fresh water whenever you need it. Convenient, safe, and perfect for daily use.</p>
                     </div>
                 </div>
             </div>

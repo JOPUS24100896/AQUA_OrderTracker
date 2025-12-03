@@ -61,7 +61,7 @@
                                         <div class="form-check d-flex justify-content-center">
                                             <input class="form-check-input selectCheckbox" type="checkbox"
                                                 id="select-<?= $row['OrderID'] ?>"
-                                                onclick="current_select(<?= $row['OrderID'] ?>, <?= $row['DeliveryID'] ?>, this)">
+                                                onclick="current_select(<?= $row['OrderID'] ?>, <?= $row['DeliveryID'] ?>, this)" style="transform: scale(1.3);">
                                         </div>
                                     </td>
                                     <td>
