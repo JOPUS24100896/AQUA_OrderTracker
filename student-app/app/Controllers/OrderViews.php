@@ -254,6 +254,8 @@ class OrderViews extends BaseController
                 $build = $db->table("orders");
                 $build->select("orders.OrderID, users.UserID, users.FullName, items.ItemID, items.ItemName, order_details.ItemQuantity,
                 orders.OrderDate, orders.TotalPrice, orders.Status");
+                $build->where("orders.Status !=", "Complete");
+                $build->where("orders.Status !=", "Cancelled");
                 $build->join("order_details", "orders.OrderID = order_details.OrderID", "inner");
                 $build->join("users", "users.UserID = orders.UserID", "inner");
                 $build->join("items", "items.ItemID = order_details.ItemID", "inner");
