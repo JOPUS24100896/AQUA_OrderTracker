@@ -93,7 +93,7 @@
                             <?php $iteration = 0;
                             foreach ($data as $dat): ?>
                                 <tr class="orderRow orderNumber<?= $dat['OrderID'] ?>" onclick="current_select(<?= $dat['OrderID'] ?>)" data-current-select="0">
-                                    <td class="orderData OrderId<?= $dat['CompositeID'] ?>">
+                                    <td class="orderData OrderId<?= $dat['OrderID'] ?>">
                                         <?= $dat["CompositeID"] ?>
                                     </td>
                                     <td class="orderData OrderDate<?= $dat["OrderID"] ?>"><?= $dat["OrderDate"] ?></td>
