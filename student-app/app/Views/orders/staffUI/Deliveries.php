@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var array $data
+ */
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,8 +49,8 @@
 
                 <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
                     <table class="table table-striped table-bordered border-dark table-hover align-middle mb-0">
-                        <thead class="table-dark position-sticky top-0">
-                            <tr class="text-center">
+                        <thead class="table-dark position-sticky top-0" style="z-index: 2;">
+                            <tr class="text-center" >
                                 <th>Select</th>
                                 <th>Order Receipt</th>
                                 <th>Order Date</th>
@@ -61,7 +67,7 @@
                                         <div class="form-check d-flex justify-content-center">
                                             <input class="form-check-input selectCheckbox" type="checkbox"
                                                 id="select-<?= $row['OrderID'] ?>"
-                                                onclick="current_select(<?= $row['OrderID'] ?>, <?= $row['DeliveryID'] ?>, this)" style="transform: scale(1.3);">
+                                                onclick="current_select(<?= $row['OrderID'] ?>, <?= $row['DeliveryID'] ?>, this)" style="transform: scale(1.3);z-index: 1;">
                                         </div>
                                     </td>
                                     <td>
