@@ -1,3 +1,12 @@
+<?php
+/**
+ * @var array $data
+ * @var string|null $itemFilter
+ * @var string|null $searchField
+ * @var string|null $searchValue
+ * @var string $url
+ */
+?>
 <!DOCTYPE html>
 <html lang="en">
 
