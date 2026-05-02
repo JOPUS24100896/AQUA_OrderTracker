@@ -639,7 +639,7 @@ class OrderViews extends BaseController
     {
         foreach ($records as &$record) {
             $orderDate = $record['OrderDate'] ?? '';
-            $orderID   = $record['ID'] ?? '';
+            $orderID   = $record['OrderID'] ?? '';
             $record['CompositeID'] = date("Yd", strtotime($orderDate)) . $orderID;
         }
         unset($record); // prevent reference issues
